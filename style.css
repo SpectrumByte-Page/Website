@@ -1,0 +1,263 @@
+/* === ANIMASI DASAR === */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-anim {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s infinite;
+}
+
+/* === EFEK GLOW === */
+.soft-glow {
+  text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+}
+.glow-text {
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+}
+
+/* === HERO SECTION === */
+header h1 {
+  letter-spacing: 2px;
+}
+
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+
+/* Item service */
+.service-list li {
+  background: rgba(90, 206, 235, 0.08);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 15px 15px;
+  width: 250px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(95, 139, 168, 0.4);
+  cursor: pointer;
+  text-align: center;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Animasi saat muncul */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efek timbul saat hover */
+.service-list li:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 255, 255, 0.4);
+  background: rgba(0, 255, 255, 0.15);
+}
+
+/* Efek ditekan */
+.service-list li:active {
+  transform: scale(0.96) translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 255, 255, 0.2);
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .service-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .service-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* === CHATBOT WINDOW === */
+#chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #00e5ff #1a1a1a;
+}
+
+/* Bubble pesan user (kanan) */
+.user-msg {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #00bcd4, #00e5ff);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 18px 18px 0 18px;
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Bubble pesan bot (kiri) */
+.bot-msg {
+  align-self: flex-start;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  padding: 10px 14px;
+  border-radius: 18px 18px 18px 0;
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Efek muncul */
+.user-msg, .bot-msg {
+  animation: fadeIn 0.3s ease-out;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* === BUBBLE "TYPING" ANIMASI === */
+.typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.typing span {
+  width: 6px;
+  height: 6px;
+  background: #00e5ff;
+  border-radius: 50%;
+  animation: typingBlink 1.2s infinite ease-in-out;
+}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBlink {
+  0%, 100% { opacity: 0.2; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* === FOOTER === */
+footer {
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+/* Animasi modal */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeInUp {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* Area konten utama dalam modal */
+#detailModal .md\:flex {
+  align-items: flex-start;
+}
+
+/* Batasi tinggi area daftar harga agar bisa discroll sendiri */
+#detailModal #priceList {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Gambar tetap diam (tidak ikut scroll) */
+#detailModal #modalImage {
+  position: sticky;
+  top: 0;
+}
+
+/* Scrollbar custom stylish */
+#detailModal #priceList::-webkit-scrollbar {
+  width: 8px;
+}
+
+#detailModal #priceList::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00e5ff, #007bff);
+  border-radius: 8px;
+}
+
+#detailModal #priceList::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+/* ===== Scrollbar Umum (untuk Chrome, Edge, Safari) ===== */
+::-webkit-scrollbar {
+  width: 10px;                /* lebar scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);  /* transparan halus */
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00bcd4, #00e5ff); /* gradasi cyan */
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00e5ff, #00bcd4);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.9);
+}
+
+/* ===== Scrollbar Firefox ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00e5ff rgba(255,255,255,0.05);
+}
+
+/* ===== Scrollbar Container tertentu (opsional) ===== */
+#chat-messages {
+  scrollbar-width: thin;
+  scrollbar-color: #00e5ff rgba(255,255,255,0.1);
+}
+

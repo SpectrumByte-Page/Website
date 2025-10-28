@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- ===== META BASIC ===== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Spectrum.Byte — Solusi service laptop & smartphone terpercaya. Kami menyediakan layanan perbaikan hardware, software, dan upgrade dengan harga terjangkau.">
+  <meta name="keywords" content="Service Laptop, Service HP, Spectrum Byte, Perbaikan Komputer, Upgrade Hardware, Install Software, Malang">
+  <meta name="author" content="Spectrum.Byte"/>
+
+  <!-- ===== TITLE & ICON ===== -->
+  <title>Spectrum.Byte | Solusi Dari Keluhan Anda</title>
+  <link rel="icon" type="image/png" href="img/ico.png" />
+  
+  <div class="absolute top-4 right-6 bg-gray-900/70 text-gray-200 text-sm px-4 py-2 rounded-xl shadow-lg backdrop-blur-sm">
+    <p class="font-semibold text-cyan-400">Service Center</p>
+    <p class="font-Inconsolata">📍 Jl. Arjuno No. 67, Sisir, Kota Batu</p>
+    <p class="font-Inconsolata">📬 65314</p>
+    <p class="font-Inconsolata">🕒 09.00 - 20.00 WIB</p>
+    <p class="font-Inconsolata">📧 spectrum.byte01@gmail.com</p>
+    <p class="font-Inconsolata">📱 083845278538</p>
+  </div>
+  
+  <!-- ===== FRAMEWORKS & ICONS ===== -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-xh6Ck0P1a6vDkKRrjT7b3YrrVwX2Yp7Pf9U7d6XoFZQF4p3Rg6g6UEkVFiXn1Rw4zMKVnD7q3HhYpgU+YFzYfw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- ===== STYLE FILE ===== -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ===== FONTS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ===== CUSTOM TAILWIND CONFIG (OPSIONAL) ===== -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            primary: '#00FFFF',
+            dark: '#0a0f1c',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+
+<body class="bg-gray-950 text-white flex flex-col min-h-screen">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+  <!-- Hero Section -->
+  <header class="relative h-[80vh] flex flex-col items-center justify-center text-center overflow-hidden fade-in">
+    <img
+      src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1350&q=80"
+      alt="Laptop Service"
+      class="absolute inset-0 w-full h-full object-cover opacity-30"
+    />
+    <div class="relative z-10 flex flex-col items-center">
+      <h1 class="text-6xl font-extrabold text-cyan-400 soft-glow float-anim">
+        SPECTRUM.BYTE
+      </h1>
+      <p class="mt-10 text-2xl text-gray-200 animate-bounce-slow glow-text">
+        Service Laptop & Ponsel
+      </p>
+      <p class="mt-4 text-4xl font-semibold text-gray-200 animate-bounce-slow glow-text">
+        Solusi Dari Keluhan Anda
+      </p>
+
+      <div class="mt-20 flex justify-center">
+        <img
+          src="img/Logo.png"
+          alt="Logo"
+          class="w-[165px] h-[165px] rounded-full border-4 border-white animate-bounce-slow shadow-lg shadow-cyan-500/50"
+        />
+      </div>
+    </div>
+  </header>
+
+<!-- ===================== LAYANAN KAMI ===================== -->
+<section class="text-center mt-12">
+  <h2 class="text-2xl font-semibold text-white mb-6">Katalog & Layanan Kami:</h2>
+  <ul class="service-list">
+    <li onclick="showDetails('laptop')">💻 Service Laptop</li>
+    <li onclick="showDetails('smartphone')">📱 Service Smartphone</li>
+    <li onclick="showDetails('software')">⚙️ OS & Software</li>
+    <li onclick="showDetails('hardware')">🔧 Upgrade Hardware</li>
+  </ul>
+</section>
+
+<!-- ===================== MODAL DETAIL HARGA ===================== -->
+<div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+  <div class="bg-gray-900 text-white rounded-2xl shadow-2xl w-full max-w-[90vw] md:max-w-[700px] h-[90vh] md:h-[auto] max-h-[90vh] flex flex-col relative">
+    <!-- Header Modal -->
+    <div class="flex justify-between items-center border-b border-gray-700 p-4">
+      <h2 id="modalTitle" class="text-xl md:text-2xl font-bold text-center flex-1"></h2>
+      <button onclick="closeDetails()" class="text-gray-400 hover:text-white text-2xl font-bold ml-4">&times;</button>
+    </div>
+
+    <!-- Body Modal (Gambar & Daftar Harga) -->
+    <div class="flex-1 overflow-hidden flex flex-col md:flex-row p-4 gap-4">
+      <!-- Gambar -->
+      <div class="md:w-2/5 flex-shrink-0">
+        <img id="modalImage" src="" alt="Ilustrasi Layanan" class="rounded-xl shadow-md w-full h-auto max-h-[200px] md:max-h-[300px] object-contain">
+      </div>
+
+      <!-- Detail harga -->
+      <div class="md:w-3/5 flex-1 overflow-hidden flex flex-col">
+        <ul id="priceList" class="flex-1 overflow-y-auto space-y-3 text-sm p-1 pr-2"></ul>
+        <p id="priceNote" class="text-gray-400 text-xs mt-2 italic hidden text-center">
+          *Harga menyesuaikan dengan jenis kerusakan atau tipe perangkat.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer Modal -->
+    <div class="border-t border-gray-700 p-4 text-center">
+      <button onclick="closeDetails()" class="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition">
+        Tutup
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const serviceData = {
+    laptop: {
+      title: "Service Laptop",
+      img: "img/IlustrasiLaptop.png",
+      prices: [
+        { jenis: "Ganti Thermal Paste", harga: "Rp50.000", desc: "Membersihkan dan mengganti thermal paste untuk mencegah overheating atau terlalu panas pada laptop." },
+        { jenis: "Service Motherboard", harga: "Rp250.000 - Rp500.000", desc: "Perbaikan jalur, IC, atau port yang rusak pada motherboard termasuk masalah pengecasan pada laptop." },
+        { jenis: "Pembersihan Lengkap pada laptop", harga: "Rp150.000", desc: "Membersihkan kipas, keyboard, dan bagian dalam laptop dengan tujuan laptop agar tetap pada performanya." },
+        { jenis: "Ganti Keyboard", harga: "Rp100.000 - Rp1.000.000", desc: "Perbaikan keyboard laptop dengan berbagai macam kerusakan." },
+        { jenis: "Ganti Kipas/Fan", harga: "Rp100.000 - Rp500.000", desc: "Perbaikan kipas/fan laptop dengan keluhan mati." },
+        { jenis: "Ganti Speaker", harga: "Rp125.000 - Rp1.200.000", desc: "Perbaikan speaker laptop dengan keluhan mati dan bersuara pecah." },
+        { jenis: "Ganti Port USB", harga: "Rp300.000", desc: "Perbaikan Perbaikan Port USB yang tidak bisa mengkoneksikan oerangkat dan tidak terdeteksi." },
+      ],
+    },
+    smartphone: {
+      title: "Service Smartphone",
+      img: "img/IlustrasiHp.png",
+      prices: [
+        { jenis: "Ganti Layar", harga: "Rp150.000 - Rp400.000", desc: "Penggantian layar retak dengan sparepart berkualitas." },
+        { jenis: "Ganti Baterai", harga: "Rp100.000 - Rp500.000", desc: "Penggantian baterai lama dengan yang baru dan original." },
+        { jenis: "Mati Total", harga: "Rp150.000 - Rp500.000", desc: "Penanganan mesin smartphone yang mengalami keluhan mati total, termasuk masalah sinyal tidak terdeteksi." },
+        { jenis: "Permasalahan Kamera", harga: "Rp125.000 - Rp250.000", desc: "Perbaikan kamera smartphone dengan masalah kamera bergetar, mati, blur, tidak fokus dsb." },
+        { jenis: "Perbaikan Pengisian Daya", harga: "Rp150.000 - Rp300.000", desc: "Menangani pengisian daya smartphone yang bermasalah seperti charger lambat, tidak bisa konek dsb." },
+        { jenis: "Pergantian Tombol Samping", harga: "Rp50.000 - Rp150.000", desc: "Perbaikan tombol volume/power yang tidak berfungsi dan tidak bisa di tekan." },
+      ],
+    },
+    software: {
+      title: "Perbaikan OS & Software",
+      img: "img/SoftwareIlustrasi.png",
+      prices: [
+        { jenis: "Install Ulang Windows", harga: "Rp50.000", desc: "Instalasi ulang berbagai OS seperti Linux, Windows 10/11, dan lainnya." },
+        { jenis: "Install Office", harga: "Rp100.000", desc: "Pemasangan Aplikasi Sofware untuk kebutuhan kantor." },
+        { jenis: "Optimasi Performa", harga: "Rp100.000 & Rp150.000", desc: "Membersihkan sistem dari cache dump, virus, serta mempercepat kinerja laptop & PC." },
+        { jenis: "Install Software Tambahan", harga: "Rp50.000/Software", desc: "Instalasi berbagai macam software sesuai kebutuhan desain atau gaming." },
+        { jenis: "Bypass Iphone", harga: "Rp1.200.000 - Rp2.550.000", desc: "Layanan Bypass untuk keluhan Unblock IMEI, Unlock iCloud, masalah Autentikasi dsb." },
+        { jenis: "Flashing", harga: "Rp100.000 - Rp150.000", desc: "Layanan Flashing android dengan keluhan Boot Loop, Stuck Logo, Lemot, Crash, Virus, Lupa Password." }
+      ],
+    },
+    hardware: {
+      title: "Upgrade Hardware",
+      img: "img/HardwareIlustrasi.png",
+      prices: [
+        { jenis: "Upgrade RAM", harga: "Rp200.000 - Rp600.000", desc: "Penambahan kapasitas RAM untuk performa lebih cepat." },
+        { jenis: "Upgrade HDD/SSD", harga: "Rp350.000 - Rp650.000", desc: "Migrasi data dan pemasangan HDD/SSD baru." },
+        { jenis: "Upgrade GPU", harga: "Rp500.000 - Rp1.500.000", desc: "Peningkatan GPU untuk kebutuhan editing & gaming." },
+      ],
+    },
+  };
+
+  function showDetails(type) {
+    const modal = document.getElementById("detailModal");
+    const data = serviceData[type];
+    const list = document.getElementById("priceList");
+    const note = document.getElementById("priceNote");
+
+    document.getElementById("modalTitle").innerText = data.title;
+    document.getElementById("modalImage").src = data.img;
+
+    list.innerHTML = data.prices.map(
+      (p) => `
+        <li class="bg-gray-800 p-3 rounded-lg shadow-sm hover:bg-gray-700 transition flex flex-col gap-2">
+          <div class="flex justify-between items-start">
+            <span class="font-semibold text-xs sm:text-sm">${p.jenis}</span>
+            <span class="text-cyan-400 font-bold text-xs sm:text-sm">${p.harga}</span>
+          </div>
+          <p class="text-gray-300 text-xs mb-2">${p.desc}</p>
+          <a href="https://wa.me/6283845278538?text=Halo%2C%20saya%20ingin%20${encodeURIComponent(p.jenis)}."
+             target="_blank"
+             class="w-full bg-cyan-500 text-white text-center text-xs px-3 py-2 rounded-md hover:bg-cyan-400 transition">
+            Pesan Sekarang
+          </a>
+        </li>`
+    ).join("");
+
+    // Tampilkan note kalau ada kata “Harga menyesuaikan” di salah satu desc
+    const adaHargaMenyesuaikan = data.prices.some(p => p.desc.toLowerCase().includes("harga menyesuaikan"));
+    note.classList.toggle("hidden", !adaHargaMenyesuaikan);
+
+    // Tampilkan modal
+    modal.classList.remove("hidden");
+    // Pastikan overflow hidden di body aktif jika modal terbuka (opsional, tergantung layout utama)
+    // document.body.classList.add('overflow-hidden');
+  }
+
+  function closeDetails() {
+    const modal = document.getElementById("detailModal");
+    // Sembunyikan modal
+    modal.classList.add("hidden");
+    // Hapus overflow hidden dari body jika sebelumnya ditambahkan
+    // document.body.classList.remove('overflow-hidden');
+  }
+</script>
+
+
+  <!-- Contact Section -->
+  <div class="flex flex-col items-center gap-6 py-12 fade-in">
+    <p class="text-2xl font-semibold">Hubungi Kami di:</p>
+    <div class="flex gap-6 flex-wrap justify-center">
+      <a href="https://wa.me/6283845278538" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-110">
+        <i class="fab fa-whatsapp text-2xl"></i> WhatsApp
+      </a>
+      <a href="https://instagram.com/spectrum.byte" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-pink-400 via-purple-500 to-pink-600 hover:from-pink-500 hover:via-purple-600 hover:to-pink-700 px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-110">
+        <i class="fab fa-instagram text-2xl"></i> Instagram
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61579151562230" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-110">
+        <i class="fab fa-facebook text-2xl"></i> Facebook
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-400 border-t border-gray-700 text-sm fade-in">
+    © <span id="year"></span> SpectrumByte. All rights reserved.
+  </footer>
+
+  <!-- Chatbot Floating -->
+  <div id="chatbot" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+    <div class="bg-cyan-600 text-white text-sm font-bold px-3 py-1 rounded-lg shadow-lg animate-pulse relative">
+      <span class="drop-shadow-[0_0_8px_#22d3ee] animate-bounce [animation-duration:3s]">
+        Customer Service
+      </span>
+    </div>
+
+    <button id="chat-toggle" class="bg-cyan-500 hover:bg-cyan-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center animate-bounce [animation-duration:7s]">
+      💬
+    </button>
+
+    <div
+      id="chat-window"
+      class="hidden bg-gray-900 text-white
+      w-full sm:w-[400px] md:w-[500px]
+      h-[70vh] sm:h-[500px]
+      max-w-[95vw]
+      rounded-2xl shadow-xl
+      flex flex-col overflow-hidden
+      opacity-0 translate-y-4 transition-all duration-300 ease-out"
+    >
+      <div class="bg-cyan-600 p-3 flex items-center">
+        <span class="flex-1 text-center font-bold rounded-full shadow-lg animate-bounce [animation-duration:7s]">
+          SpectrumByte Customer Service
+        </span>
+        <button id="chat-close" class="text-white font-bold px-2 py-1 hover:text-gray-200">✖</button>
+      </div>
+
+      <div id="chat-messages" class="flex-1 p-3 overflow-y-auto space-y-2 text-sm"></div>
+
+      <div class="p-3 flex gap-2">
+        <input id="chat-input" type="text" placeholder="Sampaikan keluhan Anda..." class="flex-1 p-2 rounded-lg bg-gray-800 text-white focus:outline-none" />
+        <button id="chat-send" class="bg-cyan-500 px-4 rounded-lg">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+  <!-- Chatbot Script -->
+  <script>
+    const toggleBtn = document.getElementById("chat-toggle");
+    const chatWindow = document.getElementById("chat-window");
+    const closeBtn = document.getElementById("chat-close");
+    const sendBtn = document.getElementById("chat-send");
+    const input = document.getElementById("chat-input");
+    const messages = document.getElementById("chat-messages");
+
+    let dataset = [];
+
+    Papa.parse("faq_dataset.csv", {
+      download: true,
+      header: true,
+      complete: res => dataset = res.data,
+      error: err => console.error("Gagal load CSV:", err)
+    });
+
+    function addMessage(text, sender = "bot") {
+      const div = document.createElement("div");
+      div.classList.add(sender === "bot" ? "bot-msg" : "user-msg");
+      div.innerText = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div;
+    }
+
+    function showTyping() {
+      const div = document.createElement("div");
+      div.classList.add("bot-msg", "typing");
+      div.innerHTML = `<span></span><span></span><span></span>`;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div;
+    }
+
+    function findClosestAnswer(msg) {
+      msg = msg.toLowerCase();
+      let best = { score: 0, answer: "Maaf, saya belum paham pertanyaan itu 😊" };
+      dataset.forEach(item => {
+        const wordsMsg = msg.split(" ");
+        const wordsQ = item.question.toLowerCase().split(" ");
+        const matchCount = wordsMsg.filter(w => wordsQ.includes(w)).length;
+        const score = matchCount / Math.max(wordsMsg.length, wordsQ.length);
+        if (score > best.score) best = { score, answer: item.answer };
+      });
+      return best.answer;
+    }
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage(text, "user");
+      const typingBubble = showTyping();
+      setTimeout(() => {
+        typingBubble.remove();
+        addMessage(findClosestAnswer(text), "bot");
+      }, 1200);
+      input.value = "";
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keypress", e => { if (e.key === "Enter") sendMessage(); });
+
+    toggleBtn.addEventListener("click", () => {
+      if (chatWindow.classList.contains("hidden")) {
+        chatWindow.classList.remove("hidden");
+        setTimeout(() => {
+          chatWindow.classList.remove("opacity-0", "translate-y-4");
+          input.focus();
+        }, 10);
+        if (messages.innerHTML.trim() === "") {
+          const greeting = dataset.find(i => i.topic && i.topic.toLowerCase() === "sapa");
+          if (greeting) addMessage(greeting.answer, "bot");
+        }
+      }
+    });
+
+    closeBtn.addEventListener("click", () => {
+      chatWindow.classList.add("opacity-0", "translate-y-4");
+      setTimeout(() => chatWindow.classList.add("hidden"), 300);
+    });
+  </script>
+</body>
+</html>
