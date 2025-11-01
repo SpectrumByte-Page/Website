@@ -1,177 +1,225 @@
 /* ===================================================
-   🌌 ANIMASI DASAR — lebih halus & efisien
+   🌌 ANIMASI — futuristik & halus
    =================================================== */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(15px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
-.fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
+.fade-in { animation: fade-in 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-10px); }
 }
-.float-anim { animation: float 3s ease-in-out infinite; }
+.float-anim { animation: float 4s ease-in-out infinite; }
 
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(0,255,255,0.4); }
+  50% { box-shadow: 0 0 25px rgba(0,255,255,0.8); }
 }
-.animate-bounce-slow { animation: bounce-slow 2.5s infinite; }
+.pulse-glow { animation: pulse-glow 2.5s infinite ease-in-out; }
 
 /* ===================================================
-   ✨ GLOW DAN TEKS
+   🪩 TEMA WARNA & FONT GLOBAL
    =================================================== */
-.soft-glow {
-  text-shadow: 0 0 10px #00e5ff, 0 0 25px #00e5ff, 0 0 40px #00e5ff;
+:root {
+  --bg-dark: #0a0f1f;
+  --card-bg: rgba(17, 25, 40, 0.65);
+  --primary-cyan: #00eaff;
+  --secondary-pink: #ff1ec7;
+  --text-light: #e0f7fa;
+  --text-dim: rgba(255,255,255,0.7);
+  --glass-blur: blur(12px);
 }
+
+body {
+  background: radial-gradient(circle at 20% 20%, #0b1623, #050b14 60%);
+  font-family: 'Inter', 'Poppins', sans-serif;
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* ===================================================
+   ✨ GLOW & TEKS FUTURISTIK
+   =================================================== */
 .glow-text {
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-  transition: 0.3s;
+  color: var(--primary-cyan);
+  text-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+  transition: 0.3s ease;
 }
 .glow-text:hover {
-  text-shadow: 0 0 20px #00e5ff, 0 0 40px #00e5ff;
+  text-shadow: 0 0 30px #00eaff, 0 0 60px #00eaff;
+}
+
+.soft-glow {
+  text-shadow: 0 0 15px #00eaff, 0 0 40px #00eaff, 0 0 60px #00eaff;
 }
 
 /* ===================================================
-   ⚙️ HERO SECTION DAN LAYANAN
+   ⚙️ SERVICE SECTION
    =================================================== */
-header h1 { letter-spacing: 2px; }
+header h1 {
+  letter-spacing: 3px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00eaff, #ff1ec7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .service-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 22px;
-  list-style: none;
-  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
   margin: 0 auto;
+  padding: 0;
+  list-style: none;
   justify-items: center;
 }
 
 .service-list li {
-  background: rgba(90, 206, 235, 0.08);
-  backdrop-filter: blur(8px);
-  color: #fff;
-  padding: 18px 15px;
-  width: 260px;
-  border-radius: 14px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  box-shadow: 0 6px 14px rgba(95, 139, 168, 0.35);
-  cursor: pointer;
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(0, 234, 255, 0.2);
+  color: var(--text-light);
+  width: 270px;
+  padding: 20px 18px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 234, 255, 0.15);
   text-align: center;
-  transition: all 0.25s ease;
+  transition: all 0.35s ease;
+  cursor: pointer;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(25px); }
-  100% { opacity: 1; transform: translateY(0); }
+  transform: translateY(25px);
+  animation: fade-in 0.7s ease forwards;
 }
 
 .service-list li:hover {
-  transform: translateY(-8px) scale(1.06);
-  box-shadow: 0 12px 30px rgba(0, 255, 255, 0.45);
-  background: rgba(0, 255, 255, 0.15);
+  transform: translateY(-10px) scale(1.07);
+  background: rgba(0, 234, 255, 0.12);
+  border-color: rgba(255, 30, 199, 0.35);
+  box-shadow: 0 0 25px rgba(255, 30, 199, 0.3);
 }
 .service-list li:active {
-  transform: scale(0.96) translateY(-2px);
+  transform: scale(0.96);
+  filter: brightness(1.2);
 }
 
-/* Responsif */
-@media (max-width: 768px) { .service-list { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .service-list { grid-template-columns: 1fr; } }
-
-
-/* Tombol bulat chat */
+/* ===================================================
+   🗨️ CHAT FLOAT BUTTON
+   =================================================== */
 #chat-toggle {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #06b6d4;
-  color: white;
+  bottom: 22px;
+  right: 22px;
+  background: linear-gradient(145deg, #00eaff, #ff1ec7);
+  color: #fff;
+  border: none;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 28px;
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-  z-index: 1200;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.5);
+  z-index: 1000;
+  transition: 0.3s ease;
 }
-
 #chat-toggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 35px rgba(255, 30, 199, 0.6);
 }
 
-/* Area pesan */
+/* ===================================================
+   🧠 AREA PESAN CHAT
+   =================================================== */
 #chat-messages {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 12px;
+  gap: 10px;
+  padding: 14px;
   overflow-y: auto;
-  background-color: #1e293b;
+  background: rgba(15, 23, 42, 0.9);
+  border-top: 1px solid rgba(0, 234, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 30, 199, 0.2);
+  backdrop-filter: blur(12px);
 }
 
-/* Pesan user dan bot */
 .user-msg, .bot-msg {
-  animation: fadeIn 0.3s ease-out;
+  animation: fade-in 0.4s ease-out;
   max-width: 80%;
-  word-wrap: break-word;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
+  padding: 11px 15px;
+  border-radius: 16px;
+  line-height: 1.4;
 }
 
 .user-msg {
   align-self: flex-end;
-  background: linear-gradient(135deg, #00bcd4, #00e5ff);
+  background: linear-gradient(135deg, #00eaff, #00bcd4);
   color: white;
-  padding: 10px 14px;
-  border-radius: 18px 18px 0 18px;
+  box-shadow: 0 0 12px rgba(0,234,255,0.4);
 }
 
 .bot-msg {
   align-self: flex-start;
-  background: #2a2a2a;
-  color: #e0e0e0;
-  padding: 10px 14px;
-  border-radius: 18px 18px 18px 0;
+  background: rgba(255,255,255,0.08);
+  color: var(--text-light);
+  border: 1px solid rgba(0, 234, 255, 0.2);
+  backdrop-filter: blur(6px);
 }
-
-#chat-send {
-  width: 20%;
-  border: none;
-  background-color: #06b6d4;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
-  border-bottom-right-radius: 14px;
-}
-#chat-send:hover { background-color: #0891b2; }
-
 
 /* ===================================================
-   ⚡ FOOTER DAN SCROLLBAR
+   🧩 BUTTON DAN FOOTER
    =================================================== */
-footer {
-  letter-spacing: 0.5px;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.7);
+#chat-send {
+  width: 25%;
+  border: none;
+  background: linear-gradient(135deg, #00eaff, #ff1ec7);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+  border-bottom-right-radius: 16px;
+}
+#chat-send:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
 }
 
+footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  letter-spacing: 0.6px;
+  margin-top: 40px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ===================================================
+   ⚡ SCROLLBAR
+   =================================================== */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00bcd4, #00e5ff);
+  background: linear-gradient(180deg, #00eaff, #ff1ec7);
   border-radius: 10px;
+  transition: 0.3s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #00e5ff, #00bcd4);
+  background: linear-gradient(180deg, #ff1ec7, #00eaff);
+}
+
+/* ===================================================
+   📱 RESPONSIF
+   =================================================== */
+@media (max-width: 768px) {
+  .service-list { grid-template-columns: repeat(2, 1fr); }
+  #chat-toggle { width: 55px; height: 55px; font-size: 22px; }
+}
+@media (max-width: 480px) {
+  .service-list { grid-template-columns: 1fr; }
+  body { font-size: 0.9rem; }
 }
