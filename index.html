@@ -10,16 +10,7 @@
 
   <!-- ===== TITLE & ICON ===== -->
   <title>Spectrum.Byte | Solusi Dari Keluhan Anda</title>
-  <link rel="icon" type="image/png" href="img/ico.png" />
-  
-  <div class="absolute top-4 right-6 bg-gray-900/70 text-gray-200 text-sm px-4 py-2 rounded-xl shadow-lg backdrop-blur-sm">
-    <p class="font-semibold text-cyan-400">Service Center</p>
-    <p class="font-Inconsolata">📍 Jl. Arjuno No. 67, Sisir, Kota Batu</p>
-    <p class="font-Inconsolata">📬 65314</p>
-    <p class="font-Inconsolata">🕒 09.00 - 20.00 WIB</p>
-    <p class="font-Inconsolata">📧 spectrum.byte01@gmail.com</p>
-    <p class="font-Inconsolata">📱 083845278538</p>
-  </div>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/ico.png') }}" />
   
   <!-- ===== FRAMEWORKS & ICONS ===== -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,7 +23,7 @@
   />
 
   <!-- ===== STYLE FILE ===== -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
   <!-- ===== FONTS ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,9 +51,17 @@
   </script>
 </head>
 
-
 <body class="bg-gray-950 text-white flex flex-col min-h-screen">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+  <div class="absolute top-4 right-6 bg-gray-900/70 text-gray-200 text-sm px-4 py-2 rounded-xl shadow-lg backdrop-blur-sm">
+    <p class="font-semibold text-cyan-400">Service Center</p>
+    <p class="font-Inconsolata">📍 Jl. Arjuno No. 67, Sisir, Kota Batu</p>
+    <p class="font-Inconsolata">📬 65314</p>
+    <p class="font-Inconsolata">🕒 09.00 - 20.00 WIB</p>
+    <p class="font-Inconsolata">📧 spectrum.byte01@gmail.com</p>
+    <p class="font-Inconsolata">📱 083845278538</p>
+  </div>
 
   <!-- Hero Section -->
   <header class="relative h-[80vh] flex flex-col items-center justify-center text-center overflow-hidden fade-in">
@@ -84,11 +83,11 @@
 
       <div class="mt-20 flex justify-center">
         <img
-          src="img/Logo.png"
-          alt="Logo"
-          class="w-[165px] h-[165px] rounded-full border-4 border-white animate-bounce-slow shadow-lg shadow-cyan-500/50"
+            src="{{ url_for('static', filename='img/Logo.png') }}"
+            alt="Logo"
+            class="w-[165px] h-[165px] rounded-full border-4 border-white animate-bounce-slow shadow-lg shadow-cyan-500/50"
         />
-      </div>
+        </div>
     </div>
   </header>
 
@@ -104,14 +103,10 @@
 </section>
 
 <!-- ===================== MODAL DETAIL HARGA ===================== -->
-<div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+<div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[8000] p-4">
   <div class="bg-gray-900 text-white rounded-2xl shadow-2xl w-full max-w-[90vw] md:max-w-[700px] h-[90vh] md:h-[auto] max-h-[90vh] flex flex-col relative">
-    <!-- Header Modal -->
-    <div class="flex justify-between items-center border-b border-gray-700 p-4">
-      <h2 id="modalTitle" class="text-xl md:text-2xl font-bold text-center flex-1"></h2>
-      <button onclick="closeDetails()" class="text-gray-400 hover:text-white text-2xl font-bold ml-4">&times;</button>
-    </div>
-
+      <h2 id="modalTitle" class="text-lg font-semibold text-center mt-4"></h2>
+  
     <!-- Body Modal (Gambar & Daftar Harga) -->
     <div class="flex-1 overflow-hidden flex flex-col md:flex-row p-4 gap-4">
       <!-- Gambar -->
@@ -140,8 +135,8 @@
 <script>
   const serviceData = {
     laptop: {
-      title: "Service Laptop",
-      img: "img/IlustrasiLaptop.png",
+    img: "{{ url_for('static', filename='img/IlustrasiLaptop.png') }}",
+    title: "Perbaikan Laptop",
       prices: [
         { jenis: "Ganti Thermal Paste", harga: "Rp50.000", desc: "Membersihkan dan mengganti thermal paste untuk mencegah overheating atau terlalu panas pada laptop." },
         { jenis: "Service Motherboard", harga: "Rp250.000 - Rp500.000", desc: "Perbaikan jalur, IC, atau port yang rusak pada motherboard termasuk masalah pengecasan pada laptop." },
@@ -153,8 +148,8 @@
       ],
     },
     smartphone: {
-      title: "Service Smartphone",
-      img: "img/IlustrasiHp.png",
+    img: "{{ url_for('static', filename='img/IlustrasiHp.png') }}",
+    title: "Perbaikan HP",
       prices: [
         { jenis: "Ganti Layar", harga: "Rp150.000 - Rp400.000", desc: "Penggantian layar retak dengan sparepart berkualitas." },
         { jenis: "Ganti Baterai", harga: "Rp100.000 - Rp500.000", desc: "Penggantian baterai lama dengan yang baru dan original." },
@@ -165,8 +160,8 @@
       ],
     },
     software: {
-      title: "Perbaikan OS & Software",
-      img: "img/SoftwareIlustrasi.png",
+    img: "{{ url_for('static', filename='img/SoftwareIlustrasi.png') }}",
+    title: "Software Service",
       prices: [
         { jenis: "Install Ulang Windows", harga: "Rp50.000", desc: "Instalasi ulang berbagai OS seperti Linux, Windows 10/11, dan lainnya." },
         { jenis: "Install Office", harga: "Rp100.000", desc: "Pemasangan Aplikasi Sofware untuk kebutuhan kantor." },
@@ -177,8 +172,8 @@
       ],
     },
     hardware: {
-      title: "Upgrade Hardware",
-      img: "img/HardwareIlustrasi.png",
+    img: "{{ url_for('static', filename='img/HardwareIlustrasi.png') }}",
+    title: "Hardware Service",
       prices: [
         { jenis: "Upgrade RAM", harga: "Rp200.000 - Rp600.000", desc: "Penambahan kapasitas RAM untuk performa lebih cepat." },
         { jenis: "Upgrade HDD/SSD", harga: "Rp350.000 - Rp650.000", desc: "Migrasi data dan pemasangan HDD/SSD baru." },
@@ -189,6 +184,8 @@
 
   function showDetails(type) {
     const modal = document.getElementById("detailModal");
+    modal.classList.remove("hidden");
+    modal.classList.remove("pointer-events-none"); // 🔓 Aktifkan klik kembali
     const data = serviceData[type];
     const list = document.getElementById("priceList");
     const note = document.getElementById("priceNote");
@@ -222,13 +219,14 @@
     // document.body.classList.add('overflow-hidden');
   }
 
-  function closeDetails() {
-    const modal = document.getElementById("detailModal");
-    // Sembunyikan modal
-    modal.classList.add("hidden");
-    // Hapus overflow hidden dari body jika sebelumnya ditambahkan
-    // document.body.classList.remove('overflow-hidden');
-  }
+function closeDetails() {
+  const modal = document.getElementById("detailModal");
+  modal.classList.add("hidden");
+  modal.classList.add("pointer-events-none"); // 🔒 Nonaktifkan klik
+
+  // Hilangkan overflow dari body jika sebelumnya ditambahkan
+  // document.body.classList.remove('overflow-hidden');
+}
 </script>
 
 
@@ -254,4 +252,5 @@
   </footer>
 </body>
 </html>
+
 
