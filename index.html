@@ -4,8 +4,8 @@
   <!-- ===== META BASIC ===== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Spectrum.Byte — Solusi service laptop & smartphone terpercaya. Kami menyediakan layanan perbaikan hardware, software, dan upgrade dengan harga terjangkau.">
-  <meta name="keywords" content="Service Laptop, Service HP, Spectrum Byte, Perbaikan Komputer, Upgrade Hardware, Install Software, Malang">
+  <meta name="description" content="Spectrum.Byte — Solusi service laptop & smartphone terpercaya dengan sentuhan teknologi modern.">
+  <meta name="keywords" content="Service Laptop, Service HP, Spectrum Byte, Teknologi, Web3, Crypto, Perbaikan Komputer, Upgrade Hardware, Install Software, Malang">
   <meta name="author" content="Spectrum.Byte"/>
 
   <!-- ===== TITLE & ICON ===== -->
@@ -17,9 +17,7 @@
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-xh6Ck0P1a6vDkKRrjT7b3YrrVwX2Yp7Pf9U7d6XoFZQF4p3Rg6g6UEkVFiXn1Rw4zMKVnD7q3HhYpgU+YFzYfw=="
     crossorigin="anonymous"
-    referrerpolicy="no-referrer"
   />
 
   <!-- ===== STYLE FILE ===== -->
@@ -29,21 +27,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet"
   />
 
-  <!-- ===== CUSTOM TAILWIND CONFIG (OPSIONAL) ===== -->
+  <!-- ===== TAILWIND CUSTOM CONFIG ===== -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Poppins', 'sans-serif'],
+            display: ['Orbitron', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
           },
           colors: {
-            primary: '#00FFFF',
-            dark: '#0a0f1c',
+            primary: '#00ffff',
+            dark: '#050B18',
           },
         },
       },
@@ -51,56 +50,63 @@
   </script>
 </head>
 
-<body class="bg-gray-950 text-white flex flex-col min-h-screen">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-
-  <div class="absolute top-4 right-6 bg-gray-900/70 text-gray-200 text-sm px-4 py-2 rounded-xl shadow-lg backdrop-blur-sm">
-    <p class="font-semibold text-cyan-400">Service Center</p>
-    <p class="font-Inconsolata">📍 Jl. Arjuno No. 67, Sisir, Kota Batu</p>
-    <p class="font-Inconsolata">📬 65314</p>
-    <p class="font-Inconsolata">🕒 09.00 - 20.00 WIB</p>
-    <p class="font-Inconsolata">📧 spectrum.byte01@gmail.com</p>
-    <p class="font-Inconsolata">📱 083845278538</p>
+<body class="bg-gradient-to-b from-[#020617] via-[#030b1a] to-[#050A15] text-white flex flex-col min-h-screen overflow-x-hidden relative">
+  <div class="absolute inset-0 overflow-hidden">
+    <!-- efek grid Web3 -->
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-mosaic.png')] opacity-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent"></div>
+    <div class="absolute inset-0 backdrop-blur-[1px]"></div>
   </div>
 
-  <!-- Hero Section -->
-  <header class="relative h-[80vh] flex flex-col items-center justify-center text-center overflow-hidden fade-in">
+  <!-- Info box pojok -->
+  <div class="absolute top-4 right-6 bg-[#0a152a]/60 border border-cyan-400/30 text-gray-200 text-sm px-5 py-3 rounded-2xl shadow-[0_0_20px_rgba(0,255,255,0.15)] backdrop-blur-sm z-20">
+    <p class="font-display text-cyan-400 tracking-wider">⚡ Service Center</p>
+    <p class="font-mono">📍 Jl. Arjuno No. 67, Sisir, Kota Batu</p>
+    <p class="font-mono">📬 65314</p>
+    <p class="font-mono">🕒 09.00 - 20.00 WIB</p>
+    <p class="font-mono">📧 spectrum.byte01@gmail.com</p>
+    <p class="font-mono">📱 083845278538</p>
+  </div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <header class="relative h-[85vh] flex flex-col items-center justify-center text-center overflow-hidden fade-in">
     <img
-      src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1350&q=80"
+      src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80"
       alt="Laptop Service"
-      class="absolute inset-0 w-full h-full object-cover opacity-30"
+      class="absolute inset-0 w-full h-full object-cover opacity-20 blur-[1px]"
     />
+
     <div class="relative z-10 flex flex-col items-center">
-      <h1 class="text-6xl font-extrabold text-cyan-400 soft-glow float-anim">
-        SPECTRUM.BYTE
+      <h1 class="text-6xl md:text-7xl font-display font-extrabold text-cyan-400 tracking-[6px] soft-glow float-anim drop-shadow-[0_0_15px_#00ffff]">
+        SPECTRUM<span class="text-white">.BYTE</span>
       </h1>
-      <p class="mt-10 text-2xl text-gray-200 animate-bounce-slow glow-text">
+      <p class="mt-8 text-2xl text-cyan-300 animate-bounce-slow font-display tracking-widest">
         Service Laptop & Ponsel
       </p>
-      <p class="mt-4 text-4xl font-semibold text-gray-200 animate-bounce-slow glow-text">
+      <p class="mt-3 text-3xl md:text-4xl font-semibold text-gray-200 glow-text">
         Solusi Dari Keluhan Anda
       </p>
 
-      <div class="mt-20 flex justify-center">
+      <div class="mt-16 flex justify-center">
         <img
-            src="img/Logo.png"
-            alt="Logo"
-            class="w-[165px] h-[165px] rounded-full border-4 border-white animate-bounce-slow shadow-lg shadow-cyan-500/50"
+          src="img/Logo.png"
+          alt="Logo"
+          class="w-[165px] h-[165px] rounded-full border-4 border-cyan-400 shadow-[0_0_35px_rgba(0,255,255,0.4)] animate-bounce-slow"
         />
-        </div>
+      </div>
     </div>
   </header>
 
-<!-- ===================== LAYANAN KAMI ===================== -->
-<section class="text-center mt-12">
-  <h2 class="text-2xl font-semibold text-white mb-6">Katalog & Layanan Kami:</h2>
-  <ul class="service-list">
-    <li onclick="showDetails('laptop')">💻 Service Laptop</li>
-    <li onclick="showDetails('smartphone')">📱 Service Smartphone</li>
-    <li onclick="showDetails('software')">⚙️ OS & Software</li>
-    <li onclick="showDetails('hardware')">🔧 Upgrade Hardware</li>
-  </ul>
-</section>
+  <!-- ===== LAYANAN ===== -->
+  <section class="text-center mt-16 relative z-10">
+    <h2 class="text-3xl font-display text-cyan-300 mb-6 tracking-wide">Katalog & Layanan Kami</h2>
+    <ul class="service-list">
+      <li onclick="showDetails('laptop')">💻 Service Laptop</li>
+      <li onclick="showDetails('smartphone')">📱 Service Smartphone</li>
+      <li onclick="showDetails('software')">⚙️ OS & Software</li>
+      <li onclick="showDetails('hardware')">🔧 Upgrade Hardware</li>
+    </ul>
+  </section>
 
 <!-- ===================== MODAL DETAIL HARGA ===================== -->
 <div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[8000] p-4">
@@ -229,24 +235,22 @@ function closeDetails() {
 }
 </script>
 
-
-  <!-- Contact Section -->
-  <div class="flex flex-col items-center gap-6 py-12 fade-in">
-    <p class="text-2xl font-semibold">Hubungi Kami di:</p>
+  <!-- ===================== CONTACT SECTION ===================== -->
+  <div class="flex flex-col items-center gap-6 py-20 relative z-10 fade-in">
+    <p class="text-2xl font-display text-cyan-300 tracking-widest">Hubungi Kami di</p>
     <div class="flex gap-6 flex-wrap justify-center">
-      <a href="https://wa.me/6283845278538" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-110">
+      <a href="https://wa.me/6283845278538" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 px-8 py-4 rounded-2xl shadow-[0_0_20px_rgba(0,255,100,0.3)] transition transform hover:scale-110">
         <i class="fab fa-whatsapp text-2xl"></i> WhatsApp
       </a>
-      <a href="https://instagram.com/spectrum.byte" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-pink-400 via-purple-500 to-pink-600 hover:from-pink-500 hover:via-purple-600 hover:to-pink-700 px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-110">
+      <a href="https://instagram.com/spectrum.byte" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-pink-400 via-purple-500 to-pink-600 hover:from-pink-500 hover:via-purple-600 hover:to-pink-700 px-8 py-4 rounded-2xl shadow-[0_0_25px_rgba(255,0,255,0.3)] transition transform hover:scale-110">
         <i class="fab fa-instagram text-2xl"></i> Instagram
       </a>
-      <a href="https://www.facebook.com/profile.php?id=61579151562230" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 px-8 py-4 rounded-2xl shadow-lg transition transform hover:scale-110">
+      <a href="https://www.facebook.com/profile.php?id=61579151562230" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 px-8 py-4 rounded-2xl shadow-[0_0_25px_rgba(0,200,255,0.3)] transition transform hover:scale-110">
         <i class="fab fa-facebook text-2xl"></i> Facebook
       </a>
     </div>
   </div>
-  
-
-  </body>
+</body>
 </html>
+
 
