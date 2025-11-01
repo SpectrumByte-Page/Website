@@ -93,7 +93,7 @@
   <!-- ===== LAYANAN ===== -->
 <section class="text-center mt-20 relative z-10 fade-in">
   <h2 class="text-4xl font-display glow-text mb-10 tracking-wide soft-glow">
-    ⚡ Katalog & Layanan Kami
+  Katalog & Layanan Kami
   </h2>
 
   <ul class="service-list">
@@ -249,17 +249,35 @@ function closeDetails() {
       </a>
     </div>
   </div>
-  <footer class="fixed bottom-4 right-6 bg-[#0a152a]/60 border border-cyan-400/30 text-gray-200 text-sm px-5 py-3 rounded-2xl shadow-[0_0_20px_rgba(0,255,255,0.15)] backdrop-blur-sm z-20">
-  <p class="font-display text-cyan-400 tracking-wider">⚡ Service Center</p>
-  <p class="font-mono">📍 Jl. Arjuno No. 67, Sisir, Kota Batu</p>
-  <p class="font-mono">📬 65314</p>
-  <p class="font-mono">🕒 09.00 - 20.00 WIB</p>
-  <p class="font-mono">📧 spectrum.byte01@gmail.com</p>
-  <p class="font-mono">📱 083845278538</p>
-</footer>
-
+    <footer class="fixed bottom-4 right-6 flex items-center gap-6 bg-[#0a152a]/60 border border-cyan-400/30 text-gray-200 text-sm px-6 py-4 rounded-2xl shadow-[0_0_25px_rgba(0,255,255,0.2)] backdrop-blur-md z-20 animate-slide-in">
+      <div class="flex flex-col font-mono">
+        <p class="font-display text-cyan-400 tracking-wider text-base">⚡ Service Center</p>
+        <div class="flex items-center gap-2"><span>📍</span><span>Jl. Arjuno No. 67, Sisir, Kota Batu</span></div>
+        <div class="flex items-center gap-2"><span>📬</span><span>65314</span></div>
+        <div class="flex items-center gap-2"><span>🕒</span><span>09.00 - 20.00 WIB</span></div>
+        <div class="flex items-center gap-2"><span>📧</span><span>spectrum.byte01@gmail.com</span></div>
+        <div class="flex items-center gap-2"><span>📱</span><span>083845278538</span></div>
+        <style>
+        @keyframes slideIn {
+          from {
+            transform: translateX(50px);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        
+        .animate-slide-in {
+          animation: slideIn 1.2s ease-out forwards;
+        }
+        </style>
+      </div>
+    </footer>
 </body>
 </html>
+
 
 
 
