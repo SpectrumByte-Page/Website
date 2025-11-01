@@ -1,11 +1,21 @@
 /* ===================================================
-   🌌 ANIMASI — futuristik & halus
+   🌌 ANIMASI — Futuristik, smooth, dan immersive
    =================================================== */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(5px); }
-  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.95);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
-.fade-in { animation: fade-in 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+.fade-in {
+  animation: fade-in 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -14,37 +24,54 @@
 .float-anim { animation: float 4s ease-in-out infinite; }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 12px rgba(0,255,255,0.4); }
-  50% { box-shadow: 0 0 25px rgba(0,255,255,0.8); }
+  0%, 100% { box-shadow: 0 0 14px rgba(0,255,255,0.4); }
+  50% { box-shadow: 0 0 30px rgba(0,255,255,0.8); }
 }
 .pulse-glow { animation: pulse-glow 2.5s infinite ease-in-out; }
 
 /* ===================================================
-   🪩 TEMA WARNA & FONT GLOBAL
+   🪩 WARNA & FONT GLOBAL — Web3 terminal vibes
    =================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Orbitron:wght@600;800&display=swap');
+
 :root {
-  --bg-dark: #0a0f1f;
-  --card-bg: rgba(17, 25, 40, 0.65);
+  --bg-dark: #060b16;
+  --card-bg: rgba(13, 20, 35, 0.7);
   --primary-cyan: #00eaff;
   --secondary-pink: #ff1ec7;
   --text-light: #e0f7fa;
   --text-dim: rgba(255,255,255,0.7);
+  --grid-lines: rgba(255,255,255,0.03);
   --glass-blur: blur(12px);
 }
 
 body {
-  background: radial-gradient(circle at 20% 20%, #0b1623, #050b14 60%);
-  font-family: 'Inter', 'Poppins', sans-serif;
+  background: radial-gradient(circle at 30% 20%, #0b1328, #050811 70%);
+  font-family: 'Space Grotesk', 'Orbitron', sans-serif;
   color: var(--text-light);
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Background grid lines */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--grid-lines) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ===================================================
-   ✨ GLOW & TEKS FUTURISTIK
+   ✨ TEKS & GLOW
    =================================================== */
 .glow-text {
   color: var(--primary-cyan);
-  text-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+  text-shadow: 0 0 15px rgba(0, 234, 255, 0.6);
   transition: 0.3s ease;
 }
 .glow-text:hover {
@@ -52,88 +79,83 @@ body {
 }
 
 .soft-glow {
-  text-shadow: 0 0 15px #00eaff, 0 0 40px #00eaff, 0 0 60px #00eaff;
+  text-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff;
 }
 
-/* ===================================================
-   ⚙️ SERVICE SECTION
-   =================================================== */
 header h1 {
   letter-spacing: 3px;
   font-weight: 700;
   background: linear-gradient(90deg, #00eaff, #ff1ec7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
 }
 
+/* ===================================================
+   ⚙️ SERVICE SECTION
+   =================================================== */
 .service-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  margin: 0 auto;
-  padding: 0;
+  gap: 26px;
   list-style: none;
   justify-items: center;
+  margin: 0 auto;
+  padding: 0;
+  z-index: 2;
 }
 
 .service-list li {
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(0, 234, 255, 0.2);
+  border: 1px solid rgba(0, 234, 255, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 234, 255, 0.12);
+  text-align: center;
+  padding: 20px 18px;
   color: var(--text-light);
   width: 270px;
-  padding: 20px 18px;
-  border-radius: 18px;
-  box-shadow: 0 6px 18px rgba(0, 234, 255, 0.15);
-  text-align: center;
-  transition: all 0.35s ease;
   cursor: pointer;
-  opacity: 0;
   transform: translateY(25px);
-  animation: fade-in 0.7s ease forwards;
+  opacity: 0;
+  transition: 0.4s ease;
+  animation: fade-in 0.8s ease forwards;
 }
 
 .service-list li:hover {
-  transform: translateY(-10px) scale(1.07);
-  background: rgba(0, 234, 255, 0.12);
-  border-color: rgba(255, 30, 199, 0.35);
-  box-shadow: 0 0 25px rgba(255, 30, 199, 0.3);
-}
-.service-list li:active {
-  transform: scale(0.96);
-  filter: brightness(1.2);
+  transform: translateY(-10px) scale(1.05);
+  border-color: var(--secondary-pink);
+  background: rgba(0, 234, 255, 0.1);
+  box-shadow: 0 0 30px rgba(255, 30, 199, 0.35);
 }
 
 /* ===================================================
-   🗨️ CHAT FLOAT BUTTON
+   🧠 CHAT & UI
    =================================================== */
 #chat-toggle {
   position: fixed;
-  bottom: 22px;
-  right: 22px;
-  background: linear-gradient(145deg, #00eaff, #ff1ec7);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
+  bottom: 25px;
+  right: 25px;
   width: 65px;
   height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--primary-cyan), var(--secondary-pink));
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
+  color: #fff;
   cursor: pointer;
-  box-shadow: 0 0 25px rgba(0, 234, 255, 0.5);
-  z-index: 1000;
   transition: 0.3s ease;
+  z-index: 10;
 }
 #chat-toggle:hover {
-  transform: scale(1.1) rotate(10deg);
+  transform: scale(1.1) rotate(8deg);
   box-shadow: 0 0 35px rgba(255, 30, 199, 0.6);
 }
 
-/* ===================================================
-   🧠 AREA PESAN CHAT
-   =================================================== */
 #chat-messages {
   flex: 1;
   display: flex;
@@ -141,10 +163,11 @@ header h1 {
   gap: 10px;
   padding: 14px;
   overflow-y: auto;
-  background: rgba(15, 23, 42, 0.9);
-  border-top: 1px solid rgba(0, 234, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 30, 199, 0.2);
-  backdrop-filter: blur(12px);
+  background: rgba(12, 18, 32, 0.9);
+  border-top: 1px solid rgba(0, 234, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 30, 199, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
 }
 
 .user-msg, .bot-msg {
@@ -159,7 +182,7 @@ header h1 {
 .user-msg {
   align-self: flex-end;
   background: linear-gradient(135deg, #00eaff, #00bcd4);
-  color: white;
+  color: #fff;
   box-shadow: 0 0 12px rgba(0,234,255,0.4);
 }
 
@@ -171,22 +194,31 @@ header h1 {
   backdrop-filter: blur(6px);
 }
 
-/* ===================================================
-   🧩 BUTTON DAN FOOTER
-   =================================================== */
 #chat-send {
   width: 25%;
   border: none;
   background: linear-gradient(135deg, #00eaff, #ff1ec7);
   color: white;
-  cursor: pointer;
   font-weight: 600;
+  cursor: pointer;
   transition: 0.3s ease;
   border-bottom-right-radius: 16px;
 }
 #chat-send:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+}
+
+/* ===================================================
+   ⚡ SCROLLBAR & FOOTER
+   =================================================== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00eaff, #ff1ec7);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff1ec7, #00eaff);
 }
 
 footer {
@@ -197,19 +229,6 @@ footer {
   margin-top: 40px;
   padding: 15px 0;
   border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-/* ===================================================
-   ⚡ SCROLLBAR
-   =================================================== */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00eaff, #ff1ec7);
-  border-radius: 10px;
-  transition: 0.3s;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ff1ec7, #00eaff);
 }
 
 /* ===================================================
