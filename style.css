@@ -1,0 +1,177 @@
+/* ===================================================
+   🌌 ANIMASI DASAR — lebih halus & efisien
+   =================================================== */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(15px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-anim { animation: float 3s ease-in-out infinite; }
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-bounce-slow { animation: bounce-slow 2.5s infinite; }
+
+/* ===================================================
+   ✨ GLOW DAN TEKS
+   =================================================== */
+.soft-glow {
+  text-shadow: 0 0 10px #00e5ff, 0 0 25px #00e5ff, 0 0 40px #00e5ff;
+}
+.glow-text {
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  transition: 0.3s;
+}
+.glow-text:hover {
+  text-shadow: 0 0 20px #00e5ff, 0 0 40px #00e5ff;
+}
+
+/* ===================================================
+   ⚙️ HERO SECTION DAN LAYANAN
+   =================================================== */
+header h1 { letter-spacing: 2px; }
+
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.service-list li {
+  background: rgba(90, 206, 235, 0.08);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 18px 15px;
+  width: 260px;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 6px 14px rgba(95, 139, 168, 0.35);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(25px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.service-list li:hover {
+  transform: translateY(-8px) scale(1.06);
+  box-shadow: 0 12px 30px rgba(0, 255, 255, 0.45);
+  background: rgba(0, 255, 255, 0.15);
+}
+.service-list li:active {
+  transform: scale(0.96) translateY(-2px);
+}
+
+/* Responsif */
+@media (max-width: 768px) { .service-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .service-list { grid-template-columns: 1fr; } }
+
+
+/* Tombol bulat chat */
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #06b6d4;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  z-index: 1200;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#chat-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+/* Area pesan */
+#chat-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  overflow-y: auto;
+  background-color: #1e293b;
+}
+
+/* Pesan user dan bot */
+.user-msg, .bot-msg {
+  animation: fadeIn 0.3s ease-out;
+  max-width: 80%;
+  word-wrap: break-word;
+  font-size: 0.92rem;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #00bcd4, #00e5ff);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 18px 18px 0 18px;
+}
+
+.bot-msg {
+  align-self: flex-start;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  padding: 10px 14px;
+  border-radius: 18px 18px 18px 0;
+}
+
+#chat-send {
+  width: 20%;
+  border: none;
+  background-color: #06b6d4;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  border-bottom-right-radius: 14px;
+}
+#chat-send:hover { background-color: #0891b2; }
+
+
+/* ===================================================
+   ⚡ FOOTER DAN SCROLLBAR
+   =================================================== */
+footer {
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00bcd4, #00e5ff);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00e5ff, #00bcd4);
+}
