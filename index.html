@@ -59,41 +59,50 @@
   </div>
   
   <!-- ===== HERO SECTION ===== -->
-  <header class="relative h-[85vh] flex flex-col items-center justify-center text-center overflow-hidden fade-in">
-    <img
-      src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80"
-      alt="Laptop Service"
-      class="absolute inset-0 w-full h-full object-cover opacity-20 blur-[1px]"
-    />
-
-    <div class="relative z-10 flex flex-col items-center">
-        <h1 class="font-display text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text drop-shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-          SPECTRUM<span class="text-white">.BYTE</span>
-        </h1>
+  <header class="relative h-[85vh] md:h-[90vh] flex flex-col items-center justify-center text-center overflow-hidden fade-in">
+  <!-- Background Image -->
+  <img
+  src="img/bg2.jpg"
+  alt="Laptop Service"
+  class="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm brightness-110"
+  />
 
 
-      <p class="mt-8 text-3xl md:text-4xl text-cyan-300 font-display tracking-[0.3em] drop-shadow-[0_0_10px_rgba(0,255,255,0.3)] animate-pulse">
-        Service Laptop & Ponsel
-      </p>
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col items-center px-4 md:px-8">
+    <!-- Judul -->
+    <h1 class="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(0,255,255,0.3)]">
+      SPECTRUM<span class="text-white">.BYTE</span>
+    </h1>
 
-      <p class="mt-3 text-3xl md:text-4xl font-semibold text-gray-200 glow-text">
-        Solusi Dari Keluhan Anda
-      </p>
+    <!-- Subtitle 1 -->
+    <p class="mt-4 sm:mt-6 text-xl sm:text-2xl md:text-3xl text-cyan-300 font-display tracking-widest drop-shadow-[0_0_8px_rgba(0,255,255,0.3)] animate-pulse">
+      Service Laptop & Ponsel
+    </p>
 
-      <div class="mt-16 flex justify-center">
-        <img
-          src="img/Logo.png"
-          alt="Logo"
-          class="w-[165px] h-[165px] rounded-full border-4 border-cyan-400 shadow-[0_0_35px_rgba(0,255,255,0.4)] animate-bounce-slow"
-        />
-      </div>
+    <!-- Subtitle 2 -->
+    <p class="mt-2 sm:mt-3 text-lg sm:text-xl md:text-2xl font-semibold text-gray-200 glow-text">
+      Solusi Dari Keluhan Anda
+    </p>
+
+    <!-- Logo -->
+    <div class="mt-8 sm:mt-12 flex justify-center">
+      <img
+        src="img/Logo.png"
+        alt="Logo"
+        class="w-28 sm:w-36 md:w-40 lg:w-44 h-28 sm:h-36 md:h-40 lg:h-44 rounded-full border-4 border-cyan-400 shadow-[0_0_25px_rgba(0,255,255,0.4)] animate-bounce-slow"
+      />
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ===== LAYANAN ===== -->
-<section class="text-center mt-20 relative z-10 fade-in">
-  <h2 class="text-4xl font-display glow-text mb-10 tracking-wide soft-glow">
-  Katalog & Layanan Kami
+<!-- ===== FONT IMPORT ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- ===== LAYANAN ===== -->
+<section class="text-center mt-20 relative z-10 fade-in" style="font-family: 'Inter', sans-serif;">
+  <h2 class="text-4xl font-semibold text-cyan-300 mb-10 tracking-wide">
+    Katalog & Layanan Kami
   </h2>
 
   <ul class="service-list">
@@ -105,24 +114,31 @@
 </section>
 
 <!-- ===================== MODAL DETAIL HARGA ===================== -->
-<div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[8000] p-4 fade-in">
-  <div class="relative bg-[rgba(13,20,35,0.85)] text-white rounded-2xl shadow-[0_0_40px_rgba(0,234,255,0.3)] border border-[rgba(0,234,255,0.25)] w-full max-w-[90vw] md:max-w-[700px] h-[90vh] md:h-auto max-h-[90vh] flex flex-col overflow-hidden">
+<div id="detailModal" 
+  class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[8000] p-4 fade-in" 
+  style="font-family: 'Inter', sans-serif;">
+
+  <div class="relative bg-[rgba(13,20,35,0.85)] text-white rounded-2xl shadow-[0_0_40px_rgba(0,234,255,0.3)] 
+              border border-[rgba(0,234,255,0.25)] w-full max-w-[90vw] md:max-w-[700px] h-[90vh] md:h-auto 
+              max-h-[90vh] flex flex-col overflow-hidden">
 
     <!-- Judul Modal -->
-    <h2 id="modalTitle" class="text-lg font-semibold text-center mt-5 mb-2 glow-text uppercase tracking-wide"></h2>
+    <h2 id="modalTitle" class="text-lg font-semibold text-center mt-5 mb-2 text-cyan-300 uppercase tracking-wide"></h2>
 
     <!-- Body Modal -->
     <div class="flex-1 overflow-hidden flex flex-col md:flex-row p-4 gap-5">
       
       <!-- Gambar -->
       <div class="md:w-2/5 flex-shrink-0 flex justify-center items-center">
-        <img id="modalImage" src="" alt="Ilustrasi Layanan" class="rounded-xl w-full h-auto max-h-[240px] md:max-h-[300px] object-contain pulse-glow">
+        <img id="modalImage" src="" alt="Ilustrasi Layanan" 
+             class="rounded-xl w-full h-auto max-h-[240px] md:max-h-[300px] object-contain">
       </div>
 
       <!-- Detail harga -->
       <div class="md:w-3/5 flex-1 overflow-hidden flex flex-col">
-        <ul id="priceList" class="flex-1 overflow-y-auto space-y-3 text-sm p-1 pr-2"></ul>
-        <p id="priceNote" class="text-gray-400 text-xs mt-2 italic hidden text-center">
+        <ul id="priceList" 
+            class="flex-1 overflow-y-auto space-y-3 text-sm p-1 pr-3 pl-3 leading-relaxed"></ul>
+        <p id="priceNote" class="text-gray-400 text-xs mt-2 italic hidden text-left">
           *Harga menyesuaikan dengan jenis kerusakan atau tipe perangkat.
         </p>
       </div>
@@ -130,7 +146,9 @@
 
     <!-- Footer Modal -->
     <div class="border-t border-[rgba(255,255,255,0.1)] p-4 text-center">
-      <button onclick="closeDetails()" class="bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-6 py-2 rounded-xl hover:bg-[rgba(255,30,199,0.3)] hover:text-cyan-200 transition uppercase tracking-wider">
+      <button onclick="closeDetails()" 
+        class="bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-6 py-2 rounded-xl 
+               hover:bg-[rgba(255,30,199,0.3)] hover:text-cyan-200 transition uppercase tracking-wide">
         Tutup
       </button>
     </div>
@@ -140,57 +158,55 @@
 <script>
   const serviceData = {
     laptop: {
-    img: "img/IlustrasiLaptop.png",
-    title: "Perbaikan Laptop",
+      img: "img/IlustrasiLaptop.png",
+      title: "Perbaikan Laptop",
       prices: [
-        { jenis: "Ganti Thermal Paste", harga: "Rp50.000", desc: "Membersihkan dan mengganti thermal paste untuk mencegah overheating atau terlalu panas pada laptop." },
-        { jenis: "Service Motherboard", harga: "Rp250.000 - Rp500.000", desc: "Perbaikan jalur, IC, atau port yang rusak pada motherboard termasuk masalah pengecasan pada laptop." },
-        { jenis: "Pembersihan Lengkap pada laptop", harga: "Rp150.000", desc: "Membersihkan kipas, keyboard, dan bagian dalam laptop dengan tujuan laptop agar tetap pada performanya." },
-        { jenis: "Ganti Keyboard", harga: "Rp100.000 - Rp1.000.000", desc: "Perbaikan keyboard laptop dengan berbagai macam kerusakan." },
-        { jenis: "Ganti Kipas/Fan", harga: "Rp100.000 - Rp500.000", desc: "Perbaikan kipas/fan laptop dengan keluhan mati." },
-        { jenis: "Ganti Speaker", harga: "Rp125.000 - Rp1.200.000", desc: "Perbaikan speaker laptop dengan keluhan mati dan bersuara pecah." },
-        { jenis: "Ganti Port USB", harga: "Rp300.000", desc: "Perbaikan Perbaikan Port USB yang tidak bisa mengkoneksikan oerangkat dan tidak terdeteksi." },
+        { jenis: "Ganti Thermal Paste", harga: "Rp50.000", desc: "Membersihkan dan mengganti thermal paste untuk mencegah overheating." },
+        { jenis: "Service Motherboard", harga: "Rp250.000 - Rp500.000", desc: "Perbaikan jalur, IC, atau port yang rusak pada motherboard." },
+        { jenis: "Pembersihan Lengkap", harga: "Rp150.000", desc: "Membersihkan kipas, keyboard, dan bagian dalam laptop." },
+        { jenis: "Ganti Keyboard", harga: "Rp100.000 - Rp1.000.000", desc: "Perbaikan berbagai macam kerusakan pada keyboard laptop." },
+        { jenis: "Ganti Kipas/Fan", harga: "Rp100.000 - Rp500.000", desc: "Perbaikan kipas laptop yang mati atau berisik." },
+        { jenis: "Ganti Speaker", harga: "Rp125.000 - Rp1.200.000", desc: "Perbaikan speaker laptop mati atau suaranya pecah." },
+        { jenis: "Ganti Port USB", harga: "Rp300.000", desc: "Perbaikan port USB yang tidak mendeteksi perangkat." },
       ],
     },
     smartphone: {
-    img: "img/IlustrasiHp.png",
-    title: "Perbaikan HP",
+      img: "img/IlustrasiHp.png",
+      title: "Perbaikan HP",
       prices: [
         { jenis: "Ganti Layar", harga: "Rp150.000 - Rp400.000", desc: "Penggantian layar retak dengan sparepart berkualitas." },
-        { jenis: "Ganti Baterai", harga: "Rp100.000 - Rp500.000", desc: "Penggantian baterai lama dengan yang baru dan original." },
-        { jenis: "Mati Total", harga: "Rp150.000 - Rp500.000", desc: "Penanganan mesin smartphone yang mengalami keluhan mati total, termasuk masalah sinyal tidak terdeteksi." },
-        { jenis: "Permasalahan Kamera", harga: "Rp125.000 - Rp250.000", desc: "Perbaikan kamera smartphone dengan masalah kamera bergetar, mati, blur, tidak fokus dsb." },
-        { jenis: "Perbaikan Pengisian Daya", harga: "Rp150.000 - Rp300.000", desc: "Menangani pengisian daya smartphone yang bermasalah seperti charger lambat, tidak bisa konek dsb." },
-        { jenis: "Pergantian Tombol Samping", harga: "Rp50.000 - Rp150.000", desc: "Perbaikan tombol volume/power yang tidak berfungsi dan tidak bisa di tekan." },
+        { jenis: "Ganti Baterai", harga: "Rp100.000 - Rp500.000", desc: "Ganti baterai lama dengan yang baru & original." },
+        { jenis: "Mati Total", harga: "Rp150.000 - Rp500.000", desc: "Penanganan mesin smartphone mati total atau sinyal hilang." },
+        { jenis: "Permasalahan Kamera", harga: "Rp125.000 - Rp250.000", desc: "Perbaikan kamera yang blur, mati, atau tidak fokus." },
+        { jenis: "Perbaikan Pengisian Daya", harga: "Rp150.000 - Rp300.000", desc: "Menangani masalah charger lambat atau tidak terdeteksi." },
+        { jenis: "Pergantian Tombol Samping", harga: "Rp50.000 - Rp150.000", desc: "Perbaikan tombol volume/power yang tidak berfungsi." },
       ],
     },
     software: {
-    img: "img/SoftwareIlustrasi.png",
-    title: "Software Service",
+      img: "img/SoftwareIlustrasi.png",
+      title: "Software Service",
       prices: [
-        { jenis: "Install Ulang Windows", harga: "Rp50.000", desc: "Instalasi ulang berbagai OS seperti Linux, Windows 10/11, dan lainnya." },
-        { jenis: "Install Office", harga: "Rp100.000", desc: "Pemasangan Aplikasi Sofware untuk kebutuhan kantor." },
-        { jenis: "Optimasi Performa", harga: "Rp100.000 & Rp150.000", desc: "Membersihkan sistem dari cache dump, virus, serta mempercepat kinerja laptop & PC." },
-        { jenis: "Install Software Tambahan", harga: "Rp50.000/Software", desc: "Instalasi berbagai macam software sesuai kebutuhan desain atau gaming." },
-        { jenis: "Bypass Iphone", harga: "Rp1.200.000 - Rp2.550.000", desc: "Layanan Bypass untuk keluhan Unblock IMEI, Unlock iCloud, masalah Autentikasi dsb." },
-        { jenis: "Flashing", harga: "Rp100.000 - Rp150.000", desc: "Layanan Flashing android dengan keluhan Boot Loop, Stuck Logo, Lemot, Crash, Virus, Lupa Password." }
+        { jenis: "Install Ulang Windows", harga: "Rp50.000", desc: "Instalasi ulang Windows, Linux, dan OS lainnya." },
+        { jenis: "Install Office", harga: "Rp100.000", desc: "Pemasangan aplikasi Microsoft Office lengkap." },
+        { jenis: "Optimasi Performa", harga: "Rp100.000 - Rp150.000", desc: "Membersihkan sistem dari virus & mempercepat performa." },
+        { jenis: "Install Software Tambahan", harga: "Rp50.000/Software", desc: "Instalasi software tambahan untuk desain/gaming." },
+        { jenis: "Bypass iPhone", harga: "Rp1.200.000 - Rp2.550.000", desc: "Layanan bypass iCloud, IMEI, atau autentikasi." },
+        { jenis: "Flashing", harga: "Rp100.000 - Rp150.000", desc: "Flashing Android untuk mengatasi bootloop, crash, atau lupa password." }
       ],
     },
     hardware: {
-    img: "img/HardwareIlustrasi.png",
-    title: "Hardware Service",
+      img: "img/HardwareIlustrasi.png",
+      title: "Hardware Service",
       prices: [
-        { jenis: "Upgrade RAM", harga: "Rp200.000 - Rp600.000", desc: "Penambahan kapasitas RAM untuk performa lebih cepat." },
-        { jenis: "Upgrade HDD/SSD", harga: "Rp350.000 - Rp650.000", desc: "Migrasi data dan pemasangan HDD/SSD baru." },
-        { jenis: "Upgrade GPU", harga: "Rp500.000 - Rp1.500.000", desc: "Peningkatan GPU untuk kebutuhan editing & gaming." },
+        { jenis: "Upgrade RAM", harga: "Rp200.000 - Rp600.000", desc: "Tambah kapasitas RAM untuk performa lebih cepat." },
+        { jenis: "Upgrade HDD/SSD", harga: "Rp350.000 - Rp650.000", desc: "Migrasi data & pemasangan penyimpanan baru." },
+        { jenis: "Upgrade GPU", harga: "Rp500.000 - Rp1.500.000", desc: "Upgrade GPU untuk kebutuhan editing & gaming." },
       ],
     },
   };
 
   function showDetails(type) {
     const modal = document.getElementById("detailModal");
-    modal.classList.remove("hidden");
-    modal.classList.remove("pointer-events-none"); // 🔓 Aktifkan klik kembali
     const data = serviceData[type];
     const list = document.getElementById("priceList");
     const note = document.getElementById("priceNote");
@@ -198,42 +214,29 @@
     document.getElementById("modalTitle").innerText = data.title;
     document.getElementById("modalImage").src = data.img;
 
-    list.innerHTML = data.prices.map(
-      (p) => `
-        <li class="bg-gray-800 p-3 rounded-lg shadow-sm hover:bg-gray-700 transition flex flex-col gap-2">
-          <div class="flex justify-between items-start">
-            <span class="font-semibold text-xs sm:text-sm">${p.jenis}</span>
-            <span class="text-cyan-400 font-bold text-xs sm:text-sm">${p.harga}</span>
-          </div>
-          <p class="text-gray-300 text-xs mb-2">${p.desc}</p>
-          <a href="https://wa.me/6283845278538?text=Halo%2C%20saya%20ingin%20${encodeURIComponent(p.jenis)}."
-             target="_blank"
-             class="w-full bg-cyan-500 text-white text-center text-xs px-3 py-2 rounded-md hover:bg-cyan-400 transition">
-            Pesan Sekarang
-          </a>
-        </li>`
-    ).join("");
+    list.innerHTML = data.prices.map(p => `
+      <li class="bg-gray-800 p-3 rounded-lg shadow-sm hover:bg-gray-700 transition">
+        <div class="flex justify-start items-start gap-4">
+          <span class="font-semibold text-sm text-gray-100 w-1/2">${p.jenis}</span>
+          <span class="text-cyan-400 font-semibold text-sm">${p.harga}</span>
+        </div>
+        <p class="text-gray-300 text-xs mt-1 mb-2">${p.desc}</p>
+        <a href="https://wa.me/6283845278538?text=Halo%2C%20saya%20ingin%20${encodeURIComponent(p.jenis)}."
+           target="_blank"
+           class="w-full bg-cyan-500 text-white text-center text-xs px-3 py-2 rounded-md hover:bg-cyan-400 transition">
+          Pesan Sekarang
+        </a>
+      </li>
+    `).join("");
 
-    // Tampilkan note kalau ada kata “Harga menyesuaikan” di salah satu desc
-    const adaHargaMenyesuaikan = data.prices.some(p => p.desc.toLowerCase().includes("harga menyesuaikan"));
-    note.classList.toggle("hidden", !adaHargaMenyesuaikan);
-
-    // Tampilkan modal
+    note.classList.add("hidden");
     modal.classList.remove("hidden");
-    // Pastikan overflow hidden di body aktif jika modal terbuka (opsional, tergantung layout utama)
-    // document.body.classList.add('overflow-hidden');
   }
 
-function closeDetails() {
-  const modal = document.getElementById("detailModal");
-  modal.classList.add("hidden");
-  modal.classList.add("pointer-events-none"); // 🔒 Nonaktifkan klik
-
-  // Hilangkan overflow dari body jika sebelumnya ditambahkan
-  // document.body.classList.remove('overflow-hidden');
-}
+  function closeDetails() {
+    document.getElementById("detailModal").classList.add("hidden");
+  }
 </script>
-
   <!-- ===================== CONTACT SECTION ===================== -->
   <div class="flex flex-col items-center gap-6 py-20 relative z-10 fade-in">
     <p class="text-2xl font-display text-cyan-300 tracking-widest">Hubungi Kami di</p>
@@ -248,42 +251,27 @@ function closeDetails() {
         <i class="fab fa-facebook text-2xl"></i> Facebook
       </a>
     </div>
-  </div>
-    <footer class="fixed bottom-4 right-6 flex items-center gap-6 bg-[#0a152a]/60 border border-cyan-400/30 text-gray-200 text-sm px-6 py-4 rounded-2xl shadow-[0_0_25px_rgba(0,255,255,0.2)] backdrop-blur-md z-20 animate-slide-in">
-      <div class="flex flex-col font-mono">
-        <p class="font-display text-cyan-400 tracking-wider text-base">⚡ Service Center</p>
-        <div class="flex items-center gap-2"><span>📍</span><span>Jl. Arjuno No. 67, Sisir, Kota Batu</span></div>
-        <div class="flex items-center gap-2"><span>📬</span><span>65314</span></div>
-        <div class="flex items-center gap-2"><span>🕒</span><span>09.00 - 20.00 WIB</span></div>
-        <div class="flex items-center gap-2"><span>📧</span><span>spectrum.byte01@gmail.com</span></div>
-        <div class="flex items-center gap-2"><span>📱</span><span>083845278538</span></div>
-        <style>
-        @keyframes slideIn {
-          from {
-            transform: translateX(50px);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        
-        .animate-slide-in {
-          animation: slideIn 1.2s ease-out forwards;
-        }
-        </style>
-      </div>
+      <footer class="fixed bottom-4 right-6 left-6 mx-auto max-w-6xl 
+        flex items-center justify-between flex-wrap gap-3 
+        bg-[#0a152a]/70 border border-cyan-400/30 text-gray-200 text-sm 
+        px-6 py-3 rounded-2xl shadow-[0_0_25px_rgba(0,255,255,0.25)] backdrop-blur-md 
+        z-20">
+        <div class="overflow-hidden w-full">
+          <div class="running-text flex items-center gap-4 text-[13px] font-mono flex-nowrap text-gray-300">
+            <span>📍 Jl. Arjuno No. 67, Sisir, Kota Batu</span>
+            <span>📬 65314</span>
+            <span>🕒 09.00 - 20.00 WIB</span>
+            <span>📧 spectrum.byte01@gmail.com</span>
+            <span>📱 083845278538</span>
+
+            <span>📍 Jl. Arjuno No. 67, Sisir, Kota Batu</span>
+            <span>📬 65314</span>
+            <span>🕒 09.00 - 20.00 WIB</span>
+            <span>📧 spectrum.byte01@gmail.com</span>
+            <span>📱 083845278538</span>
+          </div>
+        </div>
     </footer>
+  </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
