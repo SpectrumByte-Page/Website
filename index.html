@@ -98,26 +98,32 @@
   </header>
 
   <!-- ===== LAYANAN ===== -->
-  <section class="text-center mt-16 relative z-10">
-    <h2 class="text-3xl font-display text-cyan-300 mb-6 tracking-wide">Katalog & Layanan Kami</h2>
-    <ul class="service-list">
-      <li onclick="showDetails('laptop')">💻 Service Laptop</li>
-      <li onclick="showDetails('smartphone')">📱 Service Smartphone</li>
-      <li onclick="showDetails('software')">⚙️ OS & Software</li>
-      <li onclick="showDetails('hardware')">🔧 Upgrade Hardware</li>
-    </ul>
-  </section>
+<section class="text-center mt-20 relative z-10 fade-in">
+  <h2 class="text-4xl font-display glow-text mb-10 tracking-wide soft-glow">
+    ⚡ Katalog & Layanan Kami
+  </h2>
+
+  <ul class="service-list">
+    <li class="float-anim pulse-glow" onclick="showDetails('laptop')">💻 Service Laptop</li>
+    <li class="float-anim pulse-glow" onclick="showDetails('smartphone')">📱 Service Smartphone</li>
+    <li class="float-anim pulse-glow" onclick="showDetails('software')">⚙️ OS & Software</li>
+    <li class="float-anim pulse-glow" onclick="showDetails('hardware')">🔧 Upgrade Hardware</li>
+  </ul>
+</section>
 
 <!-- ===================== MODAL DETAIL HARGA ===================== -->
-<div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[8000] p-4">
-  <div class="bg-gray-900 text-white rounded-2xl shadow-2xl w-full max-w-[90vw] md:max-w-[700px] h-[90vh] md:h-[auto] max-h-[90vh] flex flex-col relative">
-      <h2 id="modalTitle" class="text-lg font-semibold text-center mt-4"></h2>
-  
-    <!-- Body Modal (Gambar & Daftar Harga) -->
-    <div class="flex-1 overflow-hidden flex flex-col md:flex-row p-4 gap-4">
+<div id="detailModal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[8000] p-4 fade-in">
+  <div class="relative bg-[rgba(13,20,35,0.85)] text-white rounded-2xl shadow-[0_0_40px_rgba(0,234,255,0.3)] border border-[rgba(0,234,255,0.25)] w-full max-w-[90vw] md:max-w-[700px] h-[90vh] md:h-auto max-h-[90vh] flex flex-col overflow-hidden">
+
+    <!-- Judul Modal -->
+    <h2 id="modalTitle" class="text-lg font-semibold text-center mt-5 mb-2 glow-text uppercase tracking-wide"></h2>
+
+    <!-- Body Modal -->
+    <div class="flex-1 overflow-hidden flex flex-col md:flex-row p-4 gap-5">
+      
       <!-- Gambar -->
-      <div class="md:w-2/5 flex-shrink-0">
-        <img id="modalImage" src="" alt="Ilustrasi Layanan" class="rounded-xl shadow-md w-full h-auto max-h-[200px] md:max-h-[300px] object-contain">
+      <div class="md:w-2/5 flex-shrink-0 flex justify-center items-center">
+        <img id="modalImage" src="" alt="Ilustrasi Layanan" class="rounded-xl w-full h-auto max-h-[240px] md:max-h-[300px] object-contain pulse-glow">
       </div>
 
       <!-- Detail harga -->
@@ -130,8 +136,8 @@
     </div>
 
     <!-- Footer Modal -->
-    <div class="border-t border-gray-700 p-4 text-center">
-      <button onclick="closeDetails()" class="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition">
+    <div class="border-t border-[rgba(255,255,255,0.1)] p-4 text-center">
+      <button onclick="closeDetails()" class="bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-6 py-2 rounded-xl hover:bg-[rgba(255,30,199,0.3)] hover:text-cyan-200 transition uppercase tracking-wider">
         Tutup
       </button>
     </div>
@@ -252,5 +258,6 @@ function closeDetails() {
   </div>
 </body>
 </html>
+
 
 
