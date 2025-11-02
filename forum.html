@@ -108,7 +108,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-  <script>
+ <script>
     // Inisialisasi Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyDxBWbzttv2gaPVrphK-0WcaAOY1dbTxiQ",
@@ -122,33 +122,23 @@
     const db = firebase.database();
     const commentsRef = db.ref('comments');
 
+    // --- Konfigurasi Khusus Admin ---
+    const ADMIN_USERNAME = "Spectrum.Byte"; // Ganti dengan username khusus Anda
+    const ADMIN_TOKEN = "SpectrumByte_Admin_Access_9f3b1a_Xyz789"; // Ganti dengan token khusus Anda
+    // --------------------------------
+
     // Fungsi untuk membuat ID unik sederhana
     function generateId() {
         return Math.random().toString(36).substr(2, 9);
     }
 
-    // Fungsi untuk membuat username unik otomatis
-    function generateUniqueUsername() {
-        return "User_" + generateId().substring(0, 6); // Contoh: User_abc123
-    }
-
-    // Ambil username unik dari localStorage, atau buat baru jika belum ada
-    function getStoredUsername() {
-        let storedName = localStorage.getItem('forum_unique_username');
-        if (!storedName) {
-            storedName = generateUniqueUsername();
-            setStoredUsername(storedName);
-        }
-        return storedName;
-    }
-
-    // Simpan username unik ke localStorage
-    function setStoredUsername(name) {
-        localStorage.setItem('forum_unique_username', name);
-    }
-
     // Ambil token akses komentar dari localStorage (jika ada)
     function getStoredCommentToken() {
+        // Cek apakah token admin disimpan di localStorage
+        if (localStorage.getItem('forum_comment_token') === ADMIN_TOKEN) {
+            return ADMIN_TOKEN; // Jika cocok, gunakan token admin
+        }
+        // Jika tidak, kembalikan token biasa
         return localStorage.getItem('forum_comment_token');
     }
 
@@ -157,8 +147,7 @@
         localStorage.setItem('forum_comment_token', token);
     }
 
-    // Ambil username dan token saat halaman dimuat
-    let currentUsername = getStoredUsername(); // Username unik otomatis
+    // Ambil token saat halaman dimuat
     let currentCommentToken = getStoredCommentToken();
 
     // Fungsi untuk menampilkan modal konfirmasi kustom
@@ -245,8 +234,14 @@
 
             const timestamp = comment.timestamp ? new Date(comment.timestamp).toLocaleString('id-ID') : 'Tidak ada waktu';
 
-            // Periksa apakah komentar ini milik pengguna saat ini
+            // Periksa apakah komentar ini milik pengguna saat ini (termasuk admin)
             const isOwner = comment.ownerToken === currentCommentToken;
+
+            // --- Periksa apakah ini komentar dari Admin ---
+            // Gunakan nama admin jika ownerToken cocok dengan ADMIN_TOKEN
+            // Gunakan nama dari data komentar (jika ada) atau 'Anonim' untuk yang lain
+            const displayAuthor = comment.ownerToken === ADMIN_TOKEN ? ADMIN_USERNAME : (comment.author || 'Anonim');
+            // ------------------------------------------------
 
             // Render balasan (replies)
             let repliesHtml = '';
@@ -254,10 +249,12 @@
                 repliesHtml = `<div class="mt-4 pl-4 border-l-2 border-gray-700 space-y-3">`;
                 Object.entries(comment.replies).forEach(([replyId, replyData]) => {
                     const replyTimestamp = replyData.timestamp ? new Date(replyData.timestamp).toLocaleString('id-ID') : 'Tidak ada waktu';
+                    // Tampilkan author reply, bisa admin atau anonim
+                    const displayReplyAuthor = replyData.ownerToken === ADMIN_TOKEN ? ADMIN_USERNAME : (replyData.author || 'Anonim');
                     repliesHtml += `
                         <div class="bg-[rgba(5,12,22,0.5)] p-3 rounded-lg">
                             <div class="flex justify-between">
-                                <span class="text-sm text-purple-300">Balasan dari ${replyData.author || 'Anonim'}</span>
+                                <span class="text-sm text-purple-300">Balasan dari ${displayReplyAuthor}</span>
                                 <span class="text-gray-500 text-xs">${replyTimestamp}</span>
                             </div>
                             <p class="text-gray-300 text-sm mt-1">${replyData.text || ''}</p>
@@ -271,7 +268,7 @@
             el.innerHTML = `
                 <div class="flex justify-between items-start">
                     <div>
-                        <span class="font-semibold text-cyan-300">${comment.author || 'Anonim'}</span>
+                        <span class="font-semibold text-cyan-300">${displayAuthor}</span>
                         <span class="text-gray-500 text-xs ml-2">${timestamp}</span>
                     </div>
                     ${isOwner ? `<button onclick="deleteComment('${comment.id}')" 
@@ -307,21 +304,28 @@
             return;
         }
 
-        // Jika belum ada token, buat token baru
+        // Jika belum ada token, buat token baru (bisa token biasa atau admin)
         if (!currentCommentToken) {
-            currentCommentToken = generateId();
-            setStoredCommentToken(currentCommentToken);
+            // --- Cek apakah token admin diset di localStorage secara manual ---
+            const storedToken = localStorage.getItem('forum_comment_token');
+            if (storedToken === ADMIN_TOKEN) {
+                 currentCommentToken = ADMIN_TOKEN;
+            } else {
+                 currentCommentToken = generateId();
+                 setStoredCommentToken(currentCommentToken);
+            }
+            // --------------------------------------------------------------
         }
 
-        // Gunakan username unik otomatis
-        const author = currentUsername; // Ini sudah diambil dari localStorage
+        // Gunakan username admin jika token cocok, atau kosongkan untuk anonim
+        const author = currentCommentToken === ADMIN_TOKEN ? ADMIN_USERNAME : undefined; // Gunakan undefined atau kosongkan
 
         commentsRef.push({
-            author: author,
+            // author: author, // Kita bisa mengirim author jika ingin, atau tidak mengirimnya untuk anonim
             text: text,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
             likes: 0,
-            ownerToken: currentCommentToken
+            ownerToken: currentCommentToken // Simpan token yang digunakan untuk kepemilikan
         });
 
         document.getElementById('mainMessage').value = '';
@@ -333,10 +337,16 @@
         const text = input.value.trim();
         if (!text) return;
 
+        // Gunakan token yang aktif saat ini untuk reply
+        const replyOwnerToken = currentCommentToken;
+        // Gunakan username admin jika token cocok, atau kosongkan untuk anonim
+        const replyAuthor = currentCommentToken === ADMIN_TOKEN ? ADMIN_USERNAME : undefined;
+
         const replyData = {
-            author: currentUsername, // Gunakan username unik yang sudah disimpan
+            // author: replyAuthor, // Sama seperti komentar utama
             text: text,
-            timestamp: firebase.database.ServerValue.TIMESTAMP
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            ownerToken: replyOwnerToken // Simpan token di reply juga
         };
 
         const newReplyRef = commentsRef.child(commentId).child('replies').push();
@@ -576,4 +586,3 @@
 </style>
 </body>
 </html>
-
