@@ -127,9 +127,24 @@
         return Math.random().toString(36).substr(2, 9);
     }
 
-    // Ambil nama pengguna dari localStorage, atau gunakan 'Anonim'
+    // Fungsi untuk membuat username unik otomatis
+    function generateUniqueUsername() {
+        return "User_" + generateId().substring(0, 6); // Contoh: User_abc123
+    }
+
+    // Ambil username unik dari localStorage, atau buat baru jika belum ada
     function getStoredUsername() {
-        return localStorage.getItem('forum_username') || 'Anonim';
+        let storedName = localStorage.getItem('forum_unique_username');
+        if (!storedName) {
+            storedName = generateUniqueUsername();
+            setStoredUsername(storedName);
+        }
+        return storedName;
+    }
+
+    // Simpan username unik ke localStorage
+    function setStoredUsername(name) {
+        localStorage.setItem('forum_unique_username', name);
     }
 
     // Ambil token akses komentar dari localStorage (jika ada)
@@ -137,32 +152,13 @@
         return localStorage.getItem('forum_comment_token');
     }
 
-    // Simpan nama pengguna ke localStorage
-    function setStoredUsername(name) {
-        if (name.trim()) {
-            localStorage.setItem('forum_username', name.trim());
-        }
-    }
-
     // Simpan token akses komentar ke localStorage
     function setStoredCommentToken(token) {
         localStorage.setItem('forum_comment_token', token);
     }
 
-    // Handler untuk menyimpan nama dari form input
-    function handleUsernameSubmit() {
-        const input = document.getElementById('usernameInput');
-        const name = input.value.trim();
-        if (name) {
-            setStoredUsername(name);
-            document.getElementById('currentUsername').textContent = name;
-        } else {
-            alert('Nama tidak boleh kosong.');
-        }
-    }
-
-    // Ambil nama dan token saat halaman dimuat
-    let currentUsername = getStoredUsername();
+    // Ambil username dan token saat halaman dimuat
+    let currentUsername = getStoredUsername(); // Username unik otomatis
     let currentCommentToken = getStoredCommentToken();
 
     // Fungsi untuk menampilkan modal konfirmasi kustom
@@ -205,7 +201,7 @@
         modal.classList.add('animate-fade-in-up');
     }
 
-    // Hapus komentar dari Firebase (versi baru menggunakan modal kustom)
+    // Hapus komentar dari Firebase
     function deleteComment(commentId) {
         showCustomConfirm(
             "Apakah Anda yakin ingin menghapus komentar ini?",
@@ -271,8 +267,7 @@
                 repliesHtml += `</div>`;
             }
 
-            // Struktur HTML untuk tombol hapus dimasukkan langsung di sini
-            // Pastikan struktur tidak menimpa tombol
+            // Struktur HTML untuk tombol hapus
             el.innerHTML = `
                 <div class="flex justify-between items-start">
                     <div>
@@ -312,12 +307,14 @@
             return;
         }
 
+        // Jika belum ada token, buat token baru
         if (!currentCommentToken) {
             currentCommentToken = generateId();
             setStoredCommentToken(currentCommentToken);
         }
 
-        const author = currentUsername;
+        // Gunakan username unik otomatis
+        const author = currentUsername; // Ini sudah diambil dari localStorage
 
         commentsRef.push({
             author: author,
@@ -337,7 +334,7 @@
         if (!text) return;
 
         const replyData = {
-            author: currentUsername,
+            author: currentUsername, // Gunakan username unik yang sudah disimpan
             text: text,
             timestamp: firebase.database.ServerValue.TIMESTAMP
         };
@@ -369,15 +366,18 @@
 
     // Set nama pengguna saat halaman dimuat
     window.addEventListener('DOMContentLoaded', (event) => {
-        document.getElementById('currentUsername').textContent = currentUsername;
+        // Karena kita tidak punya input nama, kita bisa sembunyikan elemen input nama jika ada
+        const usernameInputDiv = document.getElementById('usernameInputDiv');
+        if (usernameInputDiv) {
+            usernameInputDiv.style.display = 'none';
+        }
     });
 
     // Ekspor fungsi ke window agar bisa dipanggil oleh onclick di HTML
     window.postComment = postComment;
     window.postReply = postReply;
-    window.deleteComment = deleteComment; // Pastikan ini diekspor
+    window.deleteComment = deleteComment;
     window.setLang = setLang;
-    window.handleUsernameSubmit = handleUsernameSubmit;
 </script>
 
   <style>
@@ -576,3 +576,4 @@
 </style>
 </body>
 </html>
+
