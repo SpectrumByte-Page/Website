@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot - SpectrumAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ['Inter', 'sans-serif'] },
+          screens: { xs: '480px' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0b1120 0%, #131e33 100%);
+      color: white;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+    .fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="font-sans">
+
+  <!-- ===== NAVBAR ATAS ===== -->
+  <nav class="fixed top-0 left-0 right-0 z-[9999] bg-black/80 backdrop-blur-sm border-b border-cyan-500/20 px-4 py-2 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <a href="index.html">
+        <img src="img/Logo.png" alt="Spectrum.Byte" class="w-7 h-7 rounded-full border border-cyan-400 shadow-[0_0_8px_rgba(0,255,255,0.4)]">
+      </a>
+      <a href="index.html" class="text-base font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Home</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1">
+        <button onclick="setLang('id')" id="btnId" 
+                class="px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">ID</button>
+        <button onclick="setLang('en')" id="btnEn" 
+                class="px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200">ENG</button>
+      </div>
+      <a href="Ai.html" 
+         class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
+        Spectrum.AI
+      </a>
+      <a href="forum.html" 
+         class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
+        FORUM
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== CHAT CONTAINER ===== -->
+  <main class="pt-20 pb-24 px-4 max-w-2xl mx-auto">
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">Spectrum.AI</h1>
+      <p class="text-gray-400 text-sm mt-1">(Beta Version.)</p>
+    </div>
+
+    <!-- Chat Box -->
+    <div id="chatbox" class="h-[60vh] max-h-[600px] overflow-y-auto bg-[rgba(10,18,30,0.7)] rounded-xl p-4 border border-cyan-500/20 mb-4 space-y-4">
+      <div class="flex items-start gap-3">
+        <div class="flex flex-col items-center">
+          <span class="text-xs text-fuchsia-300 mb-1">Spectrum.AI</span>
+          <img src="img/Logo.png" alt="SpectrumAI" class="w-8 h-8 rounded-full border border-fuchsia-400 shadow-[0_0_8px_rgba(255,0,255,0.3)]">
+        </div>
+        <div class="bg-[rgba(5,12,22,0.6)] p-3 rounded-lg max-w-[80%]">
+          <p class="text-gray-200">Halo! Saya SpectrumAI. Silakan tanyakan tentang perbaikan perangkat Anda.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Form -->
+    <form id="chatForm" class="flex gap-2">
+      <input type="text" id="userInput" 
+             class="flex-1 p-3 rounded-lg bg-gray-800 text-white border border-cyan-500/30 focus:outline-none focus:ring-1 focus:ring-cyan-400 placeholder-gray-400"
+             placeholder="Ketik pesan Anda..." autocomplete="off">
+      <button type="submit"
+              class="px-4 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-medium rounded-lg transition whitespace-nowrap">
+        Kirim
+      </button>
+    </form>
+  </main>
+
+  <script>
+    const chatbox = document.getElementById('chatbox');
+    const chatForm = document.getElementById('chatForm');
+    const userInput = document.getElementById('userInput');
+
+    function scrollToBottom() {
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function addMessage(text, isUser = false) {
+      const div = document.createElement('div');
+      div.className = 'flex items-start gap-3 ' + (isUser ? 'justify-end' : 'justify-start');
+
+      if (isUser) {
+        const userAvatar = `
+          <div class="flex flex-col items-center">
+            <span class="text-xs text-cyan-300 mb-1">User</span>
+            <img src="img/Logo.png" alt="User" class="w-8 h-8 rounded-full border border-cyan-400 shadow-[0_0_8px_rgba(0,255,255,0.4)]">
+          </div>
+        `;
+        const messageBubble = `<div class="bg-[rgba(0,234,255,0.2)] text-white p-3 rounded-lg max-w-[80%]">${text}</div>`;
+        div.innerHTML = messageBubble + userAvatar;
+      } else {
+        const botAvatar = `
+          <div class="flex flex-col items-center">
+            <span class="text-xs text-fuchsia-300 mb-1">SpectrumAI</span>
+            <img src="img/Logo.png" alt="SpectrumAI" class="w-8 h-8 rounded-full border border-fuchsia-400 shadow-[0_0_8px_rgba(255,0,255,0.3)]">
+          </div>
+        `;
+        const messageBubble = `<div class="bg-[rgba(5,12,22,0.6)] text-gray-200 p-3 rounded-lg max-w-[80%]">${text}</div>`;
+        div.innerHTML = botAvatar + messageBubble;
+      }
+
+      chatbox.appendChild(div);
+      scrollToBottom();
+    }
+
+   function getAIResponse(userMsg) {
+   const msg = userMsg.toLowerCase().trim();
+
+      // Salam
+      if (/(halo|hai|hello|hallo|hi)/.test(msg)) {
+        const responses = [
+          "Halo juga...!! Selamat datang di Spectrum Ai, ada yang bisa saya bantu?",
+          "Haiii.... senang bisa bertemu. Ada yang bisa saya bantu? "
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+      }
+
+      // Perkenalan / Identitas AI
+      if (/(siapa|kamu|apa|apaan|robot|manusia|spectrumai|spectrum ai)/.test(msg)) {
+        const responses = [
+          "Baik, perkenalkan saya adalah Asisten AI dengan model bahasa yang disusun dari beberapa bahasa pemrograman yang kompleks. Di sini saya sangat siap membantu Anda menjelaskan keluhan pada perangkat Anda saat ini.",
+          "Perkenalkan saya adalah Asisten AI dari Spectrum.Byte yang siap membantu Anda. Sebelumnya mohon maaf, saya juga masih di tahap belajar, jadi harap maklum jika saya belum memahami beberapa konteks pembahasan 😜.",
+          "Oke, perkenalkan saya adalah SpectrumAI 🧠, kecerdasan buatan yang dibangun untuk membantu Anda menjelaskan keluhan dan prosedur penanganan kami. Senang bisa membantu 🫡.",
+          "Saya adalah SpectrumAI, saya dibangun untuk bisa membantu umat manusia dalam segala aktivitasnya. Namun pada kesempatan kali ini, saya hanya berbentuk model bahasa yang siap membantu Anda yang sedang terkendala pada perangkat ponsel 📱 dan laptop/PC-nya 💻."
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+      }
+
+      // Terima kasih
+      if (/(terima kasih|makasih|thanks|thank you)/.test(msg)) {
+        return "Sama-sama! Jangan ragu tanya lagi ya 😊";
+      }
+
+      // 💡 HP MATI TOTAL
+      if (
+        (/\b(hp|ponsel|handphone)\b/.test(msg)) &&
+        (/\b(mati|nyala|matot|mati total)\b/.test(msg))
+      ) {
+        return "Baik, jika Anda mengalami keluhan mati total pada ponsel, bisa disebabkan oleh banyak hal: usia perangkat📱, korosi akibat terkena air💧, konsleting komponen⚡, atau masalah sumber daya. Perlu kami tekankan⚠️: saat perangkat dibongkar, ada 2 kemungkinan — bisa normal kembali✅ atau malah mati permanen❌. Ini risiko teknis yang perlu dipahami.";
+      }
+
+      // 💻 LAPTOP/PC MATI TOTAL
+      if (
+        (/\b(laptop|pc|komputer)\b/.test(msg)) &&
+        (/\b(mati|nyala|matot|mati total)\b/.test(msg))
+      ) {
+        return "Baik, jika Anda mengalami keluhan mati total pada laptop/PC, penyebab umumnya: usia perangkat, korsleting, kerusakan motherboard, atau masalah daya. Seperti pada HP, membongkar perangkat berisiko — bisa berhasil✅ atau justru memperparah❌. Kami akan selalu memberi estimasi risiko sebelum servis.";
+      }
+
+      // 🔌 HP TIDAK BISA CHARGE
+      if (
+        (/\b(hp|ponsel|handphone)\b/.test(msg)) &&
+        (/\b(cas|charge|isi|pengisian|daya)\b/.test(msg))
+      ) {
+        return "Masalah pengisian daya HP umumnya karena: port USB kotor, kabel rusak, atau IC charger bermasalah. Coba bersihkan port dengan kuas lembut. Jika tetap tidak bisa, kemungkinan perlu pengecekan lebih dalam.";
+      }
+
+      // ⌨️ KEYBOARD ERROR
+      if (/\b(keyboard)\b/.test(msg) && /\b(error|rusak|tidak berfungsi|tidak jalan|mendadak mati)\b/.test(msg)) {
+        return "Keyboard yang error bisa disebabkan oleh kotoran, kabel fleksibel lepas, atau IC keyboard rusak. Kami bisa bantu perbaiki atau ganti dengan suku cadang berkualitas.";
+      }
+
+      // 🔥 OVERHEATING
+      if (/\b(panas|overheat|overheating|kepanasan|laptop panas)\b/.test(msg)) {
+        return "Laptop yang terlalu panas biasanya karena debu menumpuk di kipas atau thermal paste sudah kering. Kami sarankan lakukan pembersihan menyeluruh dan ganti thermal paste untuk performa optimal.";
+      }
+
+      // 🖥️ LAYAR RETAK / BLANK
+      if (/\b(layar)\b/.test(msg) && /\b(retak|pecah|blank|hitam|tidak muncul|mati)\b/.test(msg)) {
+        return "Layar retak, dot pixel, bercak, buram, dsb biasa harus diganti dikarenakan LCD pada ponsel sudah tidak bisa di perbaiki jika sudah mengalami hal tersebut. Maka dari itu kami saran kan untuk menggantinya dengan yang baru, terkait harga silahkan cek katalog yang ada pada halaman utama. Terima kasih";
+      }
+
+      // 💰 HARGA / BIAYA
+      if (/\b(harga|harganya|biaya|berapa|berapa biaya)\b/.test(msg)) {
+        return "Baik, terkait harga silahkan buka katalog yang sudah kami lampirkan di halaman utama, disana sudah tertera rentan harga pada setiap layanan yang kami sediakan. Senang bisa membantu dan Terimakasih";
+      }
+
+      // 📍 LOKASI
+      if (/\b(alamat|lokasi|dimana|di mana|tempat)\b/.test(msg)) {
+        return "Kami berlokasi di Jl. Arjuno No. 67, Sisir, Kota Batu. Jam operasional: 09.00–20.00 WIB. Bisa juga cek Google Maps dengan kata kunci 'Spectrum.Byte'.";
+      }
+
+      // 🛡️ GARANSI
+      if (/\b(garansi|jaminan|jamin)\b/.test(msg)) {
+        return "Setiap perbaikan dilengkapi garansi 7–30 hari tergantung jenis layanan. Garansi mencakup komponen yang diganti dan pekerjaan teknisi. Tidak berlaku jika ada kerusakan fisik setelah servis.";
+      }
+
+      // ⏱️ WAKTU PENGERJAAN
+      if (/\b(lama|waktu|berapa jam|berapa hari|selesai)\b/.test(msg)) {
+        return "Waktu pengerjaan:\n- Ringan (ganti pasta, bersihkan): 1–2 jam\n- Sedang (ganti layar, keyboard): 1 hari\n- Berat (motherboard): 1–3 hari\nKami akan kabari jika ada kendala teknis.";
+      }
+
+      // 📞 DEFAULT FALLBACK
+      return "Terima kasih atas pesan Anda! Untuk respon lebih cepat dan akurat, Anda bisa langsung chat kami via WhatsApp: https://wa.me/6283845278538 📲";
+    }
+
+    chatForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msg = userInput.value.trim();
+      if (!msg) return;
+
+      addMessage(msg, true);
+      userInput.value = '';
+
+      setTimeout(() => {
+        const aiResponse = getAIResponse(msg);
+        addMessage(aiResponse);
+      }, 800);
+    });
+
+    function setLang(lang) {
+      const btnId = document.getElementById('btnId');
+      const btnEn = document.getElementById('btnEn');
+      if (lang === 'id') {
+        btnId.className = 'px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+        btnEn.className = 'px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200';
+      } else {
+        btnId.className = 'px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200';
+        btnEn.className = 'px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+      }
+    }
+
+    window.addEventListener('load', scrollToBottom);
+  </script>
+  <style>
+  /* Background Angkasa Gelap */
+  body {
+    background: #000;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    position: relative;
+  }
+
+  /* Efek Neural Biru Mengambang */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 10, 40, 0.8) 0%, rgba(0, 0, 0, 1) 70%);
+    z-index: -2;
+  }
+
+  /* Jaringan Neural - Titik-titik & Garis */
+  .neural-network {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  .neural-node {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00f;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00f;
+    animation: pulse 3s infinite ease-in-out;
+  }
+
+  .neural-line {
+    position: absolute;
+    background: linear-gradient(to right, transparent, #00f, transparent);
+    height: 1px;
+    transform-origin: left center;
+    opacity: 0.4;
+    animation: glowLine 4s infinite alternate ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.6; }
+  }
+
+  @keyframes glowLine {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.6; }
+  }
+
+  /* Animasi Partikel Bintang */
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+  }
+
+  @keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+  }
+
+  /* Komet Styles */
+  .comet {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #4af;
+    border-radius: 50%;
+    box-shadow: 
+      0 0 10px #4af,
+      0 0 20px #06f,
+      0 0 30px #00f;
+    filter: blur(0.5px);
+  }
+
+  .comet::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(to left, 
+      rgba(68, 170, 255, 0.8) 0%,
+      rgba(0, 102, 255, 0.4) 40%,
+      transparent 100%);
+    transform: translate(-100%, -50%);
+    filter: blur(1px);
+  }
+
+  .comet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to left, 
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(68, 170, 255, 0.3) 50%,
+      transparent 100%);
+    transform: translate(-100%, -50%);
+  }
+
+  /* Optional: Tambahkan sedikit kabut biru */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 0, 50, 0.1), rgba(0, 50, 100, 0.05));
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
+
+<!-- Script JS untuk Generate Neural Network & Komet Dinamis -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.createElement('div');
+    container.className = 'neural-network';
+    document.body.appendChild(container);
+
+    // Buat titik-titik neural
+    for (let i = 0; i < 50; i++) {
+      const node = document.createElement('div');
+      node.className = 'neural-node';
+      node.style.left = Math.random() * 100 + 'vw';
+      node.style.top = Math.random() * 100 + 'vh';
+      container.appendChild(node);
+
+      // Buat garis acak antar titik
+      if (i > 0 && Math.random() > 0.7) {
+        const line = document.createElement('div');
+        line.className = 'neural-line';
+        const prevNode = container.children[i-1];
+        const currNode = node;
+
+        const x1 = parseFloat(prevNode.style.left);
+        const y1 = parseFloat(prevNode.style.top);
+        const x2 = parseFloat(currNode.style.left);
+        const y2 = parseFloat(currNode.style.top);
+
+        const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+
+        line.style.width = length + 'px';
+        line.style.left = x1 + 'vw';
+        line.style.top = y1 + 'vh';
+        line.style.transform = `rotate(${angle}deg)`;
+
+        container.appendChild(line);
+      }
+    }
+
+    // Tambahkan bintang-bintang
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.width = (Math.random() * 1 + 0.5) + 'px';
+      star.style.height = star.style.width;
+      document.body.appendChild(star);
+    }
+
+    // Fungsi untuk membuat komet
+    function createComet() {
+      const comet = document.createElement('div');
+      comet.className = 'comet';
+      
+      // Posisi awal random dari sisi kanan atau atas
+      const startSide = Math.random() > 0.5 ? 'top' : 'right';
+      
+      if (startSide === 'top') {
+        comet.style.left = Math.random() * 100 + 'vw';
+        comet.style.top = '-50px';
+      } else {
+        comet.style.left = window.innerWidth + 'px';
+        comet.style.top = Math.random() * 100 + 'vh';
+      }
+      
+      document.body.appendChild(comet);
+      
+      // Animasi komet
+      const duration = 2000 + Math.random() * 3000; // 2-5 detik
+      const angle = 30 + Math.random() * 60; // Sudut 30-90 derajat
+      const distance = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2) * 1.5;
+      
+      const startX = parseFloat(comet.style.left);
+      const startY = parseFloat(comet.style.top);
+      const endX = startX - distance * Math.cos(angle * Math.PI / 180);
+      const endY = startY + distance * Math.sin(angle * Math.PI / 180);
+      
+      const startTime = Date.now();
+      
+      function animate() {
+        const elapsed = Date.now() - startTime;
+        const progress = elapsed / duration;
+        
+        if (progress < 1) {
+          const currentX = startX + (endX - startX) * progress;
+          const currentY = startY + (endY - startY) * progress;
+          
+          comet.style.left = currentX + 'px';
+          comet.style.top = currentY + 'px';
+          comet.style.transform = `rotate(${-angle}deg)`;
+          
+          // Fade out di akhir
+          if (progress > 0.7) {
+            comet.style.opacity = 1 - (progress - 0.7) / 0.3;
+          }
+          
+          requestAnimationFrame(animate);
+        } else {
+          comet.remove();
+        }
+      }
+      
+      animate();
+    }
+    
+    // Spawn komet secara berkala
+    setInterval(() => {
+      if (Math.random() > 0.3) { // 70% chance setiap interval
+        createComet();
+      }
+    }, 1500); // Setiap 1.5 detik
+    
+    // Buat beberapa komet di awal
+    for (let i = 0; i < 3; i++) {
+      setTimeout(createComet, i * 800);
+    }
+  });
+</script>
+</body>
+</html>

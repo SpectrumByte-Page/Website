@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forum - SPECTRUM.BYTE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Inter', 'sans-serif'],
+          },
+          screens: {
+            xs: '480px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0b1120 0%, #131e33 100%);
+      color: white;
+      min-height: 100vh;
+    }
+    .glow-text {
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-bounce-slow {
+      animation: bounce-slow 3s infinite;
+    }
+    .fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="font-sans">
+
+  <!-- ===== NAVBAR ATAS ===== -->
+<nav class="fixed top-0 left-0 right-0 z-[9999] bg-black/80 backdrop-blur-sm border-b border-cyan-500/20 px-4 py-2 flex items-center justify-between">
+  <!-- Kiri: Logo + Nama Brand -->
+  <div class="flex items-center gap-2">
+      <a href="index.html">
+        <img src="img/Logo.png" alt="Spectrum.Byte" class="w-7 h-7 rounded-full border border-cyan-400 shadow-[0_0_8px_rgba(0,255,255,0.4)]">
+      </a>
+      <a href="index.html" class="text-base font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Home</a>
+    </div>
+
+  <!-- Kanan: Toggle Bahasa + Tombol Forum -->
+  <div class="flex items-center gap-2">
+    <!-- Toggle Bahasa -->
+    <div class="flex items-center gap-1">
+      <button onclick="setLang('id')" id="btnId" 
+              class="px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">ID</button>
+      <button onclick="setLang('en')" id="btnEn" 
+              class="px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200">ENG</button>
+    </div>
+
+    <!-- Tombol Forum (aktif di halaman ini, tapi tetap bisa klik) -->
+    <a href="Ai.html" 
+       class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
+      Spectrum.Ai
+    </a>
+    <a href="forum.html" 
+       class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
+      FORUM
+    </a>
+  </div>
+</nav>
+
+  <!-- ===== KONTEN FORUM ===== -->
+  <main class="pt-20 pb-12 px-4 max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+      <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">Forum Kritik & Saran</h1>
+      <p class="text-gray-400 mt-2 text-sm">Bagi kami setiap masukan sangat berharga!</p>
+    </div>
+
+    <!-- Form Kirim Komentar -->
+    <div class="bg-[rgba(13,20,35,0.7)] rounded-xl p-5 border border-cyan-500/20 mb-8">
+      <textarea id="mainMessage" rows="3"
+                class="w-full p-3 rounded-lg bg-gray-800 text-white text-sm border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                placeholder="Tulis kritik, saran, atau pengalaman Anda..."></textarea>
+      <div class="mt-3 flex justify-end">
+        <button onclick="postComment()"
+                class="px-5 py-2 bg-cyan-500 hover:bg-cyan-400 text-black font-medium rounded-lg transition uppercase tracking-wide text-sm">
+          Kirim
+        </button>
+      </div>
+    </div>
+
+    <!-- Daftar Komentar -->
+    <div id="commentsContainer" class="space-y-5">
+      <!-- Komentar akan muncul di sini -->
+    </div>
+  </main>
+
+  <script>
+    // Data komentar
+    let comments = JSON.parse(localStorage.getItem('spectrum_comments') || '[]');
+
+    const saveComments = () => {
+      localStorage.setItem('spectrum_comments', JSON.stringify(comments));
+    };
+
+    const renderComments = () => {
+      const container = document.getElementById('commentsContainer');
+      container.innerHTML = '';
+
+      if (comments.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10">
+            <p class="text-gray-500 italic">Belum ada komentar. Jadilah yang pertama!</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Urutkan: terbaru di atas
+      const sorted = [...comments].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+      sorted.forEach(comment => {
+        const el = document.createElement('div');
+        el.className = 'bg-[rgba(10,18,30,0.6)] p-5 rounded-xl border border-[rgba(0,234,255,0.1)]';
+        el.innerHTML = `
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="font-semibold text-cyan-300">${comment.author || 'Anonim'}</span>
+              <span class="text-gray-500 text-xs ml-2">${new Date(comment.timestamp).toLocaleString('id-ID')}</span>
+            </div>
+            <button onclick="deleteComment('${comment.id}')" 
+                    class="text-red-400 hover:text-red-300 text-xs flex items-center gap-1">🗑️ Hapus</button>
+          </div>
+          <p class="text-gray-200 mt-3 whitespace-pre-wrap">${comment.text}</p>
+
+          <!-- Like -->
+          <div class="mt-3 flex items-center gap-3">
+            <button onclick="toggleLike('${comment.id}')" 
+                    class="flex items-center gap-1 text-sm ${comment.liked ? 'text-pink-400' : 'text-gray-400 hover:text-pink-400'}">
+              ❤️ <span>${comment.likes || 0}</span>
+            </button>
+          </div>
+
+          <!-- Balas -->
+          <div class="mt-4 flex gap-2">
+            <input type="text" id="reply-${comment.id}" 
+                   placeholder="Balas komentar ini..." 
+                   class="flex-1 p-2 text-sm rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400">
+            <button onclick="postReply('${comment.id}')" 
+                    class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded text-sm whitespace-nowrap">
+              Balas
+            </button>
+          </div>
+
+          <!-- Balasan -->
+          ${comment.replies && comment.replies.length > 0 ? `
+            <div class="mt-4 pl-4 border-l-2 border-gray-700 space-y-3">
+              ${comment.replies.map(reply => `
+                <div class="bg-[rgba(5,12,22,0.5)] p-3 rounded-lg">
+                  <div class="flex justify-between">
+                    <span class="text-sm text-purple-300">Balasan</span>
+                    <button onclick="deleteReply('${comment.id}', '${reply.id}')" class="text-red-400 text-xs">🗑️</button>
+                  </div>
+                  <p class="text-gray-300 text-sm mt-1">${reply.text}</p>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        `;
+        container.appendChild(el);
+      });
+    };
+
+    function postComment() {
+      const text = document.getElementById('mainMessage').value.trim();
+      if (!text) return alert('Mohon isi pesan Anda.');
+      
+      const author = prompt('Nama Anda (opsional):') || 'Anonim';
+      
+      comments.push({
+        id: Math.random().toString(36).substr(2, 9),
+        author,
+        text,
+        timestamp: new Date().toISOString(),
+        likes: 0,
+        liked: false,
+        replies: []
+      });
+      
+      saveComments();
+      document.getElementById('mainMessage').value = '';
+      renderComments();
+    }
+
+    function postReply(commentId) {
+      const input = document.getElementById(`reply-${commentId}`);
+      const text = input.value.trim();
+      if (!text) return;
+      
+      const comment = comments.find(c => c.id === commentId);
+      if (comment) {
+        comment.replies = comment.replies || [];
+        comment.replies.push({
+          id: Math.random().toString(36).substr(2, 9),
+          text,
+          timestamp: new Date().toISOString()
+        });
+        saveComments();
+        input.value = '';
+        renderComments();
+      }
+    }
+
+    function deleteComment(id) {
+      if (!confirm('Hapus komentar ini?')) return;
+      comments = comments.filter(c => c.id !== id);
+      saveComments();
+      renderComments();
+    }
+
+    function deleteReply(commentId, replyId) {
+      if (!confirm('Hapus balasan ini?')) return;
+      const comment = comments.find(c => c.id === commentId);
+      if (comment) {
+        comment.replies = comment.replies.filter(r => r.id !== replyId);
+        saveComments();
+        renderComments();
+      }
+    }
+
+    function toggleLike(id) {
+      const comment = comments.find(c => c.id === id);
+      if (comment) {
+        if (comment.liked) {
+          comment.likes = Math.max(0, (comment.likes || 0) - 1);
+          comment.liked = false;
+        } else {
+          comment.likes = (comment.likes || 0) + 1;
+          comment.liked = true;
+        }
+        saveComments();
+        renderComments();
+      }
+    }
+
+    function setLang(lang) {
+      const btnId = document.getElementById('btnId');
+      const btnEn = document.getElementById('btnEn');
+      if (lang === 'id') {
+        btnId.className = 'px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+        btnEn.className = 'px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200';
+      } else {
+        btnId.className = 'px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200';
+        btnEn.className = 'px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+      }
+      // Untuk versi lengkap, ganti teks halaman di sini
+    }
+
+    // Render saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', renderComments);
+  </script>
+  <style>
+  /* Background Angkasa Gelap */
+  body {
+    background: #000;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    position: relative;
+  }
+
+  /* Efek Neural Biru Mengambang */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 10, 40, 0.8) 0%, rgba(0, 0, 0, 1) 70%);
+    z-index: -2;
+  }
+
+  /* Jaringan Neural - Titik-titik & Garis */
+  .neural-network {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  .neural-node {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00f;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00f;
+    animation: pulse 3s infinite ease-in-out;
+  }
+
+  .neural-line {
+    position: absolute;
+    background: linear-gradient(to right, transparent, #00f, transparent);
+    height: 1px;
+    transform-origin: left center;
+    opacity: 0.4;
+    animation: glowLine 4s infinite alternate ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.6; }
+  }
+
+  @keyframes glowLine {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.6; }
+  }
+
+  /* Animasi Partikel Bintang */
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+  }
+
+  @keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+  }
+
+  /* Optional: Tambahkan sedikit kabut biru */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 0, 50, 0.1), rgba(0, 50, 100, 0.05));
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
+
+<!-- Script JS untuk Generate Neural Network Dinamis -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.createElement('div');
+    container.className = 'neural-network';
+    document.body.appendChild(container);
+
+    // Buat titik-titik neural
+    for (let i = 0; i < 50; i++) {
+      const node = document.createElement('div');
+      node.className = 'neural-node';
+      node.style.left = Math.random() * 100 + 'vw';
+      node.style.top = Math.random() * 100 + 'vh';
+      container.appendChild(node);
+
+      // Buat garis acak antar titik
+      if (i > 0 && Math.random() > 0.7) {
+        const line = document.createElement('div');
+        line.className = 'neural-line';
+        const prevNode = container.children[i-1];
+        const currNode = node;
+
+        const x1 = parseFloat(prevNode.style.left);
+        const y1 = parseFloat(prevNode.style.top);
+        const x2 = parseFloat(currNode.style.left);
+        const y2 = parseFloat(currNode.style.top);
+
+        const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+
+        line.style.width = length + 'px';
+        line.style.left = x1 + 'vw';
+        line.style.top = y1 + 'vh';
+        line.style.transform = `rotate(${angle}deg)`;
+
+        container.appendChild(line);
+      }
+    }
+
+    // Tambahkan bintang-bintang
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.width = (Math.random() * 1 + 0.5) + 'px';
+      star.style.height = star.style.width;
+      document.body.appendChild(star);
+    }
+  });
+</script>
+</body>
+</html>
