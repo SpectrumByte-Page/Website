@@ -123,7 +123,7 @@
     const commentsRef = db.ref('comments');
 
     // --- Konfigurasi Khusus Admin ---
-    const ADMIN_USERNAME = "Spectrum.Byte"; // Ganti dengan username khusus Anda
+    const ADMIN_USERNAME = "Admin_Spectrum"; // Ganti dengan username khusus Anda
     const ADMIN_TOKEN = "SpectrumByte_Admin_Access_9f3b1a_Xyz789"; // Ganti dengan token khusus Anda
     // --------------------------------
 
@@ -414,175 +414,92 @@
     z-index: -2;
   }
 
-  /* Jaringan Neural - Titik-titik & Garis */
+    /* Jaringan Neural - Titik-titik & Garis */
   .neural-network {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
     z-index: -1;
-    opacity: 0.6;
+    overflow: hidden;
+    pointer-events: none;
   }
 
-  .neural-node {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #00f;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #00f;
-    animation: pulse 3s infinite ease-in-out;
-  }
-
-  .neural-line {
-    position: absolute;
-    background: linear-gradient(to right, transparent, #00f, transparent);
-    height: 1px;
-    transform-origin: left center;
-    opacity: 0.4;
-    animation: glowLine 4s infinite alternate ease-in-out;
-  }
-
-  @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.6; }
-  }
-
-  @keyframes glowLine {
-    0% { opacity: 0.3; }
-    100% { opacity: 0.6; }
-  }
-
-  /* Animasi Partikel Bintang */
-  .star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: twinkle 3s infinite alternate;
-  }
-
-  @keyframes twinkle {
-    from { opacity: 0.3; }
-    to { opacity: 1; }
-  }
-
-  /* Optional: Tambahkan sedikit kabut biru */
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
+  canvas {
+    display: block;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(0, 0, 50, 0.1), rgba(0, 50, 100, 0.05));
-    z-index: -1;
-    pointer-events: none;
   }
 </style>
 
-<!-- Script JS untuk Generate Neural Network Dinamis -->
+<div class="neural-network">
+  <canvas id="neuralCanvas"></canvas>
+</div>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const container = document.createElement('div');
-    container.className = 'neural-network';
-    document.body.appendChild(container);
+  // ===== Efek Neural Network Biru =====
+  const canvas = document.getElementById("neuralCanvas");
+  const ctx = canvas.getContext("2d");
 
-    // Buat titik-titik neural
-    for (let i = 0; i < 50; i++) {
-      const node = document.createElement('div');
-      node.className = 'neural-node';
-      node.style.left = Math.random() * 100 + 'vw';
-      node.style.top = Math.random() * 100 + 'vh';
-      container.appendChild(node);
+  let particles = [];
+  const numParticles = 60;
 
-      // Buat garis acak antar titik
-      if (i > 0 && Math.random() > 0.7) {
-        const line = document.createElement('div');
-        line.className = 'neural-line';
-        const prevNode = container.children[i-1];
-        const currNode = node;
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
 
-        const x1 = parseFloat(prevNode.style.left);
-        const y1 = parseFloat(prevNode.style.top);
-        const x2 = parseFloat(currNode.style.left);
-        const y2 = parseFloat(currNode.style.top);
+  for (let i = 0; i < numParticles; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+    });
+  }
 
-        const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(0, 255, 255, 0.7)";
 
-        line.style.width = length + 'px';
-        line.style.left = x1 + 'vw';
-        line.style.top = y1 + 'vh';
-        line.style.transform = `rotate(${angle}deg)`;
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+    });
 
-        container.appendChild(line);
+    for (let i = 0; i < numParticles; i++) {
+      for (let j = i + 1; j < numParticles; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.strokeStyle = `rgba(0, 255, 255, ${1 - dist / 120})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
       }
     }
 
-    // Tambahkan bintang-bintang
-    for (let i = 0; i < 100; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = Math.random() * 100 + 'vw';
-      star.style.top = Math.random() * 100 + 'vh';
-      star.style.width = (Math.random() * 1 + 0.5) + 'px';
-      star.style.height = star.style.width;
-      document.body.appendChild(star);
-    }
-  });
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
 </script>
-<!-- Modal Konfirmasi Kustom -->
-<div id="customConfirmModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[9999] hidden">
-    <div class="bg-[rgba(13,20,35,0.8)] rounded-xl p-6 border border-cyan-500/30 max-w-md w-full mx-4 shadow-2xl animate-fade-in-up">
-        <div class="text-center mb-4">
-            <h3 class="text-lg font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Konfirmasi Hapus</h3>
-        </div>
-        <p id="customConfirmMessage" class="text-gray-300 mb-6 text-sm">Apakah Anda yakin ingin menghapus komentar ini?</p>
-        <div class="flex justify-end gap-3">
-            <button id="customConfirmCancel" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium rounded-lg transition">
-                Batal
-            </button>
-            <button id="customConfirmOK" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm font-medium rounded-lg transition">
-                Hapus
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- Animasi CSS -->
-<style>
-    @keyframes fade-in-up {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in-up {
-        animation: fade-in-up 0.3s ease-out forwards;
-    }
-
-    @keyframes fade-out-down {
-        from {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        to {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-    }
-
-    .animate-fade-out-down {
-        animation: fade-out-down 0.3s ease-in forwards;
-    }
-</style>
 </body>
 </html>
