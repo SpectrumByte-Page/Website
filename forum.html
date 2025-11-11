@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Forum - SPECTRUM.BYTE</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="    https://cdn.tailwindcss.com    "></script>
   <link rel="icon" type="image/png" href="img/ico.png" />
   <script>
     tailwind.config = {
@@ -48,46 +48,121 @@
 </head>
 <body class="font-sans">
 
+  <!-- ===== HALAMAN LOGIN ===== -->
+<div id="loginPage" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[9999]">
+    <div class="bg-[rgba(13,20,35,0.8)] rounded-xl p-8 border border-cyan-500/30 max-w-md w-full mx-4 shadow-2xl animate-fade-in-up">
+      <div class="text-center mb-6">
+        <h2 class="text-xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Login ke Forum</h2>
+      </div>
+      <div class="space-y-4">
+        <!-- Tombol Login Google yang diperbarui -->
+        <button id="googleLoginBtn"
+                class="w-full px-5 py-2 bg-red-600 hover:bg-red-500 text-white font-medium rounded-lg transition uppercase tracking-wide text-sm flex items-center justify-center gap-2 group">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="group-hover:scale-110 transition-transform">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.25 1.12-1.03 2.13-2.21 2.75V21h3.75c2.18-1.76 3.56-4.5 3.56-7.5z" fill="#4285F4"/>
+            <path d="M12 21c1.17 0 2.21-.36 3.06-1.01l-3.06-3.06V12h-3.75v4.26c-.85.65-1.89 1.01-3.06 1.01z" fill="#34A853"/>
+            <path d="M5.94 12.25c-.78 0-1.53.07-2.25.2v3.75h4.26c.65-.85 1.01-1.89 1.01-3.06z" fill="#FBBC05"/>
+            <path d="M12 5.25c1.17 0 2.21.36 3.06 1.01L12 9.32V12H8.25V8.25c0-1.17.36-2.21 1.01-3.06z" fill="#EA4335"/>
+          </svg>
+          LOGIN WITH GOOGLE
+        </button>
+      </div>
+      <!-- Hapus elemen "Belum punya akun?" karena tidak diperlukan -->
+    </div>
+  </div>
+
   <!-- ===== NAVBAR ATAS ===== -->
-<nav class="fixed top-0 left-0 right-0 z-[9999] bg-black/80 backdrop-blur-sm border-b border-cyan-500/20 px-4 py-2 flex items-center justify-between">
-  <!-- Kiri: Logo + Nama Brand -->
-  <div class="flex items-center gap-2">
+  <nav id="mainNav" class="fixed top-0 left-0 right-0 z-[9999] bg-black/80 backdrop-blur-sm border-b border-cyan-500/20 px-4 py-2 flex items-center justify-between hidden">
+    <!-- Kiri: Logo + Nama Brand -->
+    <div class="flex items-center gap-2">
       <a href="index.html">
         <img src="img/Logo.png" alt="Spectrum.Byte" class="w-7 h-7 rounded-full border border-cyan-400 shadow-[0_0_8px_rgba(0,255,255,0.4)]">
       </a>
       <a href="index.html" class="text-base font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Home</a>
     </div>
 
-  <!-- Kanan: Toggle Bahasa + Tombol Forum -->
-  <div class="flex items-center gap-2">
-    <!-- Toggle Bahasa -->
-    <div class="flex items-center gap-1">
-      <button onclick="setLang('id')" id="btnId" 
-              class="px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">ID</button>
-      <button onclick="setLang('en')" id="btnEn" 
-              class="px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200">ENG</button>
+    <!-- Tengah: Menu Kategori -->
+    <div class="flex space-x-4">
+      <button onclick="switchCategory('kritik')" id="menuKritik" 
+              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Kritik</button>
+      <button onclick="switchCategory('Hardware & Software')" id="menuHardware & Software" 
+              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Hardware & Software</button>
+      <button onclick="switchCategory('ai')" id="menuAi" 
+              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">AI</button>
+      <button onclick="switchCategory('web3')" id="menuWeb3" 
+              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Web3</button>
+      <button onclick="switchCategory('teknologi')" id="menuTeknologi" 
+              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Teknologi</button>
     </div>
 
-    <!-- Tombol Forum (aktif di halaman ini, tapi tetap bisa klik) -->
-    <!-- a href="Ai.html" 
-       class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
-      Spectrum.Ai
-    </a>
-  </div -->
-</nav>
+    <!-- Kanan: Toggle Bahasa + Tombol Forum -->
+    <div class="flex items-center gap-2">
+      <!-- Toggle Bahasa -->
+      <div class="flex items-center gap-1">
+        <button onclick="setLang('id')" id="btnId" 
+                class="px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">ID</button>
+        <button onclick="setLang('en')" id="btnEn" 
+                class="px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200">ENG</button>
+      </div>
+
+      <!-- Tombol Forum -->
+      <a href="Ai.html" 
+         class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
+        Spectrum.Ai
+      </a>
+    </div>
+  </nav>
 
   <!-- ===== KONTEN FORUM ===== -->
-  <main class="pt-20 pb-12 px-4 max-w-3xl mx-auto">
+  <main id="forumMain" class="pt-20 pb-12 px-4 max-w-3xl mx-auto hidden">
     <div class="text-center mb-8">
-      <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">Forum Kritik & Saran</h1>
-      <p class="text-gray-400 mt-2 text-sm">Bagi kami setiap masukan sangat berharga!</p>
+      <h1 id="categoryTitle" class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">Forum Kritik & Saran</h1>
+      <p id="categorySubtitle" class="text-gray-400 mt-2 text-sm">Bagi kami setiap masukan sangat berharga!</p>
     </div>
 
-    <!-- Form Kirim Komentar -->
+    <!-- Form Tambah Topik -->
     <div class="bg-[rgba(13,20,35,0.7)] rounded-xl p-5 border border-cyan-500/20 mb-8">
-      <textarea id="mainMessage" rows="3"
+      <h2 class="text-lg font-semibold mb-3 text-cyan-300">Tambahkan Topik Baru</h2>
+      <input type="text" id="topicTitle" 
+             class="w-full p-3 rounded-lg bg-gray-800 text-white text-sm border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400 mb-3"
+             placeholder="Judul Topik">
+      <textarea id="topicContent" rows="3"
                 class="w-full p-3 rounded-lg bg-gray-800 text-white text-sm border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400"
-                placeholder="Tulis kritik, saran, atau pengalaman Anda..."></textarea>
+                placeholder="Isi topik..."></textarea>
+      <div class="mt-3 flex justify-end">
+        <button onclick="createTopic()"
+                class="px-5 py-2 bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-medium rounded-lg transition uppercase tracking-wide text-sm">
+          Buat Topik
+        </button>
+      </div>
+    </div>
+
+    <!-- Form Kirim Komentar Utama (akan ditampilkan di semua kategori) -->
+    <div id="commentFormContainer" class="bg-[rgba(13,20,35,0.7)] rounded-xl p-5 border border-cyan-500/20 mb-8">
+      <!-- Rating Section (akan ditampilkan hanya di kategori "kritik") -->
+      <div id="ratingSection" class="mb-3">
+        <label class="block text-gray-300 text-sm mb-1">Beri Penilaian (Opsional):</label>
+        <div class="flex space-x-1">
+            <input type="radio" id="star5" name="rating" value="5" class="hidden peer" />
+            <label for="star5" class="text-2xl text-gray-400 peer-checked:text-yellow-400 cursor-pointer">★</label>
+            <input type="radio" id="star4" name="rating" value="4" class="hidden peer" />
+            <label for="star4" class="text-2xl text-gray-400 peer-checked:text-yellow-400 cursor-pointer">★</label>
+            <input type="radio" id="star3" name="rating" value="3" class="hidden peer" />
+            <label for="star3" class="text-2xl text-gray-400 peer-checked:text-yellow-400 cursor-pointer">★</label>
+            <input type="radio" id="star2" name="rating" value="2" class="hidden peer" />
+            <label for="star2" class="text-2xl text-gray-400 peer-checked:text-yellow-400 cursor-pointer">★</label>
+            <input type="radio" id="star1" name="rating" value="1" class="hidden peer" />
+            <label for="star1" class="text-2xl text-gray-400 peer-checked:text-yellow-400 cursor-pointer">★</label>
+        </div>
+      </div>
+
+      <!-- Textarea Komentar -->
+      <div id="commentInputContainer" class="mb-3">
+        <textarea id="mainMessage" rows="3"
+                  class="w-full p-3 rounded-lg bg-gray-800 text-white text-sm border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  placeholder="Tulis pesan Anda..."></textarea>
+      </div>
+
       <div class="mt-3 flex justify-end">
         <button onclick="postComment()"
                 class="px-5 py-2 bg-cyan-500 hover:bg-cyan-400 text-black font-medium rounded-lg transition uppercase tracking-wide text-sm">
@@ -96,55 +171,32 @@
       </div>
     </div>
 
-    <!-- Daftar Komentar -->
+    <!-- Daftar Topik dan Komentar -->
     <div id="commentsContainer" class="space-y-5">
-      <!-- Komentar akan muncul di sini -->
+      <!-- Topik dan Komentar akan muncul di sini -->
     </div>
   </main>
 
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
- <script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js    "></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js    "></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js    "></script>
+  <script>
     // Inisialisasi Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyDxBWbzttv2gaPVrphK-0WcaAOY1dbTxiQ",
         authDomain: "forumdb-358d4.firebaseapp.com",
-        databaseURL: "https://forumdb-358d4-default-rtdb.asia-southeast1.firebasedatabase.app/",
+        databaseURL: "https://forumdb-358d4-default-rtdb.asia-southeast1.firebasedatabase.app/", // <- Pastikan ini benar tanpa spasi
         projectId: "forumdb-358d4",
         appId: "1:690140074859:web:767450f11d2f122177722e"
     };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-    const commentsRef = db.ref('comments');
+    const auth = firebase.auth(); // Inisialisasi Auth
 
-    // --- Konfigurasi Khusus Admin ---
-    const ADMIN_USERNAME = "Admin_Spectrum"; // Ganti dengan username khusus Anda
-    const ADMIN_TOKEN = "SpectrumByte_Admin_Access_9f3b1a_Xyz789"; // Ganti dengan token khusus Anda
-    // --------------------------------
-
-    // Fungsi untuk membuat ID unik sederhana
-    function generateId() {
-        return Math.random().toString(36).substr(2, 9);
-    }
-
-    // Ambil token akses komentar dari localStorage (jika ada)
-    function getStoredCommentToken() {
-        // Cek apakah token admin disimpan di localStorage
-        if (localStorage.getItem('forum_comment_token') === ADMIN_TOKEN) {
-            return ADMIN_TOKEN; // Jika cocok, gunakan token admin
-        }
-        // Jika tidak, kembalikan token biasa
-        return localStorage.getItem('forum_comment_token');
-    }
-
-    // Simpan token akses komentar ke localStorage
-    function setStoredCommentToken(token) {
-        localStorage.setItem('forum_comment_token', token);
-    }
-
-    // Ambil token saat halaman dimuat
-    let currentCommentToken = getStoredCommentToken();
+    // Ambil email pengguna yang login
+    let currentUserEmail = null;
+    let currentCategory = 'kritik'; // Default category
 
     // Fungsi untuk menampilkan modal konfirmasi kustom
     function showCustomConfirm(message, onConfirm, onCancel = () => {}) {
@@ -186,166 +238,393 @@
         modal.classList.add('animate-fade-in-up');
     }
 
-    // Hapus komentar dari Firebase
-    function deleteComment(commentId) {
-        showCustomConfirm(
-            "Apakah Anda yakin ingin menghapus komentar ini?",
-            () => { // Callback jika OK
-                commentsRef.child(commentId).remove()
-                    .then(() => {
-                        console.log("Komentar berhasil dihapus.");
-                        // renderComments akan dipanggil otomatis oleh listener
-                    })
-                    .catch(error => {
-                        console.error("Gagal menghapus komentar: ", error);
-                        alert("Gagal menghapus komentar.");
-                    });
-            },
-            () => { // Callback jika Batal (opsional)
-                console.log("Penghapusan dibatalkan.");
-            }
-        );
+    // --- Fungsi Like ---
+    function likeTopic(topicId) {
+        if (!currentUserEmail) {
+            alert("Silakan login terlebih dahulu untuk menyukai topik ini.");
+            return;
+        }
+        const sanitizedEmail = currentUserEmail.replace(/[.@]/g, '_');
+        const likeRef = db.ref(`categories/${currentCategory}/topics/${topicId}/likes/${sanitizedEmail}`);
+        likeRef.once('value')
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    // Sudah disukai, hapus like
+                    likeRef.remove()
+                        .then(() => console.log("Like dihapus dari topik."))
+                        .catch(error => console.error("Gagal menghapus like dari topik: ", error));
+                } else {
+                    // Belum disukai, tambahkan like
+                    likeRef.set(true)
+                        .then(() => console.log("Like ditambahkan ke topik."))
+                        .catch(error => console.error("Gagal menambahkan like ke topik: ", error));
+                }
+            })
+            .catch(error => console.error("Gagal memeriksa status like topik: ", error));
     }
 
-    // Render komentar dari Firebase
-    function renderComments(snapshot) {
-        const container = document.getElementById('commentsContainer');
-        const comments = [];
-        snapshot.forEach(child => {
-            comments.push({ id: child.key, ...child.val() });
-        });
+    function likeComment(commentId) {
+        if (!currentUserEmail) {
+            alert("Silakan login terlebih dahulu untuk menyukai komentar ini.");
+            return;
+        }
+        const sanitizedEmail = currentUserEmail.replace(/[.@]/g, '_');
+        const likeRef = db.ref(`categories/${currentCategory}/comments/${commentId}/likes/${sanitizedEmail}`);
+        likeRef.once('value')
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    // Sudah disukai, hapus like
+                    likeRef.remove()
+                        .then(() => console.log("Like dihapus dari komentar."))
+                        .catch(error => console.error("Gagal menghapus like dari komentar: ", error));
+                } else {
+                    // Belum disukai, tambahkan like
+                    likeRef.set(true)
+                        .then(() => console.log("Like ditambahkan ke komentar."))
+                        .catch(error => console.error("Gagal menambahkan like ke komentar: ", error));
+                }
+            })
+            .catch(error => console.error("Gagal memeriksa status like komentar: ", error));
+    }
+    // --- End Fungsi Like ---
 
-        // Urutkan: terbaru di atas
-        const sorted = comments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        container.innerHTML = '';
-
-        if (sorted.length === 0) {
-            container.innerHTML = `<div class="text-center py-10"><p class="text-gray-500 italic">Belum ada komentar. Jadilah yang pertama!</p></div>`;
+    // Hapus topik dari Firebase
+    function deleteTopic(topicId) {
+        const user = auth.currentUser;
+        if (!user) {
+            alert("Silakan login terlebih dahulu untuk menghapus topik.");
             return;
         }
 
-        sorted.forEach(comment => {
-            const el = document.createElement('div');
-            el.className = 'bg-[rgba(10,18,30,0.6)] p-5 rounded-xl border border-[rgba(0,234,255,0.1)]';
+        const topicRef = db.ref(`categories/${currentCategory}/topics/${topicId}`);
+        topicRef.once('value')
+            .then((snapshot) => {
+                const topicData = snapshot.val();
+                if (!topicData) {
+                    console.error("Topik tidak ditemukan.");
+                    return;
+                }
 
-            const timestamp = comment.timestamp ? new Date(comment.timestamp).toLocaleString('id-ID') : 'Tidak ada waktu';
+                if (topicData.userEmail === user.email) {
+                     showCustomConfirm(
+                         "Apakah Anda yakin ingin menghapus topik ini?",
+                         () => {
+                             topicRef.remove()
+                                 .then(() => {
+                                     console.log("Topik berhasil dihapus.");
+                                     // renderComments akan dipanggil otomatis oleh listener
+                                 })
+                                 .catch(error => {
+                                     console.error("Gagal menghapus topik: ", error);
+                                     alert("Gagal menghapus topik.");
+                                 });
+                         }
+                     );
+                } else {
+                    alert("Anda tidak berhak menghapus topik ini.");
+                }
+            })
+            .catch(error => {
+                console.error("Gagal membaca data topik untuk verifikasi: ", error);
+                alert("Gagal memverifikasi pemilik topik.");
+            });
+    }
 
-            // Periksa apakah komentar ini milik pengguna saat ini (termasuk admin)
-            const isOwner = comment.ownerToken === currentCommentToken;
+    // Hapus komentar dari Firebase
+    function deleteComment(commentId) {
+        const user = auth.currentUser; // Dapatkan user yang sedang login dari Firebase Auth
+        if (!user) {
+            alert("Silakan login terlebih dahulu untuk menghapus komentar.");
+            return;
+        }
 
-            // --- Periksa apakah ini komentar dari Admin ---
-            // Gunakan nama admin jika ownerToken cocok dengan ADMIN_TOKEN
-            // Gunakan nama dari data komentar (jika ada) atau 'Anonim' untuk yang lain
-            const displayAuthor = comment.ownerToken === ADMIN_TOKEN ? ADMIN_USERNAME : (comment.author || 'Anonim');
-            // ------------------------------------------------
+        // Ambil referensi komentar
+        const commentRef = db.ref(`categories/${currentCategory}/comments/${commentId}`);
+        
+        // Ambil data komentar untuk memeriksa pemiliknya
+        commentRef.once('value')
+            .then((snapshot) => {
+                const commentData = snapshot.val();
+                if (!commentData) {
+                    console.error("Komentar tidak ditemukan.");
+                    return;
+                }
 
-            // Render balasan (replies)
-            let repliesHtml = '';
-            if (comment.replies && Object.keys(comment.replies).length > 0) {
-                repliesHtml = `<div class="mt-4 pl-4 border-l-2 border-gray-700 space-y-3">`;
-                Object.entries(comment.replies).forEach(([replyId, replyData]) => {
-                    const replyTimestamp = replyData.timestamp ? new Date(replyData.timestamp).toLocaleString('id-ID') : 'Tidak ada waktu';
-                    // Tampilkan author reply, bisa admin atau anonim
-                    const displayReplyAuthor = replyData.ownerToken === ADMIN_TOKEN ? ADMIN_USERNAME : (replyData.author || 'Anonim');
-                    repliesHtml += `
-                        <div class="bg-[rgba(5,12,22,0.5)] p-3 rounded-lg">
-                            <div class="flex justify-between">
-                                <span class="text-sm text-purple-300">Balasan dari ${displayReplyAuthor}</span>
-                                <span class="text-gray-500 text-xs">${replyTimestamp}</span>
-                            </div>
-                            <p class="text-gray-300 text-sm mt-1">${replyData.text || ''}</p>
-                        </div>
-                    `;
-                });
-                repliesHtml += `</div>`;
+                // Bandingkan email pengguna yang login dengan email pemilik komentar
+                if (commentData.userEmail === user.email) {
+                     // Jika cocok, tampilkan konfirmasi dan hapus
+                     showCustomConfirm(
+                         "Apakah Anda yakin ingin menghapus komentar ini?",
+                         () => {
+                             commentRef.remove()
+                                 .then(() => {
+                                     console.log("Komentar berhasil dihapus.");
+                                 })
+                                 .catch(error => {
+                                     console.error("Gagal menghapus komentar: ", error);
+                                     alert("Gagal menghapus komentar.");
+                                 });
+                         }
+                     );
+                } else {
+                    alert("Anda tidak berhak menghapus komentar ini.");
+                }
+            })
+            .catch(error => {
+                console.error("Gagal membaca data komentar untuk verifikasi: ", error);
+                alert("Gagal memverifikasi pemilik komentar.");
+            });
+    }
+
+    // Render topik dan komentar dari Firebase
+    function renderComments() {
+        const container = document.getElementById('commentsContainer');
+        container.innerHTML = ''; // Bersihkan kontainer sebelum render
+
+        // Ambil referensi ke topik dan komentar
+        const topicsRef = db.ref(`categories/${currentCategory}/topics`);
+        const commentsRef = db.ref(`categories/${currentCategory}/comments`);
+
+        // Gabungkan data dari topik dan komentar
+        Promise.all([
+            topicsRef.once('value'),
+            commentsRef.once('value')
+        ]).then(([topicsSnapshot, commentsSnapshot]) => {
+            const topics = [];
+            const comments = [];
+
+            topicsSnapshot.forEach(child => {
+                // Inisialisasi likes jika tidak ada
+                const topicData = { id: child.key, ...child.val(), type: 'topic' };
+                if (!topicData.likes) topicData.likes = {};
+                topics.push(topicData);
+            });
+
+            commentsSnapshot.forEach(child => {
+                // Inisialisasi likes jika tidak ada
+                const commentData = { id: child.key, ...child.val(), type: 'comment' };
+                if (!commentData.likes) commentData.likes = {};
+                comments.push(commentData);
+            });
+
+            // Gabungkan dan urutkan berdasarkan timestamp terbaru
+            const allItems = [...topics, ...comments];
+            const sorted = allItems.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            if (sorted.length === 0) {
+                container.innerHTML = `<div class="text-center py-10"><p class="text-gray-500 italic">Belum ada topik atau komentar di kategori ini. Jadilah yang pertama!</p></div>`;
+                return;
             }
 
-            // Struktur HTML untuk tombol hapus
-            el.innerHTML = `
-                <div class="flex justify-between items-start">
-                    <div>
-                        <span class="font-semibold text-cyan-300">${displayAuthor}</span>
-                        <span class="text-gray-500 text-xs ml-2">${timestamp}</span>
-                    </div>
-                    ${isOwner ? `<button onclick="deleteComment('${comment.id}')" 
-                                    class="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 ml-2 focus:outline-none focus:ring-1 focus:ring-red-400 rounded">🗑️ Hapus</button>` : ''}
-                </div>
-                <p class="text-gray-200 mt-3 whitespace-pre-wrap">${comment.text || ''}</p>
+            sorted.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'bg-[rgba(10,18,30,0.6)] p-5 rounded-xl border border-[rgba(0,234,255,0.1)] mb-4'; // Tambahkan margin bottom
 
-                <div class="mt-3">
-                    <span class="text-sm text-gray-400">❤️ ${comment.likes || 0}</span>
-                </div>
+                const timestamp = item.timestamp ? new Date(item.timestamp).toLocaleString('id-ID') : 'Tidak ada waktu';
+                const isOwner = item.userEmail === currentUserEmail;
+                const displayAuthor = item.userEmail || 'Anonim';
 
-                <div class="mt-4 flex gap-2">
-                    <input type="text" id="reply-${comment.id}" 
-                           placeholder="Balas komentar ini..." 
-                           class="flex-1 p-2 text-sm rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400">
-                    <button onclick="postReply('${comment.id}')" 
-                            class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded text-sm whitespace-nowrap">
-                        Balas
-                    </button>
-                </div>
+                // --- Hitung dan cek like ---
+                const likes = item.likes || {};
+                const likeCount = Object.keys(likes).length;
+                const isLikedByCurrentUser = currentUserEmail ? likes[currentUserEmail.replace(/[.@]/g, '_')] === true : false;
+                // --- End Hitung dan cek like ---
 
-                ${repliesHtml}
-            `;
-            container.appendChild(el);
+                if (item.type === 'topic') {
+                    // Render Topik
+                    el.id = `topic-${item.id}`; // Tambahkan ID unik
+                    el.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="font-bold text-xl text-fuchsia-300">${item.title}</span>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="font-semibold text-cyan-300">${displayAuthor}</span>
+                                    <span class="text-gray-500 text-xs">${timestamp}</span>
+                                </div>
+                            </div>
+                            ${isOwner ? `<button onclick="deleteTopic('${item.id}')" 
+                                            class="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 ml-2 focus:outline-none focus:ring-1 focus:ring-red-400 rounded">🗑️ Hapus Topik</button>` : ''}
+                        </div>
+                        <p class="text-gray-200 mt-3 whitespace-pre-wrap">${item.content || ''}</p>
+                        <div class="mt-3 flex items-center gap-4">
+                            <button onclick="likeTopic('${item.id}')" class="like-btn flex items-center gap-1 ${isLikedByCurrentUser ? 'text-red-500' : 'text-gray-400 hover:text-red-400'}">
+                                ${isLikedByCurrentUser ? '❤️' : '🤍'} <span class="like-count ml-1">${likeCount}</span>
+                            </button>
+                            <button onclick="focusAndMention('${item.userEmail}')" class="text-gray-400 hover:text-cyan-300 flex items-center gap-1">
+                                💬 Komentar
+                            </button>
+                        </div>
+                        <div class="mt-3">
+                            <span class="text-sm text-gray-400">💬 Komentar akan muncul di bawah ini</span>
+                        </div>
+                    `;
+                } else {
+                    // Render Komentar (seperti sebelumnya)
+                    let ratingHtml = '';
+                    if (item.rating) {
+                        let stars = '';
+                        for (let i = 1; i <= 5; i++) {
+                            if (i <= item.rating) {
+                                stars += '★';
+                            } else {
+                                stars += '☆';
+                            }
+                        }
+                        ratingHtml = `<div class="mt-2 text-sm text-yellow-400">${stars} (${item.rating}/5)</div>`;
+                    }
+
+                    let repliesHtml = '';
+                    if (item.replies && Object.keys(item.replies).length > 0) {
+                        repliesHtml = `<div class="mt-4 pl-4 border-l-2 border-gray-700 space-y-3">`;
+                        Object.entries(item.replies).forEach(([replyId, replyData]) => {
+                            const replyTimestamp = replyData.timestamp ? new Date(replyData.timestamp).toLocaleString('id-ID') : 'Tidak ada waktu';
+                            const displayReplyAuthor = replyData.userEmail || 'Anonim';
+                            repliesHtml += `
+                                <div class="bg-[rgba(5,12,22,0.5)] p-3 rounded-lg">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-purple-300">Balasan dari ${displayReplyAuthor}</span>
+                                        <span class="text-gray-500 text-xs">${replyTimestamp}</span>
+                                    </div>
+                                    <p class="text-gray-300 text-sm mt-1">${replyData.text || ''}</p>
+                                </div>
+                            `;
+                        });
+                        repliesHtml += `</div>`;
+                    }
+
+                    el.id = `comment-${item.id}`; // Tambahkan ID unik
+                    el.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="font-semibold text-cyan-300">${displayAuthor}</span>
+                                <span class="text-gray-500 text-xs ml-2">${timestamp}</span>
+                            </div>
+                            ${isOwner ? `<button onclick="deleteComment('${item.id}')" 
+                                            class="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 ml-2 focus:outline-none focus:ring-1 focus:ring-red-400 rounded">🗑️ Hapus</button>` : ''}
+                        </div>
+                        <p class="text-gray-200 mt-3 whitespace-pre-wrap">${item.text || ''}</p>
+                        ${ratingHtml}
+                        <div class="mt-3 flex items-center gap-4">
+                            <button onclick="likeComment('${item.id}')" class="like-btn flex items-center gap-1 ${isLikedByCurrentUser ? 'text-red-500' : 'text-gray-400 hover:text-red-400'}">
+                                ${isLikedByCurrentUser ? '❤️' : '🤍'} <span class="like-count ml-1">${likeCount}</span>
+                            </button>
+                            <button onclick="focusAndMention('${item.userEmail}')" class="text-gray-400 hover:text-cyan-300 flex items-center gap-1">
+                                💬 Komentar
+                            </button>
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+                            <input type="text" id="reply-${item.id}" 
+                                  placeholder="Balas komentar ini..." 
+                                  class="flex-1 p-2 text-sm rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400">
+                            <button onclick="postReply('${item.id}')" 
+                                    class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded text-sm whitespace-nowrap">
+                                Balas
+                            </button>
+                        </div>
+
+                        ${repliesHtml}
+                    `;
+                }
+
+                container.appendChild(el);
+            });
+        }).catch(error => {
+            console.error("Gagal mengambil data topik atau komentar: ", error);
         });
     }
 
+
+    // Fungsi untuk membuat topik baru
+    function createTopic() {
+        if (!currentUserEmail) {
+            alert("Silakan login terlebih dahulu untuk membuat topik.");
+            return;
+        }
+        const title = document.getElementById('topicTitle').value.trim();
+        const content = document.getElementById('topicContent').value.trim();
+
+        if (!title || !content) {
+            alert('Mohon isi judul dan isi topik.');
+            return;
+        }
+
+        const topicData = {
+            title: title,
+            content: content,
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            userEmail: currentUserEmail,
+            likes: {} // Inisialisasi objek likes
+        };
+
+        const topicsRef = db.ref(`categories/${currentCategory}/topics`); // Gunakan currentCategory
+        topicsRef.push(topicData);
+
+        // Reset form
+        document.getElementById('topicTitle').value = '';
+        document.getElementById('topicContent').value = '';
+    }
+
+
     // Kirim komentar ke Firebase
     function postComment() {
+        if (!currentUserEmail) {
+            alert("Silakan login terlebih dahulu untuk mengirim komentar.");
+            return;
+        }
         const text = document.getElementById('mainMessage').value.trim();
+
         if (!text) {
             alert('Mohon isi pesan Anda.');
             return;
         }
 
-        // Jika belum ada token, buat token baru (bisa token biasa atau admin)
-        if (!currentCommentToken) {
-            // --- Cek apakah token admin diset di localStorage secara manual ---
-            const storedToken = localStorage.getItem('forum_comment_token');
-            if (storedToken === ADMIN_TOKEN) {
-                 currentCommentToken = ADMIN_TOKEN;
-            } else {
-                 currentCommentToken = generateId();
-                 setStoredCommentToken(currentCommentToken);
-            }
-            // --------------------------------------------------------------
-        }
-
-        // Gunakan username admin jika token cocok, atau kosongkan untuk anonim
-        const author = currentCommentToken === ADMIN_TOKEN ? ADMIN_USERNAME : undefined; // Gunakan undefined atau kosongkan
-
-        commentsRef.push({
-            // author: author, // Kita bisa mengirim author jika ingin, atau tidak mengirimnya untuk anonim
+        const commentData = {
             text: text,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
-            likes: 0,
-            ownerToken: currentCommentToken // Simpan token yang digunakan untuk kepemilikan
-        });
+            likes: {}, // Inisialisasi objek likes
+            userEmail: currentUserEmail // Simpan email pengguna yang login
+        };
+
+        // Ambil rating hanya jika kategori adalah "kritik" dan elemen rating ada
+        if (currentCategory === 'kritik') {
+            const selectedRating = document.querySelector('input[name="rating"]:checked');
+            const rating = selectedRating ? parseInt(selectedRating.value) : null;
+            if (rating !== null) {
+                commentData.rating = rating;
+            }
+        }
+        // Jika bukan kategori "kritik", jangan simpan rating
+
+        // Simpan ke Firebase di bawah kategori yang dipilih
+        const commentsRef = db.ref(`categories/${currentCategory}/comments`); // Gunakan currentCategory
+        commentsRef.push(commentData);
 
         document.getElementById('mainMessage').value = '';
+        // Reset radio button rating jika ada
+        if (currentCategory === 'kritik') {
+            document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
+        }
     }
 
     // Kirim balasan ke Firebase (nested di bawah komentar)
     function postReply(commentId) {
+        if (!currentUserEmail) {
+            alert("Silakan login terlebih dahulu untuk membalas komentar.");
+            return;
+        }
         const input = document.getElementById(`reply-${commentId}`);
         const text = input.value.trim();
         if (!text) return;
 
-        // Gunakan token yang aktif saat ini untuk reply
-        const replyOwnerToken = currentCommentToken;
-        // Gunakan username admin jika token cocok, atau kosongkan untuk anonim
-        const replyAuthor = currentCommentToken === ADMIN_TOKEN ? ADMIN_USERNAME : undefined;
-
         const replyData = {
-            // author: replyAuthor, // Sama seperti komentar utama
             text: text,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
-            ownerToken: replyOwnerToken // Simpan token di reply juga
+            userEmail: currentUserEmail // Simpan email pengguna yang login
         };
 
-        const newReplyRef = commentsRef.child(commentId).child('replies').push();
+        // Simpan ke Firebase di bawah kategori dan komentar yang dipilih
+        const newReplyRef = db.ref(`categories/${currentCategory}/comments/${commentId}/replies`).push(); // Gunakan currentCategory
         newReplyRef.set(replyData).then(() => {
             input.value = '';
         }).catch(error => {
@@ -367,16 +646,141 @@
         }
     }
 
-    // Dengarkan perubahan real-time dari Firebase
-    commentsRef.on('value', renderComments);
+    // Fungsi untuk mengganti kategori
+    function switchCategory(category) {
+        currentCategory = category;
 
-    // Set nama pengguna saat halaman dimuat
-    window.addEventListener('DOMContentLoaded', (event) => {
-        // Karena kita tidak punya input nama, kita bisa sembunyikan elemen input nama jika ada
-        const usernameInputDiv = document.getElementById('usernameInputDiv');
-        if (usernameInputDiv) {
-            usernameInputDiv.style.display = 'none';
+        // Update tampilan menu
+        document.querySelectorAll('#mainNav button').forEach(btn => {
+            btn.className = 'px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200';
+        });
+        document.getElementById(`menu${category.charAt(0).toUpperCase() + category.slice(1)}`).className = 
+            'px-3 py-1 text-sm font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+
+        // Update judul dan subtitle
+        const titles = {
+            'kritik': 'Forum Kritik & Saran',
+            'Hardware & Software': 'Forum Hardware & Software',
+            'ai': 'Forum Artificial Intelligence',
+            'web3': 'Forum Web3 & Blockchain',
+            'teknologi': 'Forum Teknologi Terkini'
+        };
+        const subtitles = {
+            'kritik': 'Bagi kami setiap masukan sangat berharga!',
+            'Hardware & Software': 'Silahkan Berdiskusi tentang permasalahan Hardware & Software Laptop/Ponsel',
+            'ai': 'Masa depan teknologi cerdas dan pembelajaran mesin.',
+            'web3': 'Eksplorasi dunia desentralisasi dan blockchain.',
+            'teknologi': 'Semua hal terbaru dalam dunia teknologi.'
+        };
+
+        document.getElementById('categoryTitle').textContent = titles[category];
+        document.getElementById('categorySubtitle').textContent = subtitles[category];
+
+        // Perbarui tampilan form rating dan placeholder textarea
+        const ratingSection = document.getElementById('ratingSection');
+        const mainMessageTextarea = document.getElementById('mainMessage');
+
+        if (category === 'kritik') {
+            ratingSection.classList.remove('hidden'); // Tampilkan rating di kategori kritik
+            mainMessageTextarea.placeholder = "Tulis kritik, saran, atau pengalaman Anda..."; // Placeholder khusus kritik
+        } else {
+            ratingSection.classList.add('hidden'); // Sembunyikan rating di kategori lain
+            mainMessageTextarea.placeholder = "Tulis pesan Anda..."; // Placeholder umum
         }
+
+        // Dengarkan perubahan real-time dari Firebase untuk kategori yang dipilih
+        renderComments();
+    }
+
+    // Fungsi untuk memfokuskan textarea dan menambahkan mention
+    function focusAndMention(userEmail) {
+        const textarea = document.getElementById('mainMessage');
+        if (textarea) {
+            textarea.focus();
+            const currentText = textarea.value;
+            // Tambahkan @userEmail di akhir, dipisahkan oleh spasi jika diperlukan
+            const mention = `@${userEmail}`;
+            if (currentText.trim() === "") {
+                // Jika textarea kosong, cukup tambahkan mention
+                textarea.value = mention + " ";
+            } else {
+                // Jika tidak kosong, tambahkan spasi dan mention di akhir
+                if (!currentText.endsWith(" ")) {
+                    textarea.value = currentText + " " + mention + " ";
+                } else {
+                    textarea.value = currentText + mention + " ";
+                }
+            }
+            // Opsional: Pindahkan kursor ke akhir teks
+            textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
+        }
+    }
+
+    // Fungsi untuk menangani login dengan Google
+    function handleGoogleLogin() {
+        console.log("Fungsi handleGoogleLogin dipanggil.");
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        // Tambahkan opsi untuk selalu meminta pemilihan akun
+        provider.setCustomParameters({
+            prompt: 'select_account'
+        });
+
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                console.log("Login popup berhasil.", result);
+                // Login berhasil
+                const user = result.user;
+                console.log("Login berhasil sebagai:", user.email);
+                currentUserEmail = user.email; // Gunakan email dari objek user Firebase
+
+                // Sembunyikan halaman login, tampilkan navbar dan konten forum
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('mainNav').classList.remove('hidden');
+                document.getElementById('forumMain').classList.remove('hidden');
+
+                // Mulai mendengarkan perubahan untuk kategori default
+                switchCategory(currentCategory);
+            })
+            .catch((error) => {
+                // Tangani error login
+                console.error("Error login Google:", error);
+                console.error("Kode Error:", error.code);
+                console.error("Pesan Error:", error.message);
+                alert("Login gagal: " + error.message); // Tampilkan pesan error kepada pengguna
+            });
+    }
+
+    // Muat data login dari localStorage saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', (event) => {
+        console.log("DOMContentLoaded event fired.");
+        // Pasang event listener untuk tombol Google Login
+        const googleLoginBtn = document.getElementById('googleLoginBtn');
+        if (googleLoginBtn) {
+             console.log("Tombol Google Login ditemukan, menambahkan event listener.");
+             googleLoginBtn.addEventListener('click', handleGoogleLogin);
+        } else {
+             console.error("Tombol Google Login (ID: googleLoginBtn) tidak ditemukan di DOM.");
+        }
+
+
+        // Cek status login saat halaman dimuat
+        auth.onAuthStateChanged((user) => {
+            console.log("onAuthStateChanged dipanggil. User:", user);
+            if (user) {
+                // Jika pengguna sudah login, tampilkan forum
+                console.log("Pengguna sudah login, menampilkan forum.");
+                currentUserEmail = user.email;
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('mainNav').classList.remove('hidden');
+                document.getElementById('forumMain').classList.remove('hidden');
+                switchCategory(currentCategory);
+            } else {
+                // Jika tidak, tetap tampilkan halaman login
+                console.log("Pengguna belum login, menampilkan halaman login.");
+                document.getElementById('loginPage').classList.remove('hidden');
+            }
+        });
     });
 
     // Ekspor fungsi ke window agar bisa dipanggil oleh onclick di HTML
@@ -384,9 +788,14 @@
     window.postReply = postReply;
     window.deleteComment = deleteComment;
     window.setLang = setLang;
-</script>
+    window.switchCategory = switchCategory;
+    window.createTopic = createTopic;
+    window.deleteTopic = deleteTopic;
+    window.likeTopic = likeTopic; // Tambahkan ke window
+    window.likeComment = likeComment; // Tambahkan ke window
+  </script>
 
-  <style>
+    <style>
   /* Background Angkasa Gelap */
   body {
     background: #000;
@@ -497,8 +906,55 @@
 
   draw();
 </script>
+<!-- Modal Konfirmasi Kustom -->
+<div id="customConfirmModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[9999] hidden">
+    <div class="bg-[rgba(13,20,35,0.8)] rounded-xl p-6 border border-cyan-500/30 max-w-md w-full mx-4 shadow-2xl animate-fade-in-up">
+        <div class="text-center mb-4">
+            <h3 class="text-lg font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Konfirmasi Hapus</h3>
+        </div>
+        <p id="customConfirmMessage" class="text-gray-300 mb-6 text-sm">Apakah Anda yakin ingin menghapus komentar ini?</p>
+        <div class="flex justify-end gap-3">
+            <button id="customConfirmCancel" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium rounded-lg transition">
+                Batal
+            </button>
+            <button id="customConfirmOK" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm font-medium rounded-lg transition">
+                Hapus
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Animasi CSS -->
+<style>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.3s ease-out forwards;
+    }
+
+    @keyframes fade-out-down {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+    }
+
+    .animate-fade-out-down {
+        animation: fade-out-down 0.3s ease-in forwards;
+    }
+</style>
 </body>
 </html>
-
-
-
