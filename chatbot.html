@@ -23,6 +23,7 @@
       color: white;
       min-height: 100vh;
       font-family: 'Inter', sans-serif;
+      overflow: hidden; /* Mencegah scroll utama jika canvas fullscreen */
     }
     .fade-in {
       animation: fadeIn 0.6s ease-out forwards;
@@ -30,6 +31,37 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== ANIMASI TYPING ===== */
+    .typing-dots {
+      display: inline-flex;
+      align-items: flex-end;
+      height: 1.2em; /* Sesuaikan dengan tinggi teks */
+    }
+    .typing-dot {
+      display: inline-block;
+      width: 0.4em;
+      height: 0.4em;
+      border-radius: 50%;
+      background-color: #9CA3AF; /* Warna titik, bisa disesuaikan */
+      margin: 0 0.1em;
+      opacity: 0;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingAnimation {
+      0%, 60%, 100% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+      30% {
+        opacity: 1;
+        transform: translateY(-0.2em);
+      }
     }
   </style>
 </head>
@@ -58,7 +90,7 @@
   </nav>
 
   <!-- ===== CHAT CONTAINER ===== -->
-  <main class="pt-20 pb-24 px-4 max-w-2xl mx-auto">
+  <main class="pt-20 pb-24 px-4 max-w-2xl mx-auto z-[10] relative" tabindex="-1">
     <div class="text-center mb-6">
       <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">Spectrum.Ai</h1>
     </div>
@@ -82,7 +114,7 @@
     <form id="chatForm" class="flex gap-2">
       <input type="text" id="userInput" 
              class="flex-1 p-3 rounded-lg bg-gray-800 text-white border border-cyan-500/30 focus:outline-none focus:ring-1 focus:ring-cyan-400 placeholder-gray-400"
-             placeholder="Ketik pesan Anda..." autocomplete="off">
+             placeholder="Ketik pesan Anda..." autocomplete="off" autofocus>
       <button type="submit"
               class="px-4 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-medium rounded-lg transition whitespace-nowrap">
         Kirim
@@ -90,10 +122,16 @@
     </form>
   </main>
 
+  <!-- Neural Network Canvas -->
+  <div class="neural-network fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
+    <canvas id="neuralCanvas"></canvas>
+  </div>
+
   <script>
       const chatbox = document.getElementById('chatbox');
       const chatForm = document.getElementById('chatForm');
       const userInput = document.getElementById('userInput');
+      const mainContainer = document.querySelector('main');
 
       function scrollToBottom() {
         chatbox.scrollTop = chatbox.scrollHeight;
@@ -130,7 +168,7 @@
       // 🚀 Kirim pesan ke n8n webhook
       async function getAIResponse(userMsg) {
         try {
-          const res = await fetch("http://localhost:5678/webhook/spectrumai", {
+          const res = await fetch("http://192.168.0.101:5678/webhook/spectrumai", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: userMsg })
@@ -167,7 +205,9 @@
 
         addMessage(msg, true);
         userInput.value = '';
+        userInput.focus(); // Fokus kembali ke input setelah kirim
 
+        // Membuat elemen typing dengan animasi
         const typing = document.createElement('div');
         typing.className = 'flex items-start gap-3 justify-start';
         typing.innerHTML = `
@@ -175,7 +215,13 @@
             <span class="text-xs text-fuchsia-300 mb-1">SpectrumAI</span>
             <img src="img/Logo.png" alt="SpectrumAI" class="w-8 h-8 rounded-full border border-fuchsia-400 shadow-[0_0_8px_rgba(255,0,255,0.3)]">
           </div>
-          <div class="bg-[rgba(5,12,22,0.6)] text-gray-400 italic p-3 rounded-lg max-w-[80%]">Mengetik...</div>
+          <div class="bg-[rgba(5,12,22,0.6)] text-gray-400 p-3 rounded-lg max-w-[80%] flex items-center">
+            <div class="typing-dots">
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+            </div>
+          </div>
         `;
         chatbox.appendChild(typing);
         scrollToBottom();
@@ -185,121 +231,133 @@
         addMessage(aiResponse);
       });
 
-      window.addEventListener('load', scrollToBottom);
+      // Fokus ke input saat halaman dimuat
+      window.addEventListener('load', function() {
+          userInput.focus();
+          scrollToBottom();
+      });
+
+      // Fokus ke input jika area chat di klik (opsional, meningkatkan UX)
+      chatbox.addEventListener('click', function() {
+          userInput.focus();
+      });
+
+      // Fokus ke input jika area main di klik (opsional, meningkatkan UX lebih lanjut)
+      mainContainer.addEventListener('click', function() {
+          if (!chatbox.contains(event.target) && !chatForm.contains(event.target)) {
+              userInput.focus();
+          }
+      });
+
   </script>
 
-
-  <style>
-  /* Background Angkasa Gelap */
-  body {
-    background: #000;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
-    position: relative;
-  }
-
-  /* Efek Neural Biru Mengambang */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 30% 30%, rgba(0, 10, 40, 0.8) 0%, rgba(0, 0, 0, 1) 70%);
-    z-index: -2;
-  }
-
-    /* Jaringan Neural - Titik-titik & Garis */
-  .neural-network {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-</style>
-
-<div class="neural-network">
-  <canvas id="neuralCanvas"></canvas>
-</div>
-
-<script>
-  // ===== Efek Neural Network Biru =====
-  const canvas = document.getElementById("neuralCanvas");
-  const ctx = canvas.getContext("2d");
-
-  let particles = [];
-  const numParticles = 60;
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
-
-  for (let i = 0; i < numParticles; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(0, 255, 255, 0.7)";
-
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    for (let i = 0; i < numParticles; i++) {
-      for (let j = i + 1; j < numParticles; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 120) {
-          ctx.strokeStyle = `rgba(0, 255, 255, ${1 - dist / 120})`;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
+   <style>
+    /* Background Angkasa Gelap */
+    body {
+      background: #000;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      position: relative;
     }
 
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
+    /* Efek Neural Biru Mengambang */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(0, 10, 40, 0.8) 0%, rgba(0, 0, 0, 1) 70%);
+      z-index: -2;
+    }
 
-      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-    });
+      /* Jaringan Neural - Titik-titik & Garis */
+    .neural-network {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-    requestAnimationFrame(draw);
-  }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  
+  <script>
+    // ===== Efek Neural Network Biru =====
+    const canvas = document.getElementById("neuralCanvas");
+    const ctx = canvas.getContext("2d");
 
-  draw();
-</script>
+    let particles = [];
+    const numParticles = 60;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(0, 255, 255, 0.7)";
+
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      for (let i = 0; i < numParticles; i++) {
+        for (let j = i + 1; j < numParticles; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.strokeStyle = `rgba(0, 255, 255, ${1 - dist / 120})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+
 </body>
 </html>
-
