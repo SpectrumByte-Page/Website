@@ -18,14 +18,57 @@
     }
   </script>
   <style>
+    /* Menggabungkan dan menyempurnakan CSS */
     body {
-      background: linear-gradient(135deg, #0b1120 0%, #131e33 100%);
+      background: #000; /* Warna dasar hitam */
       color: white;
       min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden; /* Mencegah scroll horizontal */
+      position: relative; /* Untuk efek latar */
     }
+
+    /* Efek Latar Neural Network */
+    .neural-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2; /* Di belakang konten lainnya */
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    canvas#neuralCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Overlay Gradien untuk meningkatkan kontras teks */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(0, 10, 40, 0.8) 0%, rgba(0, 0, 0, 1) 70%);
+      z-index: -1; /* Di atas canvas neural network */
+    }
+
+    /* Efek Glow Umum */
     .glow-text {
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
     }
+    .glow-border {
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+    .glow-element {
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    }
+
     .fade-in {
       animation: fadeIn 0.8s ease-out forwards;
     }
@@ -33,56 +76,76 @@
       from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Hover Effect untuk CTA */
+    .cta-hover {
+      transition: all 0.3s ease;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(0, 255, 255, 0.2);
+    }
+    .cta-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px rgba(0, 255, 255, 0.3);
+    }
   </style>
 </head>
 <body class="font-sans">
 
+  <!-- Canvas untuk efek neural network -->
+  <div class="neural-bg">
+    <canvas id="neuralCanvas"></canvas>
+  </div>
+
   <!-- ===== NAVBAR ATAS ===== -->
   <nav class="fixed top-0 left-0 right-0 z-[9999] bg-black/80 backdrop-blur-sm border-b border-cyan-500/20 px-4 py-2 flex items-center justify-between">
-   <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2">
       <a href="index.html">
         <img src="img/Logo.png" alt="Spectrum.Byte" class="w-7 h-7 rounded-full border border-cyan-400 shadow-[0_0_8px_rgba(0,255,255,0.4)]">
       </a>
       <a href="index.html" class="text-base font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Home</a>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-4"> <!-- Tambahkan gap untuk jarak -->
+      <a href="katalog.html" 
+         class="text-sm font-medium text-cyan-300 hover:text-cyan-100 transition border-b border-transparent hover:border-cyan-400">
+         Katalog Layanan
+      </a>
       <div class="flex items-center gap-1">
         <button onclick="setLang('id')" id="btnId" 
                 class="px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">ID</button>
         <button onclick="setLang('en')" id="btnEn" 
                 class="px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200">ENG</button>
       </div>
-        <a href="Ai.html" 
-            class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
-            Spectrum.Ai
-        </a>
-        <a href="forum.html" 
-            class="ml-2 bg-[rgba(0,234,255,0.15)] border border-[rgba(0,234,255,0.3)] text-white px-3 py-1.5 rounded-lg text-xs sm:text-sm transition uppercase tracking-wide no-underline flex items-center gap-1">
-            FORUM
-        </a>
     </div>
   </nav>
 
   <!-- ===== HERO SECTION ===== -->
-  <header class="relative w-full min-h-[80vh] pt-20 flex flex-col items-center justify-center text-center overflow-hidden px-4 fade-in">
+  <header class="relative w-full min-h-[90vh] pt-24 pb-16 flex flex-col items-center justify-center text-center overflow-hidden px-4 fade-in">
     <div class="relative z-10 flex flex-col items-center w-full max-w-4xl">
       <h1 class="font-display font-bold text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
-        <span class="bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">Spectrum.Ai</span>
+        <span class="bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text glow-text">Spectrum.Ai</span>
       </h1>
 
-      <p class="mt-4 text-lg sm:text-xl md:text-2xl text-cyan-300 font-display tracking-wide drop-shadow-[0_0_8px_rgba(0,255,255,0.3)]">
+      <p class="mt-4 text-lg sm:text-xl md:text-2xl text-cyan-300 font-display tracking-wide glow-text">
         Kecerdasan Buatan untuk Solusi Teknologi Anda
       </p>
 
-      <div class="mt-8 flex flex-col sm:flex-row gap-4">
+      <p class="mt-3 text-base text-gray-300 max-w-2xl">
+        Dapatkan bantuan teknis instan, estimasi biaya yang jelas, dan layanan servis terpercaya langsung dari AI kami.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 w-full max-w-md">
         <a href="chatbot.html"
-            class="bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-3 rounded-lg font-medium transition uppercase tracking-wide shadow-lg">
-            Coba Sekarang
+            class="bg-gradient-to-r from-cyan-500 to-blue-500 text-black px-8 py-4 rounded-xl font-bold text-lg uppercase tracking-wide shadow-lg cta-hover transition-all">
+            Coba Spectrum.AI Sekarang
         </a>
-        <a href="#fitur"
-           class="border border-cyan-400 text-cyan-300 px-6 py-3 rounded-lg font-medium transition hover:bg-cyan-500/10">
-          Pelajari Lebih Lanjut
+        <a href="index.html"
+           class="border-2 border-cyan-400 text-cyan-300 px-8 py-4 rounded-xl font-bold text-lg transition-all hover:bg-cyan-500/20 cta-hover">
+          Lihat Katalog Layanan
         </a>
+      </div>
+
+      <div class="mt-8 text-sm text-gray-400">
+        Solusi Cepat | Harga Terjangkau | Teknisi Profesional
       </div>
     </div>
   </header>
@@ -90,105 +153,127 @@
   <!-- ===== FITUR AI ===== -->
   <section id="fitur" class="py-16 px-4 max-w-6xl mx-auto">
     <h2 class="text-2xl sm:text-3xl font-bold text-center bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text mb-12">
-      Fitur SpectrumAI
+      Bagaimana Kami Membantu Anda
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Fitur 1 -->
-      <div class="bg-[rgba(13,20,35,0.7)] p-6 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition">
-        <div class="text-cyan-400 text-2xl mb-3">🧠</div>
-        <h3 class="font-bold text-lg text-cyan-300 mb-2">Diagnosis Otomatis</h3>
-        <p class="text-gray-300 text-sm">
-          Deskripsikan gejala laptop/HP Anda, AI akan menganalisis dan memberikan kemungkinan penyebab kerusakan.
+      <div class="bg-[rgba(13,20,35,0.7)] p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 glow-element">
+        <div class="text-cyan-400 text-3xl mb-4">🧠</div>
+        <h3 class="font-bold text-xl text-cyan-300 mb-3">Diagnosis Awal Gratis</h3>
+        <p class="text-gray-300 mb-4">
+          Jelaskan masalah perangkat Anda. AI kami akan memberikan analisis awal dan langkah-langkah solusi sederhana.
         </p>
+        <a href="chatbot.html" class="text-cyan-400 hover:text-cyan-300 font-medium inline-flex items-center">
+          Coba Sekarang
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
       </div>
 
       <!-- Fitur 2 -->
-      <div class="bg-[rgba(13,20,35,0.7)] p-6 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition">
-        <div class="text-cyan-400 text-2xl mb-3">💰</div>
-        <h3 class="font-bold text-lg text-cyan-300 mb-2">Estimasi Harga Realistis</h3>
-        <p class="text-gray-300 text-sm">
-          Dapatkan perkiraan biaya perbaikan berdasarkan jenis kerusakan dan tipe perangkat.
+      <div class="bg-[rgba(13,20,35,0.7)] p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 glow-element">
+        <div class="text-cyan-400 text-3xl mb-4">💰</div>
+        <h3 class="font-bold text-xl text-cyan-300 mb-3">Biaya Transparan</h3>
+        <p class="text-gray-300 mb-4">
+          Akses katalog layanan kami untuk melihat harga servis yang jelas dan terbaru sebelum Anda memesan.
         </p>
+        <a href="index.html" class="text-cyan-400 hover:text-cyan-300 font-medium inline-flex items-center">
+          Lihat Katalog
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
       </div>
 
       <!-- Fitur 3 -->
-      <div class="bg-[rgba(13,20,35,0.7)] p-6 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition">
-        <div class="text-cyan-400 text-2xl mb-3">💬</div>
-        <h3 class="font-bold text-lg text-cyan-300 mb-2">24/7 Customer Support</h3>
-        <p class="text-gray-300 text-sm">
-          Tidak perlu menunggu jam operasional — tanya kapan saja, dapat jawaban instan.
+      <div class="bg-[rgba(13,20,35,0.7)] p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 glow-element">
+        <div class="text-cyan-400 text-3xl mb-4">📍</div>
+        <h3 class="font-bold text-xl text-cyan-300 mb-3">Lokasi Strategis</h3>
+        <p class="text-gray-300 mb-4">
+          Temukan service center kami yang mudah dijangkau di kota Anda dengan jam operasional yang fleksibel.
         </p>
+        <a href="https://maps.app.goo.gl/5WnjkgkV35dQkMoVA" 
+          class="text-cyan-400 hover:text-cyan-300 font-medium inline-flex items-center"
+          target="_blank" 
+          rel="noopener noreferrer"> <!-- Menambahkan rel untuk keamanan -->
+          Cek Lokasi
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="py-16 px-4 bg-gradient-to-br from-gray-900/50 to-cyan-900/10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text mb-6">
+        Siap Perbaiki Perangkat Anda?
+      </h2>
+      <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+        Hubungi kami sekarang untuk konsultasi awal gratis atau langsung lihat layanan dan harganya.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="chatbot.html"
+            class="bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white px-8 py-4 rounded-xl font-bold text-lg uppercase tracking-wide shadow-lg cta-hover transition-all">
+            Konsultasi Gratis
+        </a>
+        <a href="https://wa.me/6283845278538?text=Halo%2C%20saya%20ingin%20service%20di%20Spectrum.Byte" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-block bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-3 rounded-lg font-medium transition">
+          Pesan Servis Sekarang
+        </a>
       </div>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="py-8 text-center text-gray-500 text-sm border-t border-gray-800 mt-12">
-    <p>© 2025 SPECTRUM.BYTE — Service Laptop & Ponsel dengan Teknologi AI</p>
+  <footer class="py-10 text-center text-gray-500 text-sm border-t border-gray-800 mt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="mb-2">© 2025 SPECTRUM.BYTE — Service Laptop & Ponsel dengan Teknologi AI</p>
+      <div class="flex justify-center space-x-6">
+        <a href="#" class="text-gray-400 hover:text-cyan-400">Hubungi Kami</a>
+        <a href="#" class="text-gray-400 hover:text-cyan-400">Kebijakan Privasi</a>
+        <a href="#" class="text-gray-400 hover:text-cyan-400">Syarat & Ketentuan</a>
+      </div>
+    </div>
   </footer>
-
-  <script>
-    function setLang(lang) {
-      const btnId = document.getElementById('btnId');
-      const btnEn = document.getElementById('btnEn');
-      if (lang === 'id') {
-        btnId.className = 'px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
-        btnEn.className = 'px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200';
-      } else {
-        btnId.className = 'px-2.5 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200';
-        btnEn.className = 'px-2.5 py-1 text-xs font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
-      }
-    }
-  </script>
   <style>
-  /* Background Angkasa Gelap */
-  body {
-    background: #000;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
-    position: relative;
-  }
+    /* Efek Neural Biru Mengambang */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(0, 10, 40, 0.8) 0%, rgba(0, 0, 0, 1) 70%);
+      z-index: -2;
+    }
 
-  /* Efek Neural Biru Mengambang */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 30% 30%, rgba(0, 10, 40, 0.8) 0%, rgba(0, 0, 0, 1) 70%);
-    z-index: -2;
-  }
+      /* Jaringan Neural - Titik-titik & Garis */
+    .neural-network {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-    /* Jaringan Neural - Titik-titik & Garis */
-  .neural-network {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-</style>
-
-<div class="neural-network">
-  <canvas id="neuralCanvas"></canvas>
-</div>
-
-<script>
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script>
   // ===== Efek Neural Network Biru =====
   const canvas = document.getElementById("neuralCanvas");
   const ctx = canvas.getContext("2d");
