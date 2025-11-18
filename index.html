@@ -26,10 +26,7 @@
   <!-- ===== FONTS ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- ===== TAILWIND CUSTOM CONFIG ===== -->
   <script>
@@ -80,7 +77,7 @@
   </nav>
 
 <!-- ===== HERO SECTION (DIPINDAHKAN SEDIKIT KE BAWAH AGAR TIDAK TERTUTUP NAVBAR) ===== -->
-<header class="relative w-full min-h-[80vh] sm:min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4 fade-in pt-16 sm:pt-20">
+<header class="relative w-full min-h-[80vh] sm:min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-10 fade-in pt-16 sm:pt-20">
   <!-- Background -->
 <div 
   class="absolute inset-0 z-0"
@@ -93,59 +90,61 @@
   "
 ></div>
 
-  <!-- Konten Utama -->
-  <div class="relative z-10 flex flex-col items-center w-full max-w-5xl">
-    <!-- Judul Utama -->
-    <h1 class="font-display font-bold text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight">
-      <span class="bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">SPECTRUM</span>
-      <span class="text-white">.BYTE</span>
-    </h1>
+    <!-- Konten Utama -->
+    <div class="relative z-10 flex flex-col items-center w-full max-w-5xl">
+      <!-- Judul Utama -->
+      <h1
+        class="font-display font-bold text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight"
+      >
+        <span class="bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text"
+          >SPECTRUM</span
+        >
+        <span class="text-white">.BYTE</span>
+      </h1>
 
-    <!-- Subtitle 1 -->
-    <p class="mt-3 xs:mt-4 sm:mt-5 text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl text-cyan-300 font-display tracking-wide drop-shadow-[0_0_8px_rgba(0,255,255,0.3)] animate-pulse">
-      Service Laptop & Ponsel
-    </p>
-
-    <!-- Logo -->
-    <div class="mt-5 xs:mt-6 sm:mt-8 md:mt-10">
-      <img
-        src="img/Logo.png"
-        alt="Logo Spectrum.Byte"
-        class="mx-auto w-20 xs:w-24 sm:w-32 md:w-36 lg:w-40 h-auto rounded-full border-4 border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.4)] animate-bounce-slow"
-      />
+      <!-- Logo -->
+      <div class="mt-5 xs:mt-6 sm:mt-8 md:mt-10">
+        <img
+          src="img/Logo.png"
+          alt="Logo Spectrum.Byte"
+          class="mx-auto w-20 xs:w-24 sm:w-32 md:w-36 lg:w-40 h-auto rounded-full border-4 border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.4)] animate-bounce-slow"
+        />
+      </div>
     </div>
-  </div>
 </header>
 </body>
-<div>
-  <!-- ===== FONT IMPORT ===== -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
+<div>
     <!-- ===== LAYANAN ===== -->
-    <section class="text-center mt-20 relative z-10 fade-in" style="font-family: 'Inter', sans-serif;">
+    <section class="text-center mt-5 pt-5 relative z-10 fade-in" style="font-family: 'Inter', sans-serif;">
       <h2 class="text-4xl font-semibold text-cyan-300 mb-10 tracking-wide">
         Katalog & Layanan Kami
       </h2>
-
       <ul class="service-list">
         <li class="float-anim pulse-glow" onclick="showDetails('laptop')">💻 Service Laptop</li>
         <li class="float-anim pulse-glow" onclick="showDetails('smartphone')">📱 Service Smartphone</li>
         <li class="float-anim pulse-glow" onclick="showDetails('software')">⚙️ OS & Software</li>
         <li class="float-anim pulse-glow" onclick="showDetails('hardware')">🔧 Upgrade Hardware</li>
+        <li class="float-anim pulse-glow" onclick="showDetails('ui')">📲 UI/UX Web&App</li>
       </ul>
     </section>
 
     <!-- ===================== MODAL DETAIL HARGA ===================== -->
     <div id="detailModal" 
-      class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[8000] p-4 fade-in" 
+      class="hidden fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-[8000] p-4 fade-in" 
       style="font-family: 'Inter', sans-serif;">
 
-      <div class="relative bg-[rgba(13,20,35,0.85)] text-white rounded-2xl shadow-[0_0_40px_rgba(0,234,255,0.3)] 
+      <div class="modal-card relative bg-[rgba(13,20,35,0.85)] text-white rounded-2xl shadow-[0_0_40px_rgba(0,234,255,0.3)] 
                   border border-[rgba(0,234,255,0.25)] w-full max-w-[90vw] md:max-w-[700px] h-[90vh] md:h-auto 
                   max-h-[90vh] flex flex-col overflow-hidden">
 
+        <button onclick="closeDetails()" 
+                class="modal-close absolute top-3 right-3 w-9 h-9 grid place-items-center rounded-xl border border-cyan-400/40 bg-cyan-400/10 text-cyan-300 hover:bg-fuchsia-500/20 hover:text-white transition">
+          <i class="fa fa-times"></i>
+        </button>
+
         <!-- Judul Modal -->
-        <h2 id="modalTitle" class="text-lg font-semibold text-center mt-5 mb-2 text-cyan-300 uppercase tracking-wide"></h2>
+        <h2 id="modalTitle" class="text-lg font-semibold text-center mt-6 mb-2 text-transparent bg-gradient-to-r from-cyan-300 to-fuchsia-400 bg-clip-text uppercase tracking-wide"></h2>
 
         <!-- Body Modal -->
         <div class="flex-1 overflow-hidden flex flex-col md:flex-row p-4 gap-5">
@@ -153,7 +152,7 @@
           <!-- Gambar -->
           <div class="md:w-2/5 flex-shrink-0 flex justify-center items-center">
             <img id="modalImage" src="" alt="Ilustrasi Layanan" 
-                class="rounded-xl w-full h-auto max-h-[240px] md:max-h-[300px] object-contain">
+                class="rounded-xl w-full h-auto max-h-[240px] md:max-h-[300px] object-contain ring-1 ring-cyan-400/20">
           </div>
 
           <!-- Detail harga -->
@@ -177,6 +176,49 @@
       </div>
     </div>
 
+    <!-- ===================== MODAL WELCOME (POPUP) ===================== -->
+    <div id="welcomeModal" 
+      class="hidden fixed inset-0 bg-black bg-opacity-80 backdrop-blur-md flex items-center justify-center z-[10000] p-4 fade-in" 
+      style="font-family: 'Inter', sans-serif;">
+
+      <div class="modal-card relative bg-[rgba(13,20,35,0.95)] text-white rounded-2xl shadow-[0_0_50px_rgba(0,234,255,0.5)] 
+                  border border-[rgba(0,234,255,0.4)] w-full max-w-md p-6 text-center">
+
+        <button onclick="closeWelcomeModal()" 
+                class="modal-close absolute top-3 right-3 w-9 h-9 grid place-items-center rounded-xl border border-cyan-400/40 bg-cyan-400/10 text-cyan-300 hover:bg-fuchsia-500/20 hover:text-white transition">
+          <i class="fa fa-times"></i>
+        </button>
+
+        <!-- Ikon -->
+        <div class="text-5xl text-cyan-400 mb-4">🤖</div>
+
+        <!-- Judul Modal -->
+        <h2 class="text-xl font-bold text-cyan-300 mb-3 uppercase tracking-wide">
+          Hai, Selamat Datang! 👋
+        </h2>
+
+        <!-- Deskripsi -->
+        <p class="text-gray-200 mb-6 leading-relaxed">
+          Kami ingin memperkenalkan <strong>SpectrumAI</strong>, asisten digital kami yang siap membantu Anda.
+          <br>
+          <br>
+          Ingin mencoba fitur <strong>SpectrumAI</strong> sekarang?
+        </p>
+
+        <!-- Tombol Aksi -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="Ai.html" 
+            class="bg-gradient-to-r from-cyan-500 to-blue-500 text-black px-6 py-3 rounded-xl font-bold text-base transition-all cta-hover">
+            Coba Sekarang
+          </a>
+          <button onclick="closeWelcomeModal()" 
+            class="border border-cyan-400 text-cyan-300 bg-cyan-400/10 px-6 py-3 rounded-xl font-bold text-base transition-all hover:bg-cyan-500/20 cta-hover">
+            Nanti Saja
+          </button>
+        </div>
+      </div>
+    </div>
+</div>
     <script>
       const serviceData = {
         laptop: {
@@ -225,9 +267,18 @@
             { jenis: "Upgrade GPU", harga: "Rp500.000 - Rp1.500.000", desc: "Upgrade GPU untuk kebutuhan editing & gaming." },
           ],
         },
+        ui: {
+          img: "img/Ui.png",
+          title: "Pembuatan UI/UX",
+          prices: [
+            { jenis: "Desain Tampilan Web", harga: "Rp.500.000", desc: "Pembuatan UI interaktif untuk website pribadi/Perusahaan anda." },
+            { jenis: "Desain Tampilan Aplikasi Mobile", harga: "Rp.550.000", desc: "Membuat Tampilan untuk Aplikasi android & iOS." },
+            { jenis: "Redesain UI Lama", harga: "Rp.650.000", desc: "Menerima pembaruan UI lama pada website." },
+            { jenis: "Desain Komponen & Style Guide", harga: "Rp.350.000", desc: "Menyesuaikan tampilan pada setiap komponen pada UX yang sudah ada." },
+            { jenis: "UI/UX Full", harga: "Rp.1.500.000", desc: "Pembuatan UI/UX Full terima jadi tanpa Hosting dan Domain." },
+          ],
+        },
       };
-
-      // ... (serviceData tetap sama, tidak perlu diubah)
 
       function showDetails(type) {
         const modal = document.getElementById("detailModal");
@@ -238,27 +289,24 @@
         document.getElementById("modalTitle").innerText = data.title;
         document.getElementById("modalImage").src = data.img;
 
-        // Bangun daftar harga dengan layout flex yang benar
         list.innerHTML = data.prices.map(p => `
-          <li class="bg-[rgba(10,18,30,0.6)] p-3 rounded-lg border border-[rgba(0,234,255,0.15)] hover:bg-[rgba(15,25,40,0.7)] transition">
+          <li class="price-item bg-[rgba(10,18,30,0.6)] p-3 rounded-xl border border-[rgba(0,234,255,0.15)] hover:border-[rgba(255,30,199,0.3)] hover:bg-[rgba(15,25,40,0.7)] shadow-[0_0_10px_rgba(0,234,255,0.1)] hover:shadow-[0_0_20px_rgba(255,30,199,0.2)] transition">
             <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
-              <!-- Kiri: Jenis + Deskripsi -->
               <div class="flex-1 min-w-0">
-                <div class="font-semibold text-gray-100">${p.jenis}</div>
+                <div class="flex items-center gap-2">
+                  <i class="fa fa-wrench text-cyan-300"></i>
+                  <div class="font-semibold text-gray-100">${p.jenis}</div>
+                </div>
                 <p class="text-gray-300 text-xs mt-1">${p.desc}</p>
               </div>
-              
-              <!-- Kanan: Harga (rata kanan) -->
               <div class="shrink-0 text-right">
-                <div class="text-cyan-400 font-bold whitespace-nowrap">${p.harga}</div>
+                <span class="inline-block px-2 py-1 rounded-md bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-semibold whitespace-nowrap">${p.harga}</span>
               </div>
             </div>
-
-            <!-- Tombol Pesan -->
             <a href="https://wa.me/6283845278538?text=Halo%2C%20saya%20ingin%20${encodeURIComponent(p.jenis)}."
               target="_blank"
-              class="mt-3 w-full block bg-cyan-500 text-black text-center text-xs px-3 py-1.5 rounded-md hover:bg-cyan-400 transition font-medium">
-              Pesan Sekarang
+              class="mt-3 w-full block bg-gradient-to-r from-cyan-500 to-blue-500 text-black text-center text-xs px-3 py-2 rounded-lg hover:from-cyan-400 hover:to-blue-400 transition font-bold cta-hover">
+              Pesan via WhatsApp
             </a>
           </li>
         `).join("");
@@ -270,6 +318,24 @@
       function closeDetails() {
         document.getElementById("detailModal").classList.add("hidden");
       }
+
+      // Fungsi untuk menampilkan modal selamat datang
+      function showWelcomeModal() {
+        const modal = document.getElementById("welcomeModal");
+        modal.classList.remove("hidden");
+      }
+
+      // Fungsi untuk menutup modal selamat datang
+      function closeWelcomeModal() {
+        const modal = document.getElementById("welcomeModal");
+        modal.classList.add("hidden");
+      }
+
+      // Tampilkan modal saat halaman selesai dimuat
+      window.onload = function() {
+        showWelcomeModal();
+      };
+
     </script>
       <!-- ===================== CONTACT SECTION ===================== -->
       <div class="flex flex-col items-center gap-6 py-20 relative z-10 fade-in">
@@ -331,4 +397,34 @@
         }
       </script>
     </div>
+
+  <script>
+    function setLang(lang) {
+      const btnId = document.getElementById('btnId');
+      const btnEn = document.getElementById('btnEn');
+
+      if (lang === 'id') {
+        // Highlight tombol ID
+        btnId.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border', 'border-cyan-500/30');
+        btnEn.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border', 'border-cyan-500/30');
+        btnEn.classList.add('text-gray-400');
+
+        // Ubah teks ke Bahasa Indonesia
+        document.querySelector('h2.text-4xl').innerText = 'Katalog & Layanan Kami';
+        document.querySelector('#priceNote').innerText = '*Harga menyesuaikan dengan jenis kerusakan atau tipe perangkat.';
+        document.querySelector('p.text-2xl').innerText = 'Hubungi Kami di';
+      } 
+      else if (lang === 'en') {
+        // Highlight tombol ENG
+        btnEn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border', 'border-cyan-500/30');
+        btnId.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border', 'border-cyan-500/30');
+        btnId.classList.add('text-gray-400');
+
+        // Ubah teks ke Bahasa Inggris
+        document.querySelector('h2.text-4xl').innerText = 'Our Services & Catalog';
+        document.querySelector('#priceNote').innerText = '*Prices may vary depending on device type or damage.';
+        document.querySelector('p.text-2xl').innerText = 'Contact Us via';
+      }
+    }
+  </script>
 </html>
