@@ -80,17 +80,50 @@
       <a href="index.html" id="navHomeLink" class="text-base font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Home</a>
     </div>
     <!-- Tengah: Menu Kategori -->
-    <div class="flex space-x-4">
-      <button onclick="switchCategory('kritik')" id="menuKritik" 
+    <div class="flex space-x-4 items-center">
+      <button onclick="switchCategory('kritik')" id="menuKritik"
               class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Kritik</button>
-      <button onclick="switchCategory('hardwareSoftware')" id="menuHardwareSoftware"
-        class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Hardware & Software</button>
-      <button onclick="switchCategory('ai')" id="menuAi" 
-              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">AI</button>
-      <button onclick="switchCategory('web3')" id="menuWeb3" 
-              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Web3</button>
-      <button onclick="switchCategory('teknologi')" id="menuTeknologi" 
-              class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Teknologi</button>
+      <div class="relative group">
+        <button id="menuTeknologiLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Teknologi <span class="text-xs">▼</span></button>
+        <div class="absolute left-0 mt-2 w-56 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
+          <button onclick="switchCategory('hardwareSoftware')" id="menuTeknologi_HardwareSoftware" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">IoT</button>
+          <button onclick="switchCategory('ai')" id="menuTeknologi_Ai" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">AI</button>
+          <button onclick="switchCategory('web3')" id="menuTeknologi_Web3" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Web3</button>
+          <button onclick="switchCategory('teknologiUmum')" id="menuTeknologi_Umum" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Cyber Security</button>
+        </div>
+      </div>
+      <div class="relative group">
+        <button id="menuFinanceLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Finance <span class="text-xs">▼</span></button>
+        <div class="absolute left-0 mt-2 w-56 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
+          <button onclick="switchCategory('fintech')" id="menuFinance_Fintech" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Fintech</button>
+          <button onclick="switchCategory('investasi')" id="menuFinance_Investasi" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Investasi</button>
+          <button onclick="switchCategory('kripto')" id="menuFinance_Kripto" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Kripto</button>
+          <button onclick="switchCategory('perencanaan')" id="menuFinance_Perencanaan" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Perencanaan Keuangan</button>
+        </div>
+      </div>
+      <div class="relative group">
+        <button id="menuBrandingLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Bisnis & Personal Branding <span class="text-xs">▼</span></button>
+        <div class="absolute left-0 mt-2 w-64 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
+          <button onclick="switchCategory('bisnis')" id="menuBranding_Bisnis" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Bisnis</button>
+          <button onclick="switchCategory('personalBranding')" id="menuBranding_Personal" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Personal Branding</button>
+          <button onclick="switchCategory('marketing')" id="menuBranding_Marketing" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Marketing</button>
+        </div>
+      </div>
+      <div class="relative group">
+        <button id="menuLifestyleLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Lifestyle Produktif <span class="text-xs">▼</span></button>
+        <div class="absolute left-0 mt-2 w-64 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
+          <button onclick="switchCategory('kebiasaanProduktif')" id="menuLifestyle_Kebiasaan" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Kebiasaan Produktif</button>
+          <button onclick="switchCategory('toolsProduktivitas')" id="menuLifestyle_Tools" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Tools Produktivitas</button>
+          <button onclick="switchCategory('workLifeBalance')" id="menuLifestyle_WorkLife" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Work-Life Balance</button>
+        </div>
+      </div>
+      <div class="relative group">
+        <button id="menuInspirasiLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Inspirasi & Community Project <span class="text-xs">▼</span></button>
+        <div class="absolute left-0 mt-2 w-72 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
+          <button onclick="switchCategory('inspirasi')" id="menuInspirasi_Inspirasi" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Inspirasi</button>
+          <button onclick="switchCategory('communityProject')" id="menuInspirasi_Community" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Community Project</button>
+        </div>
+      </div>
     </div>
 
      <!-- Kanan: Toggle Bahasa + Tombol Forum -->
@@ -129,8 +162,11 @@
       <textarea id="topicContent" rows="3"
                 class="w-full p-3 rounded-lg bg-gray-800 text-white text-sm border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400"
                 placeholder="Isi topik..."></textarea>
+      <input type="text" id="topicMediaUrl"
+             class="w-full p-3 rounded-lg bg-gray-800 text-white text-sm border border-gray-600 focus:outline-none focus:ring-1 focus:ring-cyan-400 mt-3"
+             placeholder="Add Media (URL opsional)">
       <div class="mt-3 flex justify-end">
-        <button onclick="createTopic()"
+        <button onclick="createTopic()" id="createTopicBtn"
                 class="px-5 py-2 bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-medium rounded-lg transition uppercase tracking-wide text-sm">
           Buat Topik
         </button>
@@ -183,7 +219,7 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-    const auth = firebase.auth(); // Inisialisasi Auth
+    const auth = firebase.auth();
     // Ambil email pengguna yang login
     let currentUserEmail = null;
     let currentCategory = 'kritik'; // Default category
@@ -398,8 +434,7 @@
                 const isLikedByCurrentUser = currentUserEmail ? likes[currentUserEmail.replace(/[.@]/g, '_')] === true : false;
                 // --- End Hitung dan cek like ---
                 if (item.type === 'topic') {
-                    // Render Topik
-                    el.id = `topic-${item.id}`; // Tambahkan ID unik
+                    el.id = `topic-${item.id}`;
                     const topicReplyCount = item.replies ? Object.keys(item.replies).length : 0;
                     el.innerHTML = `
                         <div class="flex justify-between items-start">
@@ -414,6 +449,8 @@
                                             class="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 ml-2 focus:outline-none focus:ring-1 focus:ring-red-400 rounded">🗑️ Hapus Topik</button>` : ''}
                         </div>
                         <p class="text-gray-200 mt-3 whitespace-pre-wrap">${item.content || ''}</p>
+                        ${item.mediaUrl ? `<div class="mt-3"><img src="${item.mediaUrl}" referrerpolicy="no-referrer" class="rounded-lg border border-cyan-500/20 max-h-64 w-full object-contain" onerror="this.onerror=function(){ this.parentElement.innerHTML='<a href=\'${item.mediaUrl}\' target=\'_blank\' rel=\'noopener noreferrer\' class=\'text-cyan-300 underline\'>Lihat Media</a>'; }; this.src='https://images.weserv.nl/?url='+encodeURIComponent('${item.mediaUrl}');"/></div>` : ''}
+                        ${item.mediaUrl ? `<div class="mt-3"><img src="${item.mediaUrl}" referrerpolicy="no-referrer" class="rounded-lg border border-cyan-500/20 max-h-64 w-full object-contain" onerror="this.onerror=function(){ this.parentElement.innerHTML='<a href=\'${item.mediaUrl}\' target=\'_blank\' rel=\'noopener noreferrer\' class=\'text-cyan-300 underline\'>Lihat Media</a>'; }; this.src='https://images.weserv.nl/?url='+encodeURIComponent('${item.mediaUrl}');"/></div>` : ''}
                         <div class="mt-3 flex items-center gap-4">
                             <button onclick="likeTopic('${item.id}')" class="like-btn flex items-center gap-1 ${isLikedByCurrentUser ? 'text-red-500' : 'text-gray-400 hover:text-red-400'}">
                                 ${isLikedByCurrentUser ? '❤️' : '🤍'} <span class="like-count ml-1">${likeCount}</span>
@@ -717,36 +754,52 @@
         categoryListeners = [{ref: tRef, cb: tcb}, {ref: cRef, cb: ccb}];
     }
     // Fungsi untuk membuat topik baru
-    function createTopic() {
+    async function createTopic() {
         if (!currentUserEmail) {
             alert("Silakan login terlebih dahulu untuk membuat topik.");
             return;
         }
+        const btn = document.getElementById('createTopicBtn');
+        const originalText = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = currentLang === 'id' ? 'Mengirim...' : 'Posting...'; }
         const authorName = document.getElementById('topicAuthorName').value.trim();
         const title = document.getElementById('topicTitle').value.trim();
         const content = document.getElementById('topicContent').value.trim();
+        const mediaUrl = (document.getElementById('topicMediaUrl')?.value || '').trim();
         if (!authorName) {
             alert('Mohon isi nama Anda terlebih dahulu.');
+            if (btn) { btn.disabled = false; btn.textContent = originalText; }
             return;
         }
         if (!title || !content) {
             alert('Mohon isi judul dan isi topik.');
+            if (btn) { btn.disabled = false; btn.textContent = originalText; }
             return;
         }
-        const topicData = {
-            title: title,
-            content: content,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-            userEmail: currentUserEmail,
-            userName: authorName,
-            likes: {} // Inisialisasi objek likes
-        };
-        const topicsRef = db.ref(`categories/${currentCategory}/topics`); // Gunakan currentCategory
-        topicsRef.push(topicData);
+        try {
+            const topicsRef = db.ref(`categories/${currentCategory}/topics`);
+            const newRef = topicsRef.push();
+            const topicData = {
+                title: title,
+                content: content,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                userEmail: currentUserEmail,
+                userName: authorName,
+                likes: {},
+                mediaUrl: mediaUrl || null
+            };
+            await newRef.set(topicData);
+        } catch (err) {
+            console.error('Gagal membuat topik:', err);
+            alert((currentLang === 'id' ? 'Gagal membuat topik: ' : 'Failed to create topic: ') + (err && err.message ? err.message : 'Unknown error'));
+        }
         // Reset form
         document.getElementById('topicAuthorName').value = '';
         document.getElementById('topicTitle').value = '';
         document.getElementById('topicContent').value = '';
+        const mediaInput = document.getElementById('topicMediaUrl');
+        if (mediaInput) mediaInput.value = '';
+        if (btn) { btn.disabled = false; btn.textContent = originalText; }
     }
     // Kirim penilaian pelanggan (tanpa pesan) ke Firebase pada kategori kritik
     function submitRating() {
@@ -952,15 +1005,31 @@
     // Reset highlight untuk semua tombol kategori
     const menuButtons = [
         document.getElementById('menuKritik'),
-        document.getElementById('menuHardwareSoftware'),
-        document.getElementById('menuAi'),
-        document.getElementById('menuWeb3'),
-        document.getElementById('menuTeknologi')
+        document.getElementById('menuTeknologi_HardwareSoftware'),
+        document.getElementById('menuTeknologi_Ai'),
+        document.getElementById('menuTeknologi_Web3'),
+        document.getElementById('menuTeknologi_Umum'),
+        document.getElementById('menuFinance_Fintech'),
+        document.getElementById('menuFinance_Investasi'),
+        document.getElementById('menuFinance_Kripto'),
+        document.getElementById('menuFinance_Perencanaan'),
+        document.getElementById('menuBranding_Bisnis'),
+        document.getElementById('menuBranding_Personal'),
+        document.getElementById('menuBranding_Marketing'),
+        document.getElementById('menuLifestyle_Kebiasaan'),
+        document.getElementById('menuLifestyle_Tools'),
+        document.getElementById('menuLifestyle_WorkLife'),
+        document.getElementById('menuInspirasi_Inspirasi'),
+        document.getElementById('menuInspirasi_Community')
     ];
 
     menuButtons.forEach(btn => {
-        if (btn) { // Pastikan elemen ditemukan sebelum mengubah kelas
-            btn.className = 'px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200';
+        if (btn) {
+            if (btn.id === 'menuKritik') {
+                btn.className = 'px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200';
+            } else {
+                btn.className = 'w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10';
+            }
         }
     });
 
@@ -971,17 +1040,53 @@
         case 'kritik':
             activeButtonId = 'menuKritik';
             break;
-        case 'hardwareSoftware': // Gunakan nama baru ini
-            activeButtonId = 'menuHardwareSoftware';
+        case 'hardwareSoftware':
+            activeButtonId = 'menuTeknologi_HardwareSoftware';
             break;
         case 'ai':
-            activeButtonId = 'menuAi';
+            activeButtonId = 'menuTeknologi_Ai';
             break;
         case 'web3':
-            activeButtonId = 'menuWeb3';
+            activeButtonId = 'menuTeknologi_Web3';
             break;
-        case 'teknologi':
-            activeButtonId = 'menuTeknologi';
+        case 'teknologiUmum':
+            activeButtonId = 'menuTeknologi_Umum';
+            break;
+        case 'fintech':
+            activeButtonId = 'menuFinance_Fintech';
+            break;
+        case 'investasi':
+            activeButtonId = 'menuFinance_Investasi';
+            break;
+        case 'kripto':
+            activeButtonId = 'menuFinance_Kripto';
+            break;
+        case 'perencanaan':
+            activeButtonId = 'menuFinance_Perencanaan';
+            break;
+        case 'bisnis':
+            activeButtonId = 'menuBranding_Bisnis';
+            break;
+        case 'personalBranding':
+            activeButtonId = 'menuBranding_Personal';
+            break;
+        case 'marketing':
+            activeButtonId = 'menuBranding_Marketing';
+            break;
+        case 'kebiasaanProduktif':
+            activeButtonId = 'menuLifestyle_Kebiasaan';
+            break;
+        case 'toolsProduktivitas':
+            activeButtonId = 'menuLifestyle_Tools';
+            break;
+        case 'workLifeBalance':
+            activeButtonId = 'menuLifestyle_WorkLife';
+            break;
+        case 'inspirasi':
+            activeButtonId = 'menuInspirasi_Inspirasi';
+            break;
+        case 'communityProject':
+            activeButtonId = 'menuInspirasi_Community';
             break;
         default:
             console.warn(`Kategori tidak dikenali: ${category}`);
@@ -990,24 +1095,52 @@
     if (activeButtonId) {
         const activeBtn = document.getElementById(activeButtonId);
         if (activeBtn) {
-            activeBtn.className = 'px-3 py-1 text-sm font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+            if (activeBtn.id === 'menuKritik') {
+                activeBtn.className = 'px-3 py-1 text-sm font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
+            } else {
+                activeBtn.className = 'w-full text-left px-3 py-2 text-sm font-medium bg-cyan-500/20 text-cyan-300';
+            }
         }
     }
 
     // Update judul dan subtitle berdasarkan bahasa saat ini
     const titles = {
         'kritik': currentLang === 'id' ? 'Forum Kritik & Saran' : 'Critics Forum',
-        'hardwareSoftware': currentLang === 'id' ? 'Forum Hardware & Software' : 'Hardware & Software Forum', // Gunakan nama baru
+        'hardwareSoftware': currentLang === 'id' ? 'Forum IoT' : 'Hardware & Software Forum',
         'ai': currentLang === 'id' ? 'Forum Artificial Intelligence' : 'AI Forum',
         'web3': currentLang === 'id' ? 'Forum Web3 & Blockchain' : 'Web3 & Blockchain Forum',
-        'teknologi': currentLang === 'id' ? 'Forum Teknologi Terkini' : 'Latest Technology Forum'
+        'teknologiUmum': currentLang === 'id' ? 'Cyber Securiy' : 'General Technology Forum',
+        'fintech': currentLang === 'id' ? 'Forum Fintech' : 'Fintech Forum',
+        'investasi': currentLang === 'id' ? 'Forum Investasi' : 'Investment Forum',
+        'kripto': currentLang === 'id' ? 'Forum Kripto' : 'Crypto Forum',
+        'perencanaan': currentLang === 'id' ? 'Forum Perencanaan Keuangan' : 'Financial Planning Forum',
+        'bisnis': currentLang === 'id' ? 'Forum Bisnis' : 'Business Forum',
+        'personalBranding': currentLang === 'id' ? 'Forum Personal Branding' : 'Personal Branding Forum',
+        'marketing': currentLang === 'id' ? 'Forum Marketing' : 'Marketing Forum',
+        'kebiasaanProduktif': currentLang === 'id' ? 'Forum Kebiasaan Produktif' : 'Productive Habits Forum',
+        'toolsProduktivitas': currentLang === 'id' ? 'Forum Tools Produktivitas' : 'Productivity Tools Forum',
+        'workLifeBalance': currentLang === 'id' ? 'Forum Work-Life Balance' : 'Work-Life Balance Forum',
+        'inspirasi': currentLang === 'id' ? 'Forum Inspirasi' : 'Inspiration Forum',
+        'communityProject': currentLang === 'id' ? 'Forum Community Project' : 'Community Project Forum'
     };
     const subtitles = {
         'kritik': currentLang === 'id' ? 'Bagi kami setiap masukan sangat berharga!' : 'Your feedback is very valuable to us!',
-        'hardwareSoftware': currentLang === 'id' ? 'Silahkan Berdiskusi tentang permasalahan Hardware & Software Laptop/Ponsel' : 'Please discuss issues regarding Laptop/Phone Hardware & Software', // Gunakan nama baru
-        'ai': currentLang === 'id' ? 'Masa depan teknologi cerdas dan pembelajaran mesin.' : 'The future of smart technology and machine learning.',
-        'web3': currentLang === 'id' ? 'Eksplorasi dunia desentralisasi dan blockchain.' : 'Exploring the world of decentralization and blockchain.',
-        'teknologi': currentLang === 'id' ? 'Semua hal terbaru dalam dunia teknologi.' : 'All the latest in the world of technology.'
+        'hardwareSoftware': currentLang === 'id' ? 'Sharing tentang Teknologi Internet of Things' : 'Discuss hardware and software issues.',
+        'ai': currentLang === 'id' ? 'Teknologi cerdas dan pembelajaran mesin.' : 'Smart tech and machine learning.',
+        'web3': currentLang === 'id' ? 'Desentralisasi dan blockchain.' : 'Decentralization and blockchain.',
+        'teknologiUmum': currentLang === 'id' ? 'Topik seputar Keamanan Cyber dan Privasi.' : 'General topics about technology.',
+        'fintech': currentLang === 'id' ? 'Inovasi finansial berbasis teknologi.' : 'Technology-driven financial innovation.',
+        'investasi': currentLang === 'id' ? 'Strategi dan analisa investasi.' : 'Investment strategies and analysis.',
+        'kripto': currentLang === 'id' ? 'Aset kripto dan ekosistemnya.' : 'Crypto assets and ecosystem.',
+        'perencanaan': currentLang === 'id' ? 'Perencanaan keuangan pribadi dan bisnis.' : 'Personal and business financial planning.',
+        'bisnis': currentLang === 'id' ? 'Diskusi pengembangan bisnis.' : 'Business development discussions.',
+        'personalBranding': currentLang === 'id' ? 'Bangun citra diri profesional.' : 'Build your professional image.',
+        'marketing': currentLang === 'id' ? 'Strategi pemasaran modern.' : 'Modern marketing strategies.',
+        'kebiasaanProduktif': currentLang === 'id' ? 'Kebiasaan dan rutinitas produktif.' : 'Productive habits and routines.',
+        'toolsProduktivitas': currentLang === 'id' ? 'Alat bantu untuk produktivitas.' : 'Productivity tools and tips.',
+        'workLifeBalance': currentLang === 'id' ? 'Seimbang antara kerja dan hidup.' : 'Balance between work and life.',
+        'inspirasi': currentLang === 'id' ? 'Berbagi inspirasi dan ide.' : 'Share inspiration and ideas.',
+        'communityProject': currentLang === 'id' ? 'Kolaborasi proyek komunitas.' : 'Community project collaboration.'
     };
 
     // Pastikan elemen target ada sebelum mengaksesnya
@@ -1088,11 +1221,17 @@
     // Ganti teks dan placeholder sesuai bahasa
     if (lang === 'id') {
         document.getElementById('navHomeLink').textContent = 'Home';
+        const lblTek = document.getElementById('menuTeknologiLabel');
+        if (lblTek) lblTek.innerHTML = 'Teknologi <span class="text-xs">▼</span>';
+        const lblFin = document.getElementById('menuFinanceLabel');
+        if (lblFin) lblFin.innerHTML = 'Finance <span class="text-xs">▼</span>';
+        const lblBrand = document.getElementById('menuBrandingLabel');
+        if (lblBrand) lblBrand.innerHTML = 'Bisnis & Personal Branding <span class="text-xs">▼</span>';
+        const lblLife = document.getElementById('menuLifestyleLabel');
+        if (lblLife) lblLife.innerHTML = 'Lifestyle Produktif <span class="text-xs">▼</span>';
+        const lblInsp = document.getElementById('menuInspirasiLabel');
+        if (lblInsp) lblInsp.innerHTML = 'Inspirasi & Community Project <span class="text-xs">▼</span>';
         document.getElementById('menuKritik').textContent = 'Kritik';
-        document.getElementById('menuHardwareSoftware').textContent = 'Hardware & Software';
-        document.getElementById('menuAi').textContent = 'AI';
-        document.getElementById('menuWeb3').textContent = 'Web3';
-        document.getElementById('menuTeknologi').textContent = 'Teknologi';
         document.getElementById('navForumLink').textContent = 'Spectrum.Ai';
 
         document.getElementById('categoryTitle').textContent = 'Forum Kritik & Saran';
@@ -1106,11 +1245,17 @@
         if (ratingCaptionElId) ratingCaptionElId.placeholder = 'Tulis caption penilaian (opsional)';
     } else if (lang === 'en') {
         document.getElementById('navHomeLink').textContent = 'Home';
+        const lblTekEn = document.getElementById('menuTeknologiLabel');
+        if (lblTekEn) lblTekEn.innerHTML = 'Technology <span class="text-xs">▼</span>';
+        const lblFinEn = document.getElementById('menuFinanceLabel');
+        if (lblFinEn) lblFinEn.innerHTML = 'Finance <span class="text-xs">▼</span>';
+        const lblBrandEn = document.getElementById('menuBrandingLabel');
+        if (lblBrandEn) lblBrandEn.innerHTML = 'Business & Personal Branding <span class="text-xs">▼</span>';
+        const lblLifeEn = document.getElementById('menuLifestyleLabel');
+        if (lblLifeEn) lblLifeEn.innerHTML = 'Productive Lifestyle <span class="text-xs">▼</span>';
+        const lblInspEn = document.getElementById('menuInspirasiLabel');
+        if (lblInspEn) lblInspEn.innerHTML = 'Inspiration & Community Project <span class="text-xs">▼</span>';
         document.getElementById('menuKritik').textContent = 'Critics';
-        document.getElementById('menuHardwareSoftware').textContent = 'Hardware & Software';
-        document.getElementById('menuAi').textContent = 'AI';
-        document.getElementById('menuWeb3').textContent = 'Web3';
-        document.getElementById('menuTeknologi').textContent = 'Technology';
         document.getElementById('navForumLink').textContent = 'Spectrum.Ai';
 
         document.getElementById('categoryTitle').textContent = 'Critics Forum';
