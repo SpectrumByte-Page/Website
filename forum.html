@@ -44,6 +44,12 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .overflow-y-visible { overflow-y: visible; }
+    .nav-dropdown { background: rgba(13,20,35,0.96); backdrop-filter: blur(6px); border: 1px solid rgba(0,234,255,0.25); box-shadow: 0 12px 24px rgba(0,0,0,0.6); padding: 6px; border-radius: 0.75rem; max-height: 300px; overflow-y: auto; }
+    .nav-dropdown button { color: #e5e7eb; border-radius: 0.5rem; text-align: center; }
+    .nav-dropdown button:hover { background: rgba(6,182,212,0.16); color: #a5f3fc; }
   </style>
 </head>
 <body class="font-sans">
@@ -80,48 +86,48 @@
       <a href="index.html" id="navHomeLink" class="text-base font-bold text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text">Home</a>
     </div>
     <!-- Tengah: Menu Kategori -->
-    <div class="flex space-x-4 items-center">
+    <div class="flex space-x-4 items-center overflow-x-auto overflow-y-visible whitespace-nowrap no-scrollbar">
       <button onclick="switchCategory('kritik')" id="menuKritik"
               class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200">Kritik</button>
       <div class="relative group">
         <button id="menuTeknologiLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Teknologi <span class="text-xs">▼</span></button>
-        <div class="absolute left-0 mt-2 w-56 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
-          <button onclick="switchCategory('hardwareSoftware')" id="menuTeknologi_HardwareSoftware" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">IoT</button>
-          <button onclick="switchCategory('ai')" id="menuTeknologi_Ai" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">AI</button>
-          <button onclick="switchCategory('web3')" id="menuTeknologi_Web3" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Web3</button>
-          <button onclick="switchCategory('teknologiUmum')" id="menuTeknologi_Umum" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Cyber Security</button>
+        <div class="nav-dropdown absolute left-0 mt-2 w-56 hidden z-[10000] flex flex-col space-y-1">
+          <button onclick="switchCategory('hardwareSoftware')" id="menuTeknologi_HardwareSoftware" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">IoT</button>
+          <button onclick="switchCategory('ai')" id="menuTeknologi_Ai" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">AI</button>
+          <button onclick="switchCategory('web3')" id="menuTeknologi_Web3" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Web3</button>
+          <button onclick="switchCategory('teknologiUmum')" id="menuTeknologi_Umum" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Cyber Security</button>
         </div>
       </div>
       <div class="relative group">
         <button id="menuFinanceLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Finance <span class="text-xs">▼</span></button>
-        <div class="absolute left-0 mt-2 w-56 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
-          <button onclick="switchCategory('fintech')" id="menuFinance_Fintech" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Fintech</button>
-          <button onclick="switchCategory('investasi')" id="menuFinance_Investasi" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Investasi</button>
-          <button onclick="switchCategory('kripto')" id="menuFinance_Kripto" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Kripto</button>
-          <button onclick="switchCategory('perencanaan')" id="menuFinance_Perencanaan" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Perencanaan Keuangan</button>
+        <div class="nav-dropdown absolute left-0 mt-2 w-56 hidden z-[10000] flex flex-col space-y-1">
+          <button onclick="switchCategory('fintech')" id="menuFinance_Fintech" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Fintech</button>
+          <button onclick="switchCategory('investasi')" id="menuFinance_Investasi" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Investasi</button>
+          <button onclick="switchCategory('kripto')" id="menuFinance_Kripto" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Kripto</button>
+          <button onclick="switchCategory('perencanaan')" id="menuFinance_Perencanaan" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Perencanaan Keuangan</button>
         </div>
       </div>
       <div class="relative group">
         <button id="menuBrandingLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Bisnis & Personal Branding <span class="text-xs">▼</span></button>
-        <div class="absolute left-0 mt-2 w-64 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
-          <button onclick="switchCategory('bisnis')" id="menuBranding_Bisnis" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Bisnis</button>
-          <button onclick="switchCategory('personalBranding')" id="menuBranding_Personal" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Personal Branding</button>
-          <button onclick="switchCategory('marketing')" id="menuBranding_Marketing" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Marketing</button>
+        <div class="nav-dropdown absolute left-0 mt-2 w-64 hidden z-[10000] flex flex-col space-y-1">
+          <button onclick="switchCategory('bisnis')" id="menuBranding_Bisnis" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Bisnis</button>
+          <button onclick="switchCategory('personalBranding')" id="menuBranding_Personal" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Personal Branding</button>
+          <button onclick="switchCategory('marketing')" id="menuBranding_Marketing" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Marketing</button>
         </div>
       </div>
       <div class="relative group">
         <button id="menuLifestyleLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Lifestyle Produktif <span class="text-xs">▼</span></button>
-        <div class="absolute left-0 mt-2 w-64 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
-          <button onclick="switchCategory('kebiasaanProduktif')" id="menuLifestyle_Kebiasaan" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Kebiasaan Produktif</button>
-          <button onclick="switchCategory('toolsProduktivitas')" id="menuLifestyle_Tools" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Tools Produktivitas</button>
-          <button onclick="switchCategory('workLifeBalance')" id="menuLifestyle_WorkLife" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Work-Life Balance</button>
+        <div class="nav-dropdown absolute left-0 mt-2 w-64 hidden z-[10000] flex flex-col space-y-1">
+          <button onclick="switchCategory('kebiasaanProduktif')" id="menuLifestyle_Kebiasaan" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Kebiasaan Produktif</button>
+          <button onclick="switchCategory('toolsProduktivitas')" id="menuLifestyle_Tools" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Tools Produktivitas</button>
+          <button onclick="switchCategory('workLifeBalance')" id="menuLifestyle_WorkLife" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Work-Life Balance</button>
         </div>
       </div>
       <div class="relative group">
         <button id="menuInspirasiLabel" class="px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200 flex items-center gap-1">Inspirasi & Community Project <span class="text-xs">▼</span></button>
-        <div class="absolute left-0 mt-2 w-72 bg-[rgba(13,20,35,0.95)] border border-cyan-500/20 rounded-lg shadow-lg hidden group-hover:block z-[10000]">
-          <button onclick="switchCategory('inspirasi')" id="menuInspirasi_Inspirasi" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Inspirasi</button>
-          <button onclick="switchCategory('communityProject')" id="menuInspirasi_Community" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10">Community Project</button>
+        <div class="nav-dropdown absolute left-0 mt-2 w-72 hidden z-[10000] flex flex-col space-y-1">
+          <button onclick="switchCategory('inspirasi')" id="menuInspirasi_Inspirasi" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Inspirasi</button>
+          <button onclick="switchCategory('communityProject')" id="menuInspirasi_Community" class="w-full px-3 py-1.5 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 rounded-md">Community Project</button>
         </div>
       </div>
     </div>
@@ -222,6 +228,7 @@
     const auth = firebase.auth();
     // Ambil email pengguna yang login
     let currentUserEmail = null;
+    let currentUserUid = null;
     let currentCategory = 'kritik'; // Default category
     let categoryListeners = [];
     let latestTopicsSnapshot = null;
@@ -261,51 +268,53 @@
         modal.classList.add('animate-fade-in-up');
     }
     // --- Fungsi Like ---
-    function likeTopic(topicId) {
-        if (!currentUserEmail) {
-            alert("Silakan login terlebih dahulu untuk menyukai topik ini.");
-            return;
+    async function ensureUserForLike() {
+        let user = auth.currentUser;
+        if (user) return user;
+        try {
+            await auth.signInAnonymously();
+            user = auth.currentUser;
+            return user;
+        } catch (e) {
+            console.error('Gagal sign-in anonim untuk like:', e);
+            throw e;
         }
-        const sanitizedEmail = currentUserEmail.replace(/[.@]/g, '_');
-        const likeRef = db.ref(`categories/${currentCategory}/topics/${topicId}/likes/${sanitizedEmail}`);
-        likeRef.once('value')
-            .then((snapshot) => {
-                if (snapshot.exists()) {
-                    // Sudah disukai, hapus like
-                    likeRef.remove()
-                        .then(() => console.log("Like dihapus dari topik."))
-                        .catch(error => console.error("Gagal menghapus like dari topik: ", error));
+    }
+    function likeTopic(topicId) {
+        ensureUserForLike()
+            .then(user => {
+                const likeRef = db.ref(`categories/${currentCategory}/topics/${topicId}/likes/${user.uid}`);
+                return likeRef.transaction(current => (current ? null : true));
+            })
+            .then(res => {
+                if (res && res.committed) {
+                    console.log('Toggle like topik berhasil');
                 } else {
-                    // Belum disukai, tambahkan like
-                    likeRef.set(true)
-                        .then(() => console.log("Like ditambahkan ke topik."))
-                        .catch(error => console.error("Gagal menambahkan like ke topik: ", error));
+                    console.log('Tidak ada perubahan like topik');
                 }
             })
-            .catch(error => console.error("Gagal memeriksa status like topik: ", error));
+            .catch(error => {
+                console.error('Gagal toggle like topik: ', error);
+                alert('Gagal menyimpan like. Periksa koneksi atau rules Firebase.');
+            });
     }
     function likeComment(commentId) {
-        if (!currentUserEmail) {
-            alert("Silakan login terlebih dahulu untuk menyukai komentar ini.");
-            return;
-        }
-        const sanitizedEmail = currentUserEmail.replace(/[.@]/g, '_');
-        const likeRef = db.ref(`categories/${currentCategory}/comments/${commentId}/likes/${sanitizedEmail}`);
-        likeRef.once('value')
-            .then((snapshot) => {
-                if (snapshot.exists()) {
-                    // Sudah disukai, hapus like
-                    likeRef.remove()
-                        .then(() => console.log("Like dihapus dari komentar."))
-                        .catch(error => console.error("Gagal menghapus like dari komentar: ", error));
+        ensureUserForLike()
+            .then(user => {
+                const likeRef = db.ref(`categories/${currentCategory}/comments/${commentId}/likes/${user.uid}`);
+                return likeRef.transaction(current => (current ? null : true));
+            })
+            .then(res => {
+                if (res && res.committed) {
+                    console.log('Toggle like komentar berhasil');
                 } else {
-                    // Belum disukai, tambahkan like
-                    likeRef.set(true)
-                        .then(() => console.log("Like ditambahkan ke komentar."))
-                        .catch(error => console.error("Gagal menambahkan like ke komentar: ", error));
+                    console.log('Tidak ada perubahan like komentar');
                 }
             })
-            .catch(error => console.error("Gagal memeriksa status like komentar: ", error));
+            .catch(error => {
+                console.error('Gagal toggle like komentar: ', error);
+                alert('Gagal menyimpan like. Periksa koneksi atau rules Firebase.');
+            });
     }
     // --- End Fungsi Like ---
     // Hapus topik dari Firebase
@@ -431,7 +440,7 @@
                 // --- Hitung dan cek like ---
                 const likes = item.likes || {};
                 const likeCount = Object.keys(likes).length;
-                const isLikedByCurrentUser = currentUserEmail ? likes[currentUserEmail.replace(/[.@]/g, '_')] === true : false;
+                const isLikedByCurrentUser = currentUserUid ? likes[currentUserUid] === true : false;
                 // --- End Hitung dan cek like ---
                 if (item.type === 'topic') {
                     el.id = `topic-${item.id}`;
@@ -459,7 +468,7 @@
                                 ✍️ Balas
                             </button>
                             <button onclick="toggleTopicReplies('${item.id}')" class="text-gray-400 hover:text-cyan-300 flex items-center gap-1 reply-toggle">
-                                💬 Lihat Komentar (${topicReplyCount})
+                                 Komentar (${topicReplyCount})
                             </button>
                         </div>
                         <div id="topic-reply-form-${item.id}" class="mt-3 hidden">
@@ -509,7 +518,7 @@
                     // Kontainer balasan dengan toggle
                     repliesHtml += `<div class="mt-3">
                         <button onclick="toggleReplies('${item.id}')" class="text-gray-400 hover:text-cyan-300 text-sm flex items-center gap-1 reply-toggle">
-                            💬 Lihat Komentar (${replyCount})
+                            📂 Tampilkan Balasan (${replyCount})
                         </button>
                     </div>`;
                     let repliesList = '';
@@ -604,7 +613,7 @@
             const displayAuthor = item.type === 'topic' ? (item.userName || 'Anonim') : (item.userName || 'Anonim');
             const likes = item.likes || {};
             const likeCount = Object.keys(likes).length;
-            const isLikedByCurrentUser = currentUserEmail ? likes[currentUserEmail.replace(/[.@]/g, '_')] === true : false;
+            const isLikedByCurrentUser = currentUserUid ? likes[currentUserUid] === true : false;
             if (item.type === 'topic') {
                 el.id = `topic-${item.id}`;
                 const topicReplyCount = item.replies ? Object.keys(item.replies).length : 0;
@@ -629,7 +638,7 @@
                                 ✍️ Balas
                             </button>
                             <button onclick="toggleTopicReplies('${item.id}')" class="text-gray-400 hover:text-cyan-300 flex items-center gap-1 reply-toggle">
-                                💬 Lihat Komentar (${topicReplyCount})
+                                📂 Tampilkan Balasan (${topicReplyCount})
                             </button>
                         </div>
                         <div id="topic-reply-form-${item.id}" class="mt-3 hidden">
@@ -676,7 +685,7 @@
                 let repliesHtml = '';
                 repliesHtml += `<div class="mt-3">
                         <button onclick="toggleReplies('${item.id}')" class="text-gray-400 hover:text-cyan-300 text-sm flex items-center gap-1 reply-toggle">
-                            💬 Lihat Komentar (${replyCount})
+                            📂 Tampilkan Balasan (${replyCount})
                         </button>
                     </div>`;
                 let repliesList = '';
@@ -1028,7 +1037,7 @@
             if (btn.id === 'menuKritik') {
                 btn.className = 'px-3 py-1 text-sm font-medium rounded-md text-gray-400 hover:text-gray-200';
             } else {
-                btn.className = 'w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-cyan-200 hover:bg-cyan-500/10';
+                btn.className = 'w-full px-3 py-2 text-sm font-medium text-gray-300 text-center hover:text-cyan-200 hover:bg-cyan-500/20 flex items-center justify-center';
             }
         }
     });
@@ -1098,7 +1107,7 @@
             if (activeBtn.id === 'menuKritik') {
                 activeBtn.className = 'px-3 py-1 text-sm font-medium rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
             } else {
-                activeBtn.className = 'w-full text-left px-3 py-2 text-sm font-medium bg-cyan-500/20 text-cyan-300';
+                activeBtn.className = 'w-full px-3 py-2 text-sm font-medium bg-cyan-500/20 text-cyan-300 text-center flex items-center justify-center';
             }
         }
     }
@@ -1179,7 +1188,8 @@
                 // Login berhasil
                 const user = result.user;
                 console.log("Login berhasil sebagai:", user.email);
-                currentUserEmail = user.email; // Gunakan email dari objek user Firebase
+                currentUserEmail = user.email;
+                currentUserUid = user.uid;
                 // Sembunyikan halaman login, tampilkan navbar dan konten forum
                 document.getElementById('loginPage').classList.add('hidden');
                 document.getElementById('mainNav').classList.remove('hidden');
@@ -1290,6 +1300,7 @@
                 // Jika pengguna sudah login, tampilkan forum
                 console.log("Pengguna sudah login, menampilkan forum.");
                 currentUserEmail = user.email;
+                currentUserUid = user.uid;
                 document.getElementById('loginPage').classList.add('hidden');
                 document.getElementById('mainNav').classList.remove('hidden');
                 document.getElementById('forumMain').classList.remove('hidden');
@@ -1317,8 +1328,57 @@
     window.postTopicReply = postTopicReply;
     window.toggleTopicReplyForm = toggleTopicReplyForm;
     window.toggleTopicReplies = toggleTopicReplies;
-    window.deleteCommentReply = deleteCommentReply;
-    window.deleteTopicReply = deleteTopicReply;
+  window.deleteCommentReply = deleteCommentReply;
+  window.deleteTopicReply = deleteTopicReply;
+</script>
+<script>
+  (function(){
+    function closeAllMenus(){
+      document.querySelectorAll('.nav-dropdown').forEach(function(d){ d.classList.add('hidden'); });
+    }
+    function initDropdownClicks(){
+      var ids = ['menuTeknologiLabel','menuFinanceLabel','menuBrandingLabel','menuLifestyleLabel','menuInspirasiLabel'];
+      ids.forEach(function(id){
+        var btn = document.getElementById(id);
+        var menu = btn ? btn.parentElement.querySelector('.nav-dropdown') : null;
+        if (btn && menu) {
+          var handler = function(ev){
+            ev.preventDefault();
+            ev.stopPropagation();
+            var willOpen = menu.classList.contains('hidden');
+            closeAllMenus();
+            if (willOpen) {
+              var rect = btn.getBoundingClientRect();
+              menu.style.position = 'fixed';
+              menu.style.top = Math.round(rect.bottom) + 'px';
+              menu.style.left = Math.round(rect.left) + 'px';
+              menu.style.right = '';
+              menu.style.width = '';
+              menu.style.maxWidth = '';
+              menu.classList.remove('hidden');
+              menu.classList.add('block');
+            }
+          };
+          btn.addEventListener('click', handler, { passive: false });
+          btn.addEventListener('touchstart', handler, { passive: false });
+          btn.addEventListener('pointerdown', handler, { passive: false });
+          btn.addEventListener('pointerup', handler, { passive: false });
+          menu.addEventListener('click', function(ev){ ev.stopPropagation(); });
+          menu.addEventListener('touchstart', function(ev){ ev.stopPropagation(); }, { passive: false });
+          menu.addEventListener('pointerdown', function(ev){ ev.stopPropagation(); }, { passive: false });
+        }
+      });
+      var nav = document.getElementById('mainNav');
+      document.addEventListener('click', function(e){
+        if (!nav || !nav.contains(e.target)) closeAllMenus();
+      }, { passive: true });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDropdownClicks);
+    } else {
+      initDropdownClicks();
+    }
+  })();
   </script>
     <style>
   /* Background Angkasa Gelap */
@@ -1466,5 +1526,3 @@
 </style>
 </body>
 </html>
-
-
